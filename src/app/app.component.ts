@@ -39,13 +39,18 @@ export class AppComponent {
   upload() {
     let formData = new FormData();
     for (var i = 0; i < this.uploadedFiles.length; i++) {
-        formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i]['name']);
+        formData.append("image", this.uploadedFiles[i], this.uploadedFiles[i]['name']);
     }
 
         formData.append("idAsociado", '11');
-    this.http.post('/api/upload', formData)
-    .subscribe((response) => {
-         console.log('response received is ', response);
+
+    this.image_service.uploadImage( formData ).subscribe( res =>{
+      console.log( res );
+
     })
+    // this.http.post('/api/upload', formData)
+    // .subscribe((response) => {
+    //      console.log('response received is ', response);
+    // })
 }
 }

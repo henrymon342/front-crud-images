@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class ImageService {
 
-  private baseUrl = 'http://localhost:3000/api';
+  // private baseUrl = 'http://localhost:3000/api';
+  private baseUrl = 'https://back-crud-images.vercel.app/api';
+
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -24,13 +26,16 @@ export class ImageService {
 
   uploadImage( data: any ): Observable<any>{
 
-    return this.http.post(`${this.baseUrl}/images/crear`, data );
+    return this.http.post(`${this.baseUrl}/create`, data );
 
   }
-
   getPrueba(){
     return this.http.get(`${this.baseUrl}/images/prueba`);
   }
+
+
+
+
 
 
   getFiles(): Observable<any> {

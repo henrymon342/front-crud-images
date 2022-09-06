@@ -1,5 +1,7 @@
 {
   "/api/*": {
-      "target": "https://back-crud-images.vercel.app/", "secure": false
+      "target": "https://back-crud-images.vercel.app/",
+      "secure": false,
+      "changeOrigin": true
   }
 }

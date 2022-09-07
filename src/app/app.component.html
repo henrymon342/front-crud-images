@@ -1,23 +1,36 @@
-<!-- <div class="wrapper">
-  <h2>Angular Image Upload</h2>
-  <div class="file-upload">
-    <input type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" />
-    <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-      Upload
-    </button>
-  </div>
-</div>
-
-
-<form enctype="multipart/form-data" (ngSubmit)="uploadImage()">
-  <input type="file" name="image" (change)="onFileSelected($event)">
-  <button>Save Image</button>
-</form> -->
 
 
 <header>
   <h1> SUBIDA DE IMAGENES CON CLOUDINARY </h1>
 </header>
+
+
+<section>
+  <form enctype="multipart/form-data">
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" *ngFor="let f of files" [file]="f">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
+    <span  class="input-group-text upload"  (click)="subirImagenDrop()">Subir imagen desde ngx-dropzone</span>
+  </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="mainContainer">
   <div class="content">

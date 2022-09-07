@@ -21,8 +21,8 @@ export class AppComponent {
 
   uploadedFiles: [] = [];
 
-
-
+  files: File[] = [];
+  file: File;
 
 
   constructor(private toastr: ToastrService, private image_service: ImageService, private http: HttpClient) { }
@@ -32,8 +32,40 @@ export class AppComponent {
   }
 
 
+  onSelect(event: any) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    if(this.files.length > 1){ // checking if files array has more than one content
+      this.replaceFileImage(); // replace file
+      }
+      this.file = this.files[0]
+      console.log(this.file);
+  }
+
+  replaceFileImage(){
+    this.files.splice(0,1); // index =0 , remove_count = 1
+  }
+
+  subirImagenDrop(){
+    let formData = new FormData();
+    formData.append("image", this.file, this.file['name']);
+    formData.append("idAsociado", '11');
+
+    console.log(this.file['name']);
+
+    this.image_service.uploadImage( formData ).subscribe( res =>{
+      console.log( res );
+    })
+  }
+
+
+
+
+
   fileChange(element: any) {
     this.uploadedFiles = element.target.files;
+    console.log(this.uploadedFiles);
+
   }
 
   upload() {
@@ -46,11 +78,6 @@ export class AppComponent {
 
     this.image_service.uploadImage( formData ).subscribe( res =>{
       console.log( res );
-
     })
-    // this.http.post('/api/upload', formData)
-    // .subscribe((response) => {
-    //      console.log('response received is ', response);
-    // })
-}
+  }
 }

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button mat-button color="primary" (click)="back()" class="icon" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <span class="title-church">
+    Iglesia del Nazareno Distrito La Paz
+  </span>
+
+  <button mat-icon-button color="primary" class="icon" >
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<div class="container">
+  <mat-card class="content">
+      <span class="title-component">
+        Gestión de Iglesias
+      </span>
+    <router-outlet></router-outlet>
+  </mat-card>
+</div>

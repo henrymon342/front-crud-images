@@ -1,0 +1,24 @@
+mat-toolbar {
+  display: grid;
+  grid-template-columns: 3% 94% 3%;
+  background: linear-gradient(180deg, #263746, #263746);
+  background-blend-mode: screen;
+  background-size: cover;
+  .title{
+    color: #fff;
+    text-align: center;
+  }
+
+  .example-icon{
+    color: #fff;
+  }
+}
+
+
+mat-drawer-container{
+  height: 90vh;
+
+  mat-action-list{
+    width: 20rem;
+  }
+}

@@ -1,0 +1,31 @@
+
+.title-church{
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0em;
+  font-size: 1em;
+
+}
+
+
+mat-toolbar{
+  display: grid;
+  grid-template-columns: 3% 94% 3%;
+
+  .icon{
+    color: #fff;
+  }
+}
+
+
+
+.container{
+  .content{
+    .example-button-container{
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 5em;
+    }
+  }
+}

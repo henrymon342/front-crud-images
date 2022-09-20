@@ -1,0 +1,50 @@
+
+
+.container{
+  display: grid;
+  grid-template-columns: 100%;
+  height: 80vh;
+  padding: 0em 4em;
+  .cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    text-align: center;
+
+    .card{
+      height: fit-content;
+      margin: .5em;
+    }
+  }
+
+  .list{
+
+    .example-button-container{
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 1em;
+    }
+
+    .actions{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .input-search{
+        width: 30em;
+      }
+      .bottons{
+        display: flex;
+        justify-content: space-between;
+        button{
+          margin-right: 1em;
+        }
+      }
+    }
+
+
+    table{
+      width: 100%;
+    }
+
+  }
+}

@@ -7,13 +7,16 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { MaterialModule } from '../Material/material.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,11 @@ import { HttpClientModule} from '@angular/common/http'
     NgxDropzoneModule,
     HttpClientModule,
     FormsModule,
-    FileUploadModule
+    FileUploadModule,
+    MaterialModule,
+    RouterModule,
+    AppRoutingModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

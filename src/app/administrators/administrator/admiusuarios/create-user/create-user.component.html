@@ -2,11 +2,12 @@
 
 
   <div class="container">
-    <span class="title-component">
-      <h4>Crear Usuario</h4>
-    </span>
-
     <form class="form" [formGroup]="form" (change)="checkForm()">
+      <div class="title-form">
+        <small>
+          Crear Usuario
+        </small>
+      </div>
 
      <div class="field">
       <label class="label"> Tipo de administrador</label>
@@ -174,13 +175,13 @@
 
       <button mat-raised-button color="primary"
                 class="boton"
-                (click)="alertCheckForm()">
+                (click)="alertCheckForm()"
+                >
                 CREAR</button>
     </div>
     </form>
 
 
-</div>
-
+  </div>
 
 

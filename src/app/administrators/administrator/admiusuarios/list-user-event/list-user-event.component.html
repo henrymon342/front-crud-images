@@ -7,8 +7,8 @@
     <div class="example-button-container">
       <button mat-raised-button color="primary"
               class="button-create"
-              [routerLink]="['/auth/administrador/admi-usuarios/user-create']">
-        Crear nueva
+              (click)="openDialog()">
+        Crear nuevo
       </button>
     </div>
 
@@ -18,7 +18,7 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
       <div class="bottons">
-        <button mat-stroked-button color="primary" [routerLink]="['/auth/administrador/admi-iglesias/admi-iglesia-detail']">detalle</button>
+        <button mat-stroked-button color="primary" [routerLink]="['/auth/administrador/admi-usuarios/user-detail']">detalle</button>
         <button mat-stroked-button color="primary" [routerLink]="['/auth/administrador/admi-iglesias/admi-iglesia-update']">editar</button>
         <button mat-stroked-button color="primary">Todas</button>
         <button mat-stroked-button color="accent">Zona</button>
@@ -38,31 +38,31 @@
         <!-- Name Column -->
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="apellido">
           <th mat-header-cell *matHeaderCellDef> Apellido </th>
-          <td mat-cell *matCellDef="let element"> {{ element.idPastor }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.lastname }} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="cargo">
           <th mat-header-cell *matHeaderCellDef> Cargo </th>
-          <td mat-cell *matCellDef="let element"> {{element.fundacion}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="ministerio">
           <th mat-header-cell *matHeaderCellDef> Ministerio </th>
-          <td mat-cell *matCellDef="let element"> {{element.zona}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.ministerio}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="tipo">
           <th mat-header-cell *matHeaderCellDef> Tipo </th>
-          <td mat-cell *matCellDef="let element"> {{element.zona}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -70,13 +70,12 @@
           <th mat-header-cell *matHeaderCellDef> Más </th>
           <td mat-cell *matCellDef="let element">
 
-            <div class="example-button-container">
               <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-                <mat-icon [routerLink]="['/login/administrador/detalleiglesia', element.id]">
+
+                <mat-icon [routerLink]="['/auth/administrador/admi-usuarios/user-detail', element.id]">
                   more_horiz
                   </mat-icon>
               </button>
-            </div>
           </td>
         </ng-container>
 

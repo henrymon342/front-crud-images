@@ -21,7 +21,7 @@ const routes: Routes = [
         component: ListUserPastorComponent
       },
       {
-        path: 'user-detail',
+        path: 'user-detail/:id',
         component: DetailUserComponent
       },
       {

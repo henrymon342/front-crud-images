@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-create-user',
@@ -34,7 +35,13 @@ export class CreateUserComponent implements OnInit {
   form: FormGroup;
   place_choosed: string;
   error_text = '';
-  constructor( private fb: FormBuilder, private _service_user:UserService, private toastr: ToastrService ) { }
+
+  closeDialog: boolean = false;
+  conter: number = 0;
+  constructor( private fb: FormBuilder,
+               private _service_user:UserService,
+               private toastr: ToastrService,
+               private _serviceDialog: DialogService ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -87,17 +94,21 @@ export class CreateUserComponent implements OnInit {
   }
 
   alertCheckForm(){
+    console.log(this.closeDialog);
 
     if(this.checkForm()){
       this.popUpValidForm();
+
     }
     else{
       this.popUpInvalidForm();
+
     }
   }
 
 
   popUpValidForm(){
+
     Swal.fire({
       title: 'Esta seguro de crear un nuevo administrador?',
       showDenyButton: true,
@@ -108,6 +119,7 @@ export class CreateUserComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.crearUsuario();
+
       } else if (result.isDenied) {
         // Swal.fire('Changes are not saved', '', 'info')
       }
@@ -120,6 +132,29 @@ export class CreateUserComponent implements OnInit {
 
 
   crearUsuario(){
+    let timerInterval: any;
+    Swal.fire({
+      title: 'Creando Usuario!',
+      html: `Cerrando en <b></b> milisegundos.`,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+
+        Swal.showLoading()
+        let b = Swal.getHtmlContainer()!.querySelector('b')
+        timerInterval = setInterval(() => {
+          b!.textContent = String(Swal.getTimerLeft())
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+
     this._service_user.createUser(this.form.value).subscribe( res => {
       console.log(res);
       this.showSuccess();
@@ -128,12 +163,16 @@ export class CreateUserComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Usuario creado');
+    //////////////
+    this.closeDialog = true;
+    this._serviceDialog.setPersona(this.closeDialog)
   }
 
   showError(){
     this.toastr.error('No valido!', 'Formulario', {
       positionClass: 'toast-bottom-left'
    });
-
+   this.closeDialog = false;
+  //  this._serviceDialog.setPersona(this.closeDialog)
   }
 }

@@ -1,12 +1,19 @@
 
 
 
+
   .container{
-    .title-component{
-      text-align: center;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700;
+
+    .title-form{
+      padding: 1em;
+      small{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.8em;
+        font-weight: 400;
+        justify-self: flex-start;
+      }
     }
+    padding: 0;
     form{
       display: flex;
       justify-content: center;
@@ -17,7 +24,7 @@
       .field{
         background-color: #fff;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 600;
+        // font-weight: 600;
         display: grid;
         margin: .5em 1em;
         width: 70%;
@@ -46,7 +53,7 @@
           padding: 1em;
           .radio-button{
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
+            // font-weight: 600;
 
           }
         }
@@ -60,8 +67,8 @@
 
       .subtitle{
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 600;
-        font-size: 1.1em;
+        // font-weight: 600;
+        // font-size: 1.1em;
         padding: 1em;
       }
     }
@@ -69,11 +76,5 @@
 
 
 
-.swal2-styled.swal2-confirm {
-  font-size: .5em;
-  color: blue;
-}
 
-.mat-dialog-content{
-  padding: 0em 0;
-}
+

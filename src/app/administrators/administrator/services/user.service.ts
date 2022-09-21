@@ -16,4 +16,16 @@ export class UserService {
   createUser( user: User ): Observable<any> {
       return this.http.post(`${this.baseUrl}/administrador/new`, user);
   }
+
+  getUserByType(data:any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/administrador/findActivitiesUser`, data);
+  }
+
+  update(id: number, data:any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/administrador/update/${id}`, data);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/administrador/delete/${id}`);
+  }
 }

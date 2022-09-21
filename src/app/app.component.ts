@@ -18,9 +18,9 @@ const URL = 'http://localhost:3000/api/images/new';
 export class AppComponent {
 
 
+  panelOpenState = false;
 
   uploadedFiles: [] = [];
-
   files: File[] = [];
   file: File;
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ImageService {
 
   // private baseUrl = 'http://localhost:3000/api';
-  private baseUrl = 'https://back-crud-images.vercel.app/api';
+  private baseUrl = environment.URL;
 
 
   httpOptions = {

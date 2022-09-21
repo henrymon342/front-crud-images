@@ -8,41 +8,28 @@ mat-toolbar{
   }
 }
 
-
-
-section{
-  // padding: 1em;
-  min-height: 90vh;
-  // color: #f5f5f5;
-  mat-card{
-    margin: 0 4em;
-    padding: 0;
-  }
-
-  .title-component{
-    font-size: 1.5em;
-    font-family: 'Secular One', sans-serif;
-    // background-color: #3a3a3a;
-    // color: #f5f5f5;
-    padding: 1em 3em;
-    margin: 0;
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
-  }
-
-  .content{
-    min-height: 75vh;
-  }
-}
-
-
 .title-church{
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 500;
   line-height: 0em;
-  // font-size: 1em;
+}
+
+
+
+section{
+  min-height: 90vh;
+  .title-component{
+    font-family: 'Secular One', sans-serif;
+    padding: 1em 3em 1em 3em;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .content{
+    min-height: 75vh;
+  }
 }
 
 

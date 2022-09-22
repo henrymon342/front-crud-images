@@ -15,23 +15,14 @@ export class ListUserEventComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<User>();
 
-  stateDialog: boolean = false;
-  dialogRef: any;
-  constructor( public dialog: MatDialog, private _serviceDialog: DialogService, private _serviceUser: UserService ) { }
+  constructor( private _serviceUser: UserService ) { }
 
   ngOnInit(): void {
-    this._serviceDialog.closeDialogEmitter.subscribe(
-      data => {
-        this.stateDialog = data;
-        console.log(this.stateDialog);
-        this.dialogRef.close();
-      }
-    );
     this.getUsersEvent();
   }
 
   getUsersEvent() {
-    const tipo = { type: 'Actividades'}
+    const tipo = { type: 'ACTIVIDADES'}
     this._serviceUser.getUserByType(tipo)
     .subscribe(res => {
       console.log(res);
@@ -44,19 +35,6 @@ export class ListUserEventComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-
-  openDialog() {
-    this.dialogRef = this.dialog.open(CreateUserComponent, {
-                          width: '80vw',
-                          height: '95vh',
-                          panelClass: "dialog"
-                          });
-
-    this.dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
 }

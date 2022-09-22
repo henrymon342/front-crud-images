@@ -6,12 +6,17 @@ import { ListUserEventComponent } from './list-user-event/list-user-event.compon
 import { ListUserPastorComponent } from './list-user-pastor/list-user-pastor.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { MainListsComponent } from './main-lists/main-lists.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdmiusuariosComponent,
     children: [
+      {
+        path: 'main-lists',
+        component: MainListsComponent
+      },
       {
         path: 'user-event-list',
         component: ListUserEventComponent
@@ -25,14 +30,14 @@ const routes: Routes = [
         component: DetailUserComponent
       },
       {
-        path: 'user-update',
+        path: 'user-update/:id',
         component: UpdateUserComponent
       },
       {
         path: 'user-create',
         component: CreateUserComponent
       },
-      { path: '', redirectTo: 'user-event-list', pathMatch: 'full' }
+      { path: '', redirectTo: 'main-lists', pathMatch: 'full' }
     ]
   }
 ];

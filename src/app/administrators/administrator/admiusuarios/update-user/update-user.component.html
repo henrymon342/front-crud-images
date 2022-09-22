@@ -1,1 +1,187 @@
-<p>update-user works!</p>
+
+
+
+  <div class="container">
+    <form class="form" [formGroup]="form" (change)="checkForm()">
+      <div class="title-form">
+        <small>
+          Editar Usuario
+        </small>
+      </div>
+
+     <div class="field">
+      <label class="label"> Tipo de administrador</label>
+      <mat-radio-group
+        class="radio-group"
+        formControlName="type"
+        (change)="changeValueMinistery()"
+        >
+        <mat-radio-button class="radio-button" *ngFor="let type of TYPEUSER" [value]=type>
+          {{ type }}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <ng-container *ngIf="form.value.type == 'ACTIVIDADES'">
+        <label class="label"> Ministerio</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="ministerio" formControlName="ministerio" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let min of MINISTERIOS" [value]=min>
+              {{ min }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+    </ng-container>
+    </div>
+
+
+
+    <div class="subtitle">
+      <span class="text">DATOS PERSONALES </span>
+    </div>
+
+    <div class="field">
+      <label class="label">Nombre </label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="name"
+              type="text"
+              matInput
+              placeholder="nombre"
+              class="input-text"
+              >
+          <mat-error>
+            El <strong>nombre</strong> es requerido
+          </mat-error>
+      </mat-form-field>
+
+      <label class="label">Apellido</label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="lastname"
+              type="text"
+              matInput
+              placeholder="apellido"
+              class="input-text"
+              >
+        <mat-error>
+          El <strong>apellido</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <label class="label">Cargo </label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="cargo"
+              type="text"
+              matInput
+              placeholder="cargo"
+              class="input-text"
+              >
+        <mat-error>
+          El <strong>cargo</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+
+    <div class="field">
+      <label class="label">Lugar de membresía</label>
+        <mat-radio-group class="radio-group" formControlName="option_places_memb" (change)="clearOtherInput()">
+          <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
+            {{place}}
+          </mat-radio-button>
+        </mat-radio-group>
+
+
+        <ng-container *ngIf="form.value.option_places_memb == 'IGLESIA'">
+          <mat-form-field appearance="outline" class="box-select">
+            <mat-label>iglesia</mat-label>
+            <mat-select
+                        class="input-select"
+                        formControlName="miembroen"
+                        (selectionChange)='checkForm()'
+                        >
+              <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+                {{ iglesia }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <ng-container *ngIf="form.value.option_places_memb == 'OTRO'">
+          <mat-form-field appearance="outline" class="box-input">
+            <mat-label>especificación</mat-label>
+            <input formControlName="miembroen"
+            type="text"
+            matInput
+            placeholder="especificacion"
+            class="input-text"
+            >
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+    </div>
+
+    <div class="subtitle">
+      <span class="text">AUTENTICACIÓN </span>
+    </div>
+
+    <div class="field">
+      <label class="label">Username </label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="username"
+              type="text"
+              matInput
+              placeholder="username"
+              class="input-text"
+              >
+        <mat-error>
+          El <strong>username</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <label class="label">Password </label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="password"
+              matInput
+              type="password"
+              placeholder="password"
+              class="input-text"
+              >
+        <mat-error>
+          El <strong>password</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <label class="label">confirmar password </label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="password_confirm"
+              type="password"
+              matInput
+              placeholder="confirmar password"
+              class="input-text"
+              >
+        <mat-error>
+          El <strong>confirmar password</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary"
+                class="boton"
+                (click)="alertCheckForm()"
+                >
+                CREAR</button>
+    </div>
+    </form>
+
+
+  </div>
+
+

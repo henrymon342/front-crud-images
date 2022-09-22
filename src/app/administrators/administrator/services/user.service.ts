@@ -17,6 +17,10 @@ export class UserService {
       return this.http.post(`${this.baseUrl}/administrador/new`, user);
   }
 
+  get(id:number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/administrador/find/${id}`);
+  }
+
   getUserByType(data:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/administrador/findActivitiesUser`, data);
   }

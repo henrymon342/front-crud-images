@@ -1,16 +1,6 @@
 
 <div class="container">
-
-
-
   <section class="list">
-    <div class="example-button-container">
-      <button mat-raised-button color="primary"
-              class="button-create"
-              (click)="openDialog()">
-        Crear nuevo
-      </button>
-    </div>
 
     <div class="actions">
       <mat-form-field appearance="standard" class="input-search">
@@ -18,10 +8,6 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
       <div class="bottons">
-        <button mat-stroked-button color="primary" [routerLink]="['/auth/administrador/admi-usuarios/user-detail']">detalle</button>
-        <button mat-stroked-button color="primary" [routerLink]="['/auth/administrador/admi-iglesias/admi-iglesia-update']">editar</button>
-        <button mat-stroked-button color="primary">Todas</button>
-        <button mat-stroked-button color="accent">Zona</button>
       </div>
     </div>
 
@@ -88,7 +74,7 @@
         </tr>
       </table>
   </section>
-
-
-
 </div>
+
+
+

@@ -1,0 +1,71 @@
+.container{
+
+  .title-form{
+    padding: 1em;
+    small{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.8em;
+      font-weight: 400;
+      justify-self: flex-start;
+    }
+  }
+  padding: 0;
+  form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f5f5f5;
+
+    .field{
+      background-color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      // font-weight: 600;
+      display: grid;
+      margin: .5em 1em;
+      width: 70%;
+      padding: 2em;
+      .label{
+        padding-bottom: 1em;
+      }
+
+      .box-select{
+        width: 50%;
+        justify-self: center;
+          .input-select{
+          }
+      }
+
+      .box-input{
+        width: 60%;
+        justify-self: center;
+
+      }
+
+      .radio-group{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1em;
+        .radio-button{
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          // font-weight: 600;
+
+        }
+      }
+    }
+
+    .boton{
+      width: 60%;
+      justify-self: center;
+      margin: 2em;
+    }
+
+    .subtitle{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      // font-weight: 600;
+      // font-size: 1.1em;
+      padding: 1em;
+    }
+  }
+}

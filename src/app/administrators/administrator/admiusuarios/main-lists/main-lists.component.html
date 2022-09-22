@@ -1,0 +1,15 @@
+<div class="section">
+  <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+        Crear nuevo
+  </button>
+</div>
+<mat-tab-group>
+  <mat-tab label="Usuario de Eventos">
+    <app-list-user-event></app-list-user-event>
+  </mat-tab>
+  <mat-tab label="Usiario de Pastores">
+    <app-list-user-pastor></app-list-user-pastor>
+  </mat-tab>
+</mat-tab-group>

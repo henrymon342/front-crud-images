@@ -64,7 +64,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   checkForm(): boolean{
-
     console.log('form: ', this.form.value);
     if( this.form.valid ){
       console.log('ES VALIDO');

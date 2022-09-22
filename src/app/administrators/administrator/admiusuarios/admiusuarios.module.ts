@@ -10,6 +10,7 @@ import { DetailUserComponent } from './detail-user/detail-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { ListUserPastorComponent } from './list-user-pastor/list-user-pastor.component';
 import { ListUserEventComponent } from './list-user-event/list-user-event.component';
+import { MainListsComponent } from './main-lists/main-lists.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ListUserEventComponent } from './list-user-event/list-user-event.compon
     UpdateUserComponent,
     ListUserPastorComponent,
     ListUserEventComponent,
+    MainListsComponent,
   ],
   imports: [
     CommonModule,

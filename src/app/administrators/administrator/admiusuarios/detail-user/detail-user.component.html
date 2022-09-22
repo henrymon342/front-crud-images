@@ -1,1 +1,79 @@
-<p>detail-user works!</p>
+
+
+
+  <div class="container">
+    <div class="title-detail">
+      <h4>
+        Detalle Usuario
+      </h4>
+      <mat-chip-list aria-label="Fish selection">
+        <span>TIPO DE USUARIO:</span>
+        <mat-chip color="primary" selected *ngIf="user.type=='ACTIVIDADES'">Eventos</mat-chip>
+        <mat-chip color="accent" selected *ngIf="user.type=='PASTORES'">Pastores</mat-chip>
+      </mat-chip-list>
+    </div>
+    <!-- name: string;
+    lastname: string;
+    type: string;
+    cargo: string;
+    ministerio?: string;
+
+    username: string;
+    password: string; -->
+
+    <div class="subtitle">
+      <span class="text">DATOS PERSONALES </span>
+    </div>
+
+    <section>
+      <mat-card>
+        <div class="data">
+          <p>{{ user.name | uppercase }}</p>
+          <small>NOMBRE</small>
+        </div>
+        <div class="data">
+          <p>{{ user.lastname | uppercase }}</p>
+          <small>APELLIDO</small>
+        </div>
+      </mat-card>
+    </section>
+
+    <section>
+      <mat-card>
+        <div class="data">
+          <p>{{ user.cargo | uppercase }}</p>
+          <small>CARGO</small>
+        </div>
+        <div class="data" *ngIf="user.ministerio != ' '">
+          <p>{{ user.ministerio | uppercase }}</p>
+          <small>MINISTERIO</small>
+        </div>
+      </mat-card>
+    </section>
+
+    <div class="subtitle">
+      <span class="text">AUTENTICACIÓN </span>
+    </div>
+
+    <section>
+      <mat-card>
+        <div class="data">
+          <p>{{ user.username }}</p>
+          <small>USERNAME</small>
+        </div>
+        <div class="data">
+          <p>{{ user.password }}</p>
+          <small>PASSWORD</small>
+        </div>
+      </mat-card>
+    </section>
+
+    <div class="action">
+      <button mat-raised-button color="primary"
+      class="boton"
+      [routerLink]="['/auth/administrador/admi-usuarios/user-update', user.id]">
+      EDITAR</button>
+    </div>
+  </div>
+
+

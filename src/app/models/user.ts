@@ -7,4 +7,5 @@ export class User {
   cargo: string;
   username: string;
   password: string;
+  miembroen: string;
 }

@@ -44,11 +44,12 @@ export class UpdateUserComponent implements OnInit {
                private fb: FormBuilder,
                private _serviceUser:UserService,
                private toastr: ToastrService
-               ) { }
+               ) {
+                 this.createForm();
+               }
 
   ngOnInit(): void {
     this.getUser();
-    this.createForm();
   }
 
   createForm(): void{
@@ -97,22 +98,18 @@ export class UpdateUserComponent implements OnInit {
 
   alertCheckForm(){
     console.log(this.closeDialog);
-
     if(this.checkForm()){
       this.popUpValidForm();
-
     }
     else{
       this.popUpInvalidForm();
-
     }
   }
 
 
   popUpValidForm(){
-
     Swal.fire({
-      title: 'Esta seguro de crear un nuevo administrador?',
+      title: '¿Esta seguro de guardar cambios?',
       showDenyButton: true,
       // showCancelButton: true,
       confirmButtonText: 'Si, lo estoy',
@@ -120,7 +117,7 @@ export class UpdateUserComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.crearUsuario();
+        this.editarUsuario();
 
       } else if (result.isDenied) {
         // Swal.fire('Changes are not saved', '', 'info')
@@ -133,10 +130,10 @@ export class UpdateUserComponent implements OnInit {
   }
 
 
-  crearUsuario(){
+  editarUsuario(){
     let timerInterval: any;
     Swal.fire({
-      title: 'Creando Usuario!',
+      title: 'Guardando cambios...',
       html: `Cerrando en <b></b> milisegundos.`,
       timer: 2000,
       timerProgressBar: true,
@@ -157,14 +154,14 @@ export class UpdateUserComponent implements OnInit {
       }
     })
 
-    this._serviceUser.createUser(this.form.value).subscribe( res => {
+    this._serviceUser.update(this.user.id!, this.form.value).subscribe( res => {
       console.log(res);
       this.showSuccess();
     })
   }
 
   showSuccess() {
-    this.toastr.success('Satisfactoriamente!', 'Usuario creado');
+    this.toastr.success('Satisfactoriamente!', 'Cambios guardados');
     //////////////
   }
 
@@ -178,9 +175,25 @@ export class UpdateUserComponent implements OnInit {
     const param = this.route.snapshot.params;
     this.user.id = param['id'];
     console.log(param['id']);
-    this._serviceUser.get(this.user.id!).subscribe( (res: User) => {
-      console.log(res);
-      this.user = res;
+    this._serviceUser.get(this.user.id!).subscribe( (data: User) => {
+      console.log(data);
+      this.user = data;
+      this.form.controls['name'].setValue(data.name);
+      this.form.controls['lastname'].setValue(data.lastname);
+      this.form.controls['type'].setValue(data.type);
+      this.form.controls['cargo'].setValue(data.cargo);
+      this.form.controls['ministerio'].setValue(data.ministerio);
+      this.form.controls['username'].setValue(data.username);
+      this.form.controls['password'].setValue(data.password);
+      this.form.controls['password_confirm'].setValue(data.password);
+      this.form.controls['miembroen'].setValue(data.miembroen);
+      if(this.IGLESIAS.includes(data.miembroen)){
+        console.log('YES INCLUDES', data.miembroen);
+        this.form.controls['option_places_memb'].setValue('IGLESIA');
+      }else{
+        console.log('NO INCLUDES', data.miembroen);
+        this.form.controls['option_places_memb'].setValue('OTRO');
+      }
     })
   }
 

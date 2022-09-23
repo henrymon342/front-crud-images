@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { User } from '../../../../models/user';
+import { MyValidations } from '../../../../utils/my-validations';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -34,12 +35,12 @@ export class UpdateUserComponent implements OnInit {
 
   form: FormGroup;
   place_choosed: string;
-  error_text = '';
+  ShowError: boolean = false;
 
   closeDialog: boolean = false;
   conter: number = 0;
   user: User = new User();
-
+  hide = true;
   constructor( private route: ActivatedRoute,
                private fb: FormBuilder,
                private _serviceUser:UserService,
@@ -51,6 +52,37 @@ export class UpdateUserComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
+
+  // passwordValidation(): ValidatorFn {
+  //   return (control: AbstractControl) => {
+  //     console.log(control);
+  //     console.log(this.form.value.password);
+  //     if( control.value != 'password' ){
+  //       return { 'message': 'las contraseñas no coninciden' };
+  //     }
+  //     return null;
+  //   }
+  // }
+
+
+  validarPassword: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const { password, password_confirm } = control.value; // Extraemos valores de ambos campos necesarios
+
+    // comprobamos que los controles Empresa y cvv existan en el FormGroup
+    // antes de ejecutar la validación.
+    // if (Empresa === undefined || cvv === undefined) {
+    //   throw Error(
+    //     '(validarCvv): Alguno de los controles "Empresa" y/o "cvv" no se encontraron en el FormGroup aplicado.'
+    //   );
+    // }
+
+
+    if (password == password_confirm){
+      return null; // Validación correcta, devolvemos null
+    }
+
+    return { message: true }; // validación incorrecta, devolvemos un error personalizado.
+  };
 
   createForm(): void{
     this.form = this.fb.group({
@@ -64,17 +96,24 @@ export class UpdateUserComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       password_confirm: ['', [Validators.required]],
-
-    })
+    },
+    { validators: [MyValidations.matchPassword ] }
+    )
   }
 
+
   checkForm(): boolean{
+
+    this.form.errors ? this.ShowError=true:this.ShowError=false;
+
     console.log('form: ', this.form.value);
     if( this.form.valid ){
       console.log('ES VALIDO');
       return true;
     }else{
       console.log('NO!, ES VALIDO');
+      // this.error_text = this.form.errors!['message']
+      console.log(this.form.errors!['message']);
       return false;
     }
   }
@@ -92,9 +131,6 @@ export class UpdateUserComponent implements OnInit {
     this.checkForm();
   }
 
-  validarentrada( entrada: any ){
-    return this.error_text.includes('username')?true:false;
-  }
 
   alertCheckForm(){
     console.log(this.closeDialog);

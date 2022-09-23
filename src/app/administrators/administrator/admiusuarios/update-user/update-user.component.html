@@ -154,24 +154,35 @@
               type="password"
               placeholder="password"
               class="input-text"
+              [type]="hide ? 'password' : 'text'"
               >
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error>
           El <strong>password</strong> es requerido
         </mat-error>
       </mat-form-field>
 
-      <label class="label">confirmar password </label>
+      <label class="label">Confirmar password </label>
       <mat-form-field class="box-input" appearance="outline">
         <input formControlName="password_confirm"
               type="password"
               matInput
               placeholder="confirmar password"
               class="input-text"
-              >
+              [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error>
           El <strong>confirmar password</strong> es requerido
         </mat-error>
+        <mat-error *ngIf="ShowError">
+          Las contraseñas no coinciden
+        </mat-error>
       </mat-form-field>
+      <mat-error *ngIf="ShowError">
+          Las contraseñas no coinciden
+      </mat-error>
+
+
 
       <button mat-raised-button color="primary"
                 class="boton"

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { User } from "../../../../models/user";
 import { UserService } from '../../services/user.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
@@ -15,7 +16,7 @@ export class ListUserEventComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<User>();
 
-  constructor( private _serviceUser: UserService ) { }
+  constructor( private _serviceUser: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getUsersEvent();
@@ -27,7 +28,6 @@ export class ListUserEventComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.dataSource.data = res as User[];
-
     })
   }
 
@@ -35,6 +35,15 @@ export class ListUserEventComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  deleteUser(id: number){
+    this._serviceUser.delete(id)
+    .subscribe(res => {
+      console.log(res);
+      this.dataSource.data = this.dataSource.data.filter((item: User) => item.id!=id);
+      this.toastr.success('Satisfactoriamente!', 'Usuario eliminado');
+    })
   }
 
 }

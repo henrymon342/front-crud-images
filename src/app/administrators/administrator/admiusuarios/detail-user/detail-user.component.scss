@@ -26,26 +26,35 @@
     }
   }
 
-  section{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding-bottom: .5em;
-    mat-card{
-      width: 40em;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      .data{
-        text-align: center;
-        p{
 
-        }
+  .bloque{
+    box-shadow: 5px 7px 20px -13px rgba(0,0,0,0.75);
+    section{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-bottom: .5em;
+      .card{
+        width: 40em;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        padding: 1em 0;
+        .data{
+          text-align: center;
+          p{
 
-        small{
-          font-size: 12px;
-          font-weight: 700;
+          }
+
+          small{
+            font-size: 12px;
+            font-weight: 700;
+          }
         }
+      }
+      .data-church{
+        display: flex;
+        justify-content: center;
       }
     }
   }

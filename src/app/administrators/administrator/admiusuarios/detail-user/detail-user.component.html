@@ -25,48 +25,63 @@
       <span class="text">DATOS PERSONALES </span>
     </div>
 
-    <section>
-      <mat-card>
-        <div class="data">
-          <p>{{ user.name | uppercase }}</p>
-          <small>NOMBRE</small>
+    <div class="bloque">
+      <section>
+        <div class="card">
+          <div class="data">
+            <p>{{ user.name | uppercase }}</p>
+            <small>NOMBRE</small>
+          </div>
+          <div class="data">
+            <p>{{ user.lastname | uppercase }}</p>
+            <small>APELLIDO</small>
+          </div>
         </div>
-        <div class="data">
-          <p>{{ user.lastname | uppercase }}</p>
-          <small>APELLIDO</small>
-        </div>
-      </mat-card>
-    </section>
+      </section>
 
-    <section>
-      <mat-card>
-        <div class="data">
-          <p>{{ user.cargo | uppercase }}</p>
-          <small>CARGO</small>
+      <section>
+        <div class="card">
+          <div class="data">
+            <p>{{ user.cargo | uppercase }}</p>
+            <small>CARGO</small>
+          </div>
+          <div class="data" *ngIf="user.ministerio != ' '">
+            <p>{{ user.ministerio | uppercase }}</p>
+            <small>MINISTERIO</small>
+          </div>
+
         </div>
-        <div class="data" *ngIf="user.ministerio != ' '">
-          <p>{{ user.ministerio | uppercase }}</p>
-          <small>MINISTERIO</small>
+      </section>
+
+      <section>
+        <div class="card data-church">
+          <div class="data">
+            <p>{{ user.miembroen | uppercase }}</p>
+            <small>LUGAR DE MINISTERIO</small>
+          </div>
         </div>
-      </mat-card>
-    </section>
+      </section>
+    </div>
+
 
     <div class="subtitle">
       <span class="text">AUTENTICACIÓN </span>
     </div>
 
-    <section>
-      <mat-card>
-        <div class="data">
-          <p>{{ user.username }}</p>
-          <small>USERNAME</small>
+    <div class="bloque">
+      <section>
+        <div class="card">
+          <div class="data">
+            <p>{{ user.username }}</p>
+            <small>USERNAME</small>
+          </div>
+          <div class="data">
+            <p>{{ user.password }}</p>
+            <small>PASSWORD</small>
+          </div>
         </div>
-        <div class="data">
-          <p>{{ user.password }}</p>
-          <small>PASSWORD</small>
-        </div>
-      </mat-card>
-    </section>
+      </section>
+    </div>
 
     <div class="action">
       <button mat-raised-button color="primary"

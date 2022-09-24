@@ -1,0 +1,203 @@
+
+
+
+  <div class="container">
+    <form class="form" [formGroup]="form" (change)="checkForm()">
+      <div class="title-form">
+        <small>
+          Crear Pastor
+        </small>
+      </div>
+
+     <div class="field">
+      <label class="label"> Categoria</label>
+      <mat-radio-group
+        class="radio-group"
+        formControlName="category"
+        (change)="changeValueCategory()"
+        >
+        <mat-radio-button class="radio-button" *ngFor="let cate of CATEGORIES" [value]=cate>
+          {{ cate }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="subtitle">
+      <span class="text">DATOS PERSONALES </span>
+    </div>
+
+    <div class="field">
+      <label class="label">Nombre de pastor</label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="name"
+              type="text"
+              matInput
+              placeholder="nombre"
+              class="input-text"
+              >
+          <mat-error>
+            El <strong>nombre</strong> es requerido
+          </mat-error>
+      </mat-form-field>
+
+      <label class="label" *ngIf="form.value.category != 'DISTRITAL'"> AÑO DE ORDENACIÓN </label>
+        <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> AÑO DE 1RA LICENCIA RECIBIDA </label>
+      <mat-form-field appearance="outline" class="box-select">
+        <mat-select  class="input-select" placeholder="año" formControlName="year" (selectionChange)='checkForm()'>
+          <mat-option *ngFor="let gest of YEARS" [value]=gest.anio>
+            {{ gest.anio }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          El <strong>este campo</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+
+      <div class="field">
+        <label class="label">LUGAR DE MEMBRESÍA</label>
+          <mat-radio-group class="radio-group" formControlName="option_places_memb" (change)="clearOtherInputMem()">
+            <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
+              {{place}}
+            </mat-radio-button>
+          </mat-radio-group>
+
+
+          <ng-container *ngIf="form.value.option_places_memb == 'IGLESIA'">
+            <mat-form-field appearance="outline" class="box-select">
+              <mat-label>iglesia</mat-label>
+              <mat-select
+                          class="input-select"
+                          formControlName="membresia"
+                          (selectionChange)='checkForm()'
+                          >
+                <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+                  {{ iglesia }}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="form.value.option_places_memb == 'OTRO'">
+            <mat-form-field appearance="outline" class="box-input">
+              <mat-label>especificación</mat-label>
+              <input formControlName="membresia"
+              type="text"
+              matInput
+              placeholder="especificacion"
+              class="input-text"
+              >
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+      </div>
+
+
+      <div class="field">
+        <label class="label">LUGAR DE SERVICIO MINISTERIAL</label>
+          <mat-radio-group class="radio-group" formControlName="option_places_serv" (change)="clearOtherInputServ()">
+            <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
+              {{place}}
+            </mat-radio-button>
+          </mat-radio-group>
+
+
+          <ng-container *ngIf="form.value.option_places_serv == 'IGLESIA'">
+            <mat-form-field appearance="outline" class="box-select">
+              <mat-label>iglesia</mat-label>
+              <mat-select
+                          class="input-select"
+                          formControlName="lugardeministerio"
+                          (selectionChange)='checkForm()'
+                          >
+                <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+                  {{ iglesia }}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="form.value.option_places_serv == 'OTRO'">
+            <mat-form-field appearance="outline" class="box-input">
+              <mat-label>especificación</mat-label>
+              <input formControlName="lugardeministerio"
+              type="text"
+              matInput
+              placeholder="especificacion"
+              class="input-text"
+              >
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+      </div>
+
+
+      <label class="label"> ÁREA </label>
+      <mat-form-field appearance="outline" class="box-select">
+        <mat-select  class="input-select" placeholder="area" formControlName="area" (selectionChange)='checkForm()'>
+          <mat-option *ngFor="let area of AREAS" value="{{area.area}}">
+            {{ area.area }} ({{ area.sigla }})
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          El <strong>este campo</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+
+
+      <ng-container *ngIf="form.value.category == 'PRESBITERO'">
+        <label class="label"> GRADO ACADÉMICO </label>
+        <section class="group_checks" [formGroup]="titulosForm">
+          <mat-checkbox formControlName="diploma_ministerial">DIPLOMA MINISTERIAL</mat-checkbox>
+          <mat-checkbox formControlName="bachiller_en_teologia">BACHILLER EN TEOLOGÍA</mat-checkbox>
+          <mat-checkbox formControlName="licenciatura">LICENCIATURA</mat-checkbox>
+          <mat-checkbox formControlName="maestria">MAESTRÍA</mat-checkbox>
+          <mat-checkbox formControlName="doctorado">DOCTORADO</mat-checkbox>
+        </section>
+      </ng-container>
+
+
+      <!-- <label class="label"> IMAGEN de PASTOR </label>
+      <mat-form-field appearance="outline" class="box-select">
+        <mat-select  class="input-select" placeholder="area" formControlName="area" (selectionChange)='checkForm()'>
+          <mat-option *ngFor="let area of AREAS" value="{{area.area}}">
+            {{ area.area }} ({{ area.sigla }})
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          El <strong>este campo</strong> es requerido
+        </mat-error>
+      </mat-form-field> -->
+    </div>
+
+
+
+
+
+
+    <div class="subtitle">
+      <span class="text">AUTENTICACIÓN </span>
+    </div>
+
+
+    <button mat-raised-button color="primary"
+    class="boton"
+    (click)="alertCheckForm()"
+    >
+    CREAR</button>
+    </form>
+
+
+  </div>
+
+

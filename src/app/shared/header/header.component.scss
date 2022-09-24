@@ -1,0 +1,15 @@
+mat-toolbar{
+  display: grid;
+  grid-template-columns: 3% 94% 3%;
+
+  .icon{
+    color: #fff;
+  }
+}
+
+.title-church{
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0em;
+}

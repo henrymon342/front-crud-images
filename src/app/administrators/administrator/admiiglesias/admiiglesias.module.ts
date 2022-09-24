@@ -8,6 +8,7 @@ import { AdmiIglesiaDetailComponent } from './admi-iglesia-detail/admi-iglesia-d
 import { AdmiiglesiasComponent } from './admiiglesias.component';
 import { MaterialModule } from '../../../../Material/material.module';
 import { AdmiIglesiaCreateComponent } from './admi-iglesia-create/admi-iglesia-create.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AdmiIglesiaCreateComponent } from './admi-iglesia-create/admi-iglesia-c
   imports: [
     CommonModule,
     AdmiiglesiasRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class AdmiiglesiasModule { }

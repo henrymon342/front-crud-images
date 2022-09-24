@@ -11,6 +11,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { ListUserPastorComponent } from './list-user-pastor/list-user-pastor.component';
 import { ListUserEventComponent } from './list-user-event/list-user-event.component';
 import { MainListsComponent } from './main-lists/main-lists.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MainListsComponent } from './main-lists/main-lists.component';
     CommonModule,
     AdmiusuariosRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AdmiusuariosModule { }

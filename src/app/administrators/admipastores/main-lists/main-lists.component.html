@@ -1,0 +1,18 @@
+<div class="section">
+  <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+        Crear nuevo
+  </button>
+</div>
+<mat-tab-group>
+  <mat-tab label="Presbiteros">
+    <app-list-pastor-presbitero></app-list-pastor-presbitero>
+  </mat-tab>
+  <mat-tab label="Distritales">
+    <app-list-pastor-distrital></app-list-pastor-distrital>
+  </mat-tab>
+  <mat-tab label="Locales">
+    <app-list-pastor-local></app-list-pastor-local>
+  </mat-tab>
+</mat-tab-group>

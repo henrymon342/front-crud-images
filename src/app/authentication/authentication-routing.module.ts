@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path:'',
-    redirectTo: 'administrador',
+    redirectTo: 'admipastores',
     pathMatch: 'full'
   }
 ];

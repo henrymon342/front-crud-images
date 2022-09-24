@@ -1,20 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-
-import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { DialogService } from '../services/dialog.service';
+import Swal from 'sweetalert2';
+import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
+import { PastorService } from '../services/pastor.service';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.scss']
+  selector: 'app-create-pastor',
+  templateUrl: './create-pastor.component.html',
+  styleUrls: ['./create-pastor.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreatePastorComponent implements OnInit {
 
-  TYPEUSER: string[] = ['ACTIVIDADES', 'PASTORES'];
-  MINISTERIOS: string[] = ['JNI', 'MNI', 'DNI'];
+  CATEGORIES: string[] = ['LOCAL', 'DISTRITAL', 'PRESBITERO']
+  PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
   IGLESIAS: string[] = [
     'CALLIRPA', 'CHAPICHAPINI', 'ROSAPATAYARIBAY', 'TOMATA', 'TOPOHOCO', 'TUMARAPI',// ZONA ANDINA PACAJES
     'CAQUIAVIRI', 'COLQUE ALTA', 'CHIPANAMAYA', 'LLIMPHI', 'LACALACA', 'LAURA AFETUNI', // ZONA CAQUIAVIRI
@@ -30,40 +29,48 @@ export class CreateUserComponent implements OnInit {
     'CALASAYA', 'CRUCERO', 'PATACAMAYA', 'CALTECA', 'CALACACHI', 'TOLOMA', // ZONA PATACAMAYA TAMBO QUEMADO
     'FE EN CRISTO', 'FILADELFIA', 'NUEVA VIDA', 'SHADDAI', 'LEUQUE', 'ALTO MUNAYPATA', 'IROCOTA'
     ];
-  PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
-
+  YEARS = this.rangeYears();
+  AREAS = this.arrayAreas();
   form: FormGroup;
-  place_choosed: string;
-  error_text = '';
+
+  titulosForm = this.fb.group({
+    diploma_ministerial: false,
+    bachiller_en_teologia: false,
+    licenciatura: false,
+    maestria: false,
+    doctorado: false
+  });
 
   closeDialog: boolean = false;
-  conter: number = 0;
   constructor( private fb: FormBuilder,
-               private _service_user:UserService,
                private toastr: ToastrService,
-               private _serviceDialog: DialogService ) { }
+               private _serviceDialog: DialogService,
+               private _servicePastor: PastorService) { }
 
   ngOnInit(): void {
     this.createForm();
   }
 
+
+
+
   createForm(): void{
     this.form = this.fb.group({
-      type: ['ACTIVIDADES', [Validators.required]],
-      ministerio: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      cargo: ['', [Validators.required]],
+      category: ['LOCAL', [Validators.required]],
+      year: ['', [Validators.required]],
+      area: ['', [Validators.required]],
+      membresia: ['', [Validators.required]],
+      lugardeministerio: ['', [Validators.required]],
+      titulos: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
-      miembroen: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      password_confirm: ['', [Validators.required]],
+      option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
 
     })
   }
 
   checkForm(): boolean{
+
     console.log('form: ', this.form.value);
     if( this.form.valid ){
       console.log('ES VALIDO');
@@ -74,27 +81,51 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-
-  clearOtherInput(){
-    this.form.controls['miembroen'].setValue('');
-  }
-
-  changeValueMinistery(){
-    if( this.form.value.type == 'PASTORES' ){
-      this.form.controls['ministerio'].setValue(' ');
-    }else{
-      this.form.controls['ministerio'].setValue('');
-    }
+  changeValueCategory(){
+   // hacer algo en caso de categorias
     this.checkForm();
   }
 
-  validarentrada( entrada: any ){
-    return this.error_text.includes('username')?true:false;
+  rangeYears() {
+    const anios:{ anio: number }[] = [];
+    for (let i = 1950; i < 2040; i++) {
+      anios.push({anio: i});
+    }
+    return anios;
+  }
+
+  clearOtherInputMem(){
+    //LIMPIAR EL CAMPO CORRESPONDIENTE
+    // this.form.controls['miembroen'].setValue('');
+  }
+
+  clearOtherInputServ(){
+    //LIMPIAR EL CAMPO CORRESPONDIENTE
+    // this.form.controls['miembroen'].setValue('');
+  }
+
+  arrayAreas(){
+    var areas:{ area: string, sigla: string }[] = [];
+      areas.push({area: 'Pastor', sigla: 'PAS'});
+      areas.push({area: 'Educación', sigla: 'EDU'});
+      areas.push({area: 'Especial', sigla: 'ESP'});
+      areas.push({area: 'Estudiando', sigla: 'STU'});
+      areas.push({area: 'Sin asignación', sigla: 'U'});
+      areas.push({area: 'Superintendente del distrito', sigla: 'DS'});
+      areas.push({area: 'Jubilado con asignación', sigla: 'RA'});
+      areas.push({area: 'Jubilado sin asignación', sigla: 'RU'});
+      areas.push({area: 'Evangelista registrado', sigla: 'EVR'});
+
+    return areas;
   }
 
   alertCheckForm(){
-    console.log(this.closeDialog);
-
+    if( this.form.value.category == 'PRESBITERO' ){
+      this.form.controls['titulos'].setValue(JSON.stringify(this.titulosForm.value));
+    }else{
+      this.form.controls['titulos'].setValue('');
+    }
+    console.log(this.form.value);
     if(this.checkForm()){
       this.popUpValidForm();
 
@@ -105,11 +136,10 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-
   popUpValidForm(){
 
     Swal.fire({
-      title: 'Esta seguro de crear un nuevo administrador?',
+      title: 'Esta seguro de crear un nuevo Pastor?',
       showDenyButton: true,
       // showCancelButton: true,
       confirmButtonText: 'Si, lo estoy',
@@ -129,11 +159,10 @@ export class CreateUserComponent implements OnInit {
     this.showError();
   }
 
-
   crearUsuario(){
     let timerInterval: any;
     Swal.fire({
-      title: 'Creando Usuario!',
+      title: 'Creando pastor!',
       html: `Cerrando en <b></b> milisegundos.`,
       timer: 2000,
       timerProgressBar: true,
@@ -154,14 +183,14 @@ export class CreateUserComponent implements OnInit {
       }
     })
 
-    this._service_user.createUser(this.form.value).subscribe( res => {
+    this._servicePastor.createPastor(this.form.value).subscribe( res => {
       console.log(res);
       this.showSuccess();
     })
   }
 
   showSuccess() {
-    this.toastr.success('Satisfactoriamente!', 'Usuario creado');
+    this.toastr.success('Satisfactoriamente!', 'Pastor creado');
     //////////////
     this.closeDialog = true;
     this._serviceDialog.setPersona(this.closeDialog)
@@ -175,3 +204,6 @@ export class CreateUserComponent implements OnInit {
   //  this._serviceDialog.setPersona(this.closeDialog)
   }
 }
+
+
+

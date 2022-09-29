@@ -107,7 +107,6 @@ export class CreateUserComponent implements OnInit {
 
 
   popUpValidForm(){
-
     Swal.fire({
       title: 'Esta seguro de crear un nuevo administrador?',
       showDenyButton: true,

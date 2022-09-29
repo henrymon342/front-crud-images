@@ -13,6 +13,7 @@ import { ListPastorDistritalComponent } from './list-pastor-distrital/list-pasto
 import { ListPastorLocalComponent } from './list-pastor-local/list-pastor-local.component';
 import { UpdatePastorComponent } from './update-pastor/update-pastor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdmipastoresRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxDropzoneModule,
   ],
 })
 export class AdmipastoresModule { }

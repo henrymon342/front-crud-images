@@ -20,7 +20,6 @@ export class ImageService {
     })
   };
 
-  formData: FormData = new FormData();
 
   constructor( private http: HttpClient) { }
 
@@ -34,12 +33,33 @@ export class ImageService {
     return this.http.get(`${this.baseUrl}/images/prueba`);
   }
 
-
-
-
-
-
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/files`);
   }
+
+//////////////
+
+createImage( data: any ): Observable<any> {
+  return this.http.post(`${this.baseUrl}/image/new`, data);
+}
+
+get(id:number): Observable<any> {
+return this.http.get(`${this.baseUrl}/image/find/${id}`);
+}
+
+// update(id: number, data: Pastor): Observable<any> {
+// return this.http.put(`${this.baseUrl}/pastores/update/${id}`, data);
+// }
+
+delete(id: number): Observable<any> {
+return this.http.delete(`${this.baseUrl}/image/delete/${id}`);
+}
+
+// getPastorByCategory(data:any): Observable<any> {
+// return this.http.post(`${this.baseUrl}/pastores/findByCategory`, data);
+// }
+
+
+
+
 }

@@ -1,0 +1,52 @@
+
+
+.container{
+  display: grid;
+  grid-template-columns: 100%;
+  height: 80vh;
+  padding: 0em 4em;
+
+
+  .list{
+
+    .button-container{
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1em;
+
+      .lists{
+        width: 20em;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button{
+        width: 10em;
+      }
+    }
+
+    .actions{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .input-search{
+        width: 30em;
+      }
+      .bottons{
+        display: flex;
+        justify-content: space-between;
+        button{
+          margin-right: 1em;
+        }
+      }
+    }
+
+
+    table{
+      width: 100%;
+    }
+
+  }
+}
+
+

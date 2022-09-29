@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Pastor } from '../../../models/pastor';
 import { PastorService } from '../services/pastor.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-pastor-distrital',
@@ -45,5 +46,23 @@ export class ListPastorDistritalComponent implements OnInit {
     })
   }
 
+
+  popUpDeletePastor(id: number){
+    Swal.fire({
+      title: 'Esta seguro de eliminar pastor?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Si, lo estoy',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deletePastor(id);
+
+      } else if (result.isDenied) {
+        // Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
 }
 

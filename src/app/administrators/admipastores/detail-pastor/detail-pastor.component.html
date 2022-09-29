@@ -1,1 +1,117 @@
-<p>detail-pastor works!</p>
+
+
+
+  <div class="container">
+    <div class="title-detail">
+      <h4>
+        Detalle Pastor
+      </h4>
+      <mat-chip-list aria-label="Fish selection">
+        <span>CATEGORIA:</span>
+        <mat-chip color="primary" selected *ngIf="pastor.category=='LOCAL'">LOCAL</mat-chip>
+        <mat-chip color="accent" selected *ngIf="pastor.category=='DISTRITAL'">DISTRITAL</mat-chip>
+        <mat-chip color="warn" selected *ngIf="pastor.category=='PRESBITERO'">PRESBITERO</mat-chip>
+      </mat-chip-list>
+    </div>
+
+
+    <div class="content-main">
+      <div class="content-left">
+        <!-- <div class="subtitle">
+          <span class="text">DATOS PERSONALES </span>
+        </div> -->
+
+        <div class="bloque-hor">
+          <section>
+            <div class="card-one data-church">
+              <div class="data">
+                <p>{{ pastor.name | uppercase }}</p>
+                <small>NOMBRE</small>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="card data-church">
+              <div class="data">
+                <img [src]="image.imagePath" alt="">
+                <small>IMAGEN</small>
+              </div>
+            </div>
+          </section>
+        </div>
+
+
+        <div class="subtitle">
+          <span class="text">TÍTULOS </span>
+        </div>
+        <div class="bloque-hor" *ngIf="pastor.titulos">
+
+          <div class="bloque">
+            <section>
+              <div class="card-one">
+                <div class="data titles">
+                  <mat-checkbox *ngFor="let title of titles" [checked]="title.valor" readonly> {{ title.nombre}} </mat-checkbox>
+                  <!-- <small>TÍTULOS</small> -->
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content-right">
+
+        <div class="bloque">
+          <section>
+            <div class="card-one">
+
+              <div class="data">
+                <p>{{ pastor.year | uppercase }}</p>
+                <small *ngIf="pastor.category=='DISTRITAL'"> AÑO DE 1RA LICENCIA RECIBIDA</small>
+                <small *ngIf="pastor.category!='DISTRITAL'"> AÑO DE ORDENACIÓN</small>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="card">
+              <div class="data">
+                <p>{{ pastor.lugardeministerio | uppercase }}</p>
+                <small>LUGAR DE  MINISTERIO</small>
+              </div>
+              <div class="data">
+                <p>{{ pastor.membresia | uppercase }}</p>
+                <small>LUGAR DE MEMBRESIA</small>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+
+
+        <div class="bloque">
+          <section>
+            <div class="card-one">
+              <div class="data">
+                <p>{{ pastor.area | uppercase }}</p>
+                <small>ÁREA</small>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="action">
+      <button mat-raised-button color="primary"
+      class="boton"
+      [routerLink]="['/auth/administrador/admi-usuarios/user-update', pastor.id]">
+      EDITAR</button>
+    </div>
+  </div>
+
+

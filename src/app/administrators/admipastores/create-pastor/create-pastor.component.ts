@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { ImageService } from '../../../services/image.service';
 import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
 import { PastorService } from '../services/pastor.service';
 
@@ -42,10 +43,14 @@ export class CreatePastorComponent implements OnInit {
   });
 
   closeDialog: boolean = false;
+
+  files: File[] = [];
+  file: File;
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
                private _serviceDialog: DialogService,
-               private _servicePastor: PastorService) { }
+               private _servicePastor: PastorService,
+               private _serviceImage: ImageService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -183,15 +188,42 @@ export class CreatePastorComponent implements OnInit {
       }
     })
 
-    this._servicePastor.createPastor(this.form.value).subscribe( res => {
+    this._servicePastor.createPastor(this.form.value).subscribe( async res => {
       console.log(res);
+      this.subirImagenDrop(await res.id);
       this.showSuccess();
     })
   }
 
+
+  onSelect(event: any) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    if(this.files.length > 1){ // checking if files array has more than one content
+      this.replaceFileImage(); // replace file
+      }
+      this.file = this.files[0]
+      console.log(this.file);
+  }
+
+  replaceFileImage(){
+    this.files.splice(0,1); // index =0 , remove_count = 1
+  }
+
+  subirImagenDrop(id: string){
+    let formData = new FormData();
+    formData.append("image", this.file, this.file['name']);
+    formData.append("idAsociado", id);
+    console.log(this.file['name']);
+    this._serviceImage.createImage( formData ).subscribe( res =>{
+      console.log( res );
+    })
+  }
+
+
+
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Pastor creado');
-    //////////////
     this.closeDialog = true;
     this._serviceDialog.setPersona(this.closeDialog)
   }
@@ -201,8 +233,9 @@ export class CreatePastorComponent implements OnInit {
       positionClass: 'toast-bottom-left'
    });
    this.closeDialog = false;
-  //  this._serviceDialog.setPersona(this.closeDialog)
   }
+
+
 }
 
 

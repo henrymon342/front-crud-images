@@ -2,7 +2,7 @@
 
 
   <div class="container">
-    <form class="form" [formGroup]="form" (change)="checkForm()">
+    <form class="form" [formGroup]="form" (change)="checkForm()" enctype="multipart/form-data">
       <div class="title-form">
         <small>
           Crear Pastor
@@ -167,17 +167,8 @@
       </ng-container>
 
 
-      <!-- <label class="label"> IMAGEN de PASTOR </label>
-      <mat-form-field appearance="outline" class="box-select">
-        <mat-select  class="input-select" placeholder="area" formControlName="area" (selectionChange)='checkForm()'>
-          <mat-option *ngFor="let area of AREAS" value="{{area.area}}">
-            {{ area.area }} ({{ area.sigla }})
-          </mat-option>
-        </mat-select>
-        <mat-error>
-          El <strong>este campo</strong> es requerido
-        </mat-error>
-      </mat-form-field> -->
+
+
     </div>
 
 
@@ -186,7 +177,17 @@
 
 
     <div class="subtitle">
-      <span class="text">AUTENTICACIÓN </span>
+      <span class="text">SELECCIÓN DE IMAGEN </span>
+    </div>
+
+    <div class="field">
+      <!-- <label class="label"> IMAGEN de PASTOR</label> -->
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label>Arrartrar imagen aquí</ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" *ngFor="let f of files" [file]="f">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
     </div>
 
 

@@ -152,7 +152,7 @@ export class CreatePastorComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.crearUsuario();
+        this.crearPastor();
 
       } else if (result.isDenied) {
         // Swal.fire('Changes are not saved', '', 'info')
@@ -164,7 +164,7 @@ export class CreatePastorComponent implements OnInit {
     this.showError();
   }
 
-  crearUsuario(){
+  crearPastor(){
     let timerInterval: any;
     Swal.fire({
       title: 'Creando pastor!',

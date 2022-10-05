@@ -47,9 +47,9 @@ get(id:number): Observable<any> {
 return this.http.get(`${this.baseUrl}/image/find/${id}`);
 }
 
-// update(id: number, data: Pastor): Observable<any> {
-// return this.http.put(`${this.baseUrl}/pastores/update/${id}`, data);
-// }
+update(id: number, data: any ): Observable<any> {
+return this.http.put(`${this.baseUrl}/image/update/${id}`, data);
+}
 
 delete(id: number): Observable<any> {
 return this.http.delete(`${this.baseUrl}/image/delete/${id}`);

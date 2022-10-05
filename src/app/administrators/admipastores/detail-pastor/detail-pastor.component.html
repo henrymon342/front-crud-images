@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="subtitle">
+        <div class="subtitle" *ngIf="pastor.titulos">
           <span class="text">TÍTULOS </span>
         </div>
         <div class="bloque-hor" *ngIf="pastor.titulos">
@@ -51,7 +51,7 @@
             <section>
               <div class="card-one">
                 <div class="data titles">
-                  <mat-checkbox *ngFor="let title of titles" [checked]="title.valor" readonly> {{ title.nombre}} </mat-checkbox>
+                  <mat-checkbox *ngFor="let title of titles" [checked]="title.valor" [disabled]="true"> {{ title.nombre}} </mat-checkbox>
                   <!-- <small>TÍTULOS</small> -->
                 </div>
               </div>
@@ -109,7 +109,7 @@
     <div class="action">
       <button mat-raised-button color="primary"
       class="boton"
-      [routerLink]="['/auth/administrador/admi-usuarios/user-update', pastor.id]">
+      [routerLink]="['/auth/admipastores/pastor-update/', pastor.id]">
       EDITAR</button>
     </div>
   </div>

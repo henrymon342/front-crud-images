@@ -40,21 +40,20 @@ export class DetailPastorComponent implements OnInit {
       console.log('no existe');
     }else{
       console.log('existe');
-    }
 
-    console.log(titus);
-    var listaaux = JSON.parse(titus+'');
-    for (let variable in listaaux) {
-      if (listaaux[variable] === true) {
-        console.log(variable);
-        this.titles.push({nombre: variable, valor: true});
-      }else{
-        this.titles.push({nombre: variable, valor: false});
+      console.log(titus);
+      var listaaux = JSON.parse(titus+'');
+      for (let variable in listaaux) {
+        if (listaaux[variable] === true) {
+          console.log(variable);
+          this.titles.push({nombre: variable, valor: true});
+        }else{
+          this.titles.push({nombre: variable, valor: false});
 
+        }
       }
-   }
+    }
     console.log(this.titles);
-
   }
 
   getImagePastor(id: number){

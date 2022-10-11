@@ -4,6 +4,7 @@ import { Pastor } from '../../../models/pastor';
 import { PastorService } from '../services/pastor.service';
 import { ImageService } from '../../../services/image.service';
 import { Image } from '../../../models/image';
+import { AsignaturaService } from '../services/asignatura.service';
 
 @Component({
   selector: 'app-detail-pastor',
@@ -16,7 +17,12 @@ export class DetailPastorComponent implements OnInit {
   image: Image = new Image();
   titles: any[] = [];
 
-  constructor( private route: ActivatedRoute, private _servicePastor: PastorService, private _serviceImage: ImageService) { }
+  seeRecord: boolean = false;
+  hasMaterias: boolean = false;
+  constructor( private route: ActivatedRoute,
+               private _servicePastor: PastorService,
+               private _serviceAsignatura: AsignaturaService,
+               private _serviceImage: ImageService) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -26,6 +32,7 @@ export class DetailPastorComponent implements OnInit {
     const param = this.route.snapshot.params;
     this.pastor.id = param['id'];
     console.log(param['id']);
+    this.getAsignaturas(this.pastor.id!);
     this._servicePastor.get(this.pastor.id!).subscribe( (res: Pastor) => {
       console.log(res);
       this.pastor = res;
@@ -34,6 +41,18 @@ export class DetailPastorComponent implements OnInit {
     this.getImagePastor(this.pastor.id!);
   }
 
+  getAsignaturas(id: number){
+    this._serviceAsignatura.getByIdPastor(id).subscribe( res => {
+      console.log(res);
+      if( res[0] == undefined ){
+      console.log('no EXISTE');
+      this.hasMaterias = false;
+      }else{
+        console.log('EXISTE');
+        this.hasMaterias = true;
+      }
+    })
+  }
 
   createArrayTitles(titus?: string){
     if( !titus ){

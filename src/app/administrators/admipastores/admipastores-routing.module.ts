@@ -8,6 +8,9 @@ import { ListPastorPresbiteroComponent } from './list-pastor-presbitero/list-pas
 import { CreatePastorComponent } from './create-pastor/create-pastor.component';
 import { UpdatePastorComponent } from './update-pastor/update-pastor.component';
 import { DetailPastorComponent } from './detail-pastor/detail-pastor.component';
+import { RecordPastorComponent } from './record/record-pastor/record-pastor.component';
+import { UpdateRecordPastorComponent } from './record/update-record-pastor/update-record-pastor.component';
+import { CreateRecordPastorComponent } from './record/create-record-pastor/create-record-pastor.component';
 
 const routes: Routes = [
   {
@@ -41,6 +44,18 @@ const routes: Routes = [
       {
         path: 'pastor-create',
         component: CreatePastorComponent
+      },
+      {
+        path: 'record-pastor',
+        component: RecordPastorComponent
+      },
+      {
+        path: 'create-record-pastor/:id',
+        component: CreateRecordPastorComponent
+      },
+      {
+        path: 'update-record-pastor/:id',
+        component: UpdateRecordPastorComponent
       },
       { path: '', redirectTo: 'main-lists', pathMatch: 'full' }
     ]

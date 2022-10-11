@@ -103,6 +103,20 @@
           </section>
         </div>
 
+        <ng-container *ngIf="hasMaterias && pastor.category == 'DISTRITAL' && !seeRecord">
+          <div class="bg-boton">
+            <button class="boton" mat-button (click)="seeRecord = !seeRecord" >VER RECORD ACADÉMICO </button>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="hasMaterias && seeRecord">
+          <app-record-pastor [idPas]="pastor.id"></app-record-pastor>
+        </ng-container>
+
+        <ng-container *ngIf="!hasMaterias && pastor.category == 'DISTRITAL'">
+          <button class="boton" mat-raised-button color="primary" [routerLink]="['/auth/admipastores/create-record-pastor/', pastor.id]">Añadir record </button>
+        </ng-container>
+
       </div>
     </div>
 

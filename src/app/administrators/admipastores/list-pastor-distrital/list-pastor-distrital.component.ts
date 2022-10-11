@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Pastor } from '../../../models/pastor';
 import { PastorService } from '../services/pastor.service';
 import Swal from 'sweetalert2';
+import { ImageService } from '../../../services/image.service';
+import { AsignaturaService } from '../services/asignatura.service';
+import { Asignatura } from '../../../models/asignatura';
 
 @Component({
   selector: 'app-list-pastor-distrital',
@@ -15,8 +18,12 @@ export class ListPastorDistritalComponent implements OnInit {
   displayedColumns: string[] = [ 'Nro', 'name', 'category', 'area', 'year', 'membresia', 'lugardeministerio', 'mas'];
 
   public dataSource = new MatTableDataSource<Pastor>();
+  listAsignaturas: Asignatura[] = [];
 
-  constructor( private _servicePastor: PastorService, private toastr: ToastrService) { }
+  constructor( private _servicePastor: PastorService,
+               private toastr: ToastrService,
+               private _serviceImage: ImageService,
+               private _serviceAsignatura: AsignaturaService) { }
 
   ngOnInit(): void {
     this.getDistritalPastors();
@@ -39,13 +46,31 @@ export class ListPastorDistritalComponent implements OnInit {
 
   deletePastor(id: number){
     this._servicePastor.delete(id)
+    .subscribe( async res => {
+      console.log(await res);
+      this.dataSource.data = this.dataSource.data.filter((item: Pastor) => item.id!=id);
+    })
+    this.deleteImage( id);
+    this._serviceAsignatura.getByIdPastor(id)
     .subscribe(res => {
       console.log(res);
-      this.dataSource.data = this.dataSource.data.filter((item: Pastor) => item.id!=id);
-      this.toastr.success('Satisfactoriamente!', 'Pastor eliminado');
+      this.listAsignaturas = res as Asignatura[];
+      this.listAsignaturas.forEach( (asig: Asignatura) => {
+        this._serviceAsignatura.delete(asig.id).subscribe( async res => {
+          console.log( await res);
+        })
+      });
     })
+
+
+    this.toastr.success('Satisfactoriamente!', 'Pastor eliminado');
   }
 
+  deleteImage(id: number){
+    this._serviceImage.delete(id).subscribe( res => {
+      console.log(res);
+    })
+  }
 
   popUpDeletePastor(id: number){
     Swal.fire({

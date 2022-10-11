@@ -47,6 +47,9 @@ export class UpdatePastorComponent implements OnInit {
 
   pastor:Pastor = new Pastor();
   titles: any[] = [];
+
+  hasMaterias: boolean = false;
+
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
                private _serviceDialog: DialogService,

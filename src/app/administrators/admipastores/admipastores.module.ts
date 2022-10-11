@@ -14,6 +14,9 @@ import { ListPastorLocalComponent } from './list-pastor-local/list-pastor-local.
 import { UpdatePastorComponent } from './update-pastor/update-pastor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { RecordPastorComponent } from './record/record-pastor/record-pastor.component';
+import { UpdateRecordPastorComponent } from './record/update-record-pastor/update-record-pastor.component';
+import { CreateRecordPastorComponent } from './record/create-record-pastor/create-record-pastor.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ListPastorDistritalComponent,
     ListPastorLocalComponent,
     UpdatePastorComponent,
+    RecordPastorComponent,
+    UpdateRecordPastorComponent,
+    CreateRecordPastorComponent,
   ],
   imports: [
     CommonModule,

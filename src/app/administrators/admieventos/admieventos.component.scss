@@ -1,0 +1,33 @@
+
+mat-toolbar{
+  display: grid;
+  grid-template-columns: 3% 94% 3%;
+
+  .icon{
+    color: #fff;
+  }
+}
+
+.title-church{
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0em;
+}
+
+
+
+section{
+  min-height: 90vh;
+  .title-component{
+    font-family: 'Secular One', sans-serif;
+    padding: 1em 3em 0em 3em;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  .content{
+    min-height: 75vh;
+  }
+}

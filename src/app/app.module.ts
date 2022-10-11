@@ -13,7 +13,6 @@ import { MaterialModule } from '../Material/material.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [

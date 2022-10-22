@@ -12,7 +12,9 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { DetailEventComponent } from './detail-event/detail-event.component';
 import { UpdateEventComponent } from './update-event/update-event.component';
 import { MaterialModule } from '../../../Material/material.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTimepickerModule } from 'mat-timepicker';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { MaterialModule } from '../../../Material/material.module';
     AdmieventosRoutingModule,
     SharedModule,
     MaterialModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatTimepickerModule
   ]
 })
 export class AdmieventosModule { }

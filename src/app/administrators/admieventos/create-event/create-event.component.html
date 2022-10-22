@@ -1,1 +1,253 @@
-<p>create-event works!</p>
+
+
+  <div class="container">
+    <form class="form" [formGroup]="form" (change)="checkForm()" enctype="multipart/form-data">
+      <div class="title-form">
+        <small>
+          Crear Evento
+        </small>
+      </div>
+
+     <div class="field">
+        <label class="label"> MINISTERIO</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="ministerio" formControlName="ministerio" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let min of MINISTERIOS" [value]=min>
+              {{ min }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+    <div class="field">
+      <label class="label">TÍTULO</label>
+      <mat-form-field class="box-input" appearance="outline">
+        <input formControlName="titulo"
+              type="text"
+              matInput
+              placeholder="título"
+              class="input-text"
+              >
+          <mat-error>
+            El <strong>nombre</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+
+      <div class="field">
+          <label class="label">MODALIDAD</label>
+      <!-- (change)="clearOtherInput()" -->
+        <mat-radio-group class="radio-group" formControlName="modalidad" >
+          <mat-radio-button class="radio-button" *ngFor="let place of MODALIDADES" [value]="place">
+            {{place}}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <ng-container *ngIf="form.value.modalidad == 'PRESENCIAL'">
+          <mat-form-field appearance="outline" class="box-select">
+            <mat-label>iglesia</mat-label>
+            <mat-select
+                        class="input-select"
+                        formControlName="optionplace"
+                        (selectionChange)='checkForm()'
+                        >
+              <mat-option *ngFor="let place of LUGARES" [value]=place >
+                {{ place }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+
+          <ng-container *ngIf="form.value.optionplace == 'ALGUNA IGLESIA'">
+            <mat-form-field appearance="outline" class="box-select">
+              <mat-label>iglesia</mat-label>
+              <mat-select
+                          class="input-select"
+                          formControlName="place"
+                          (selectionChange)='checkForm()'
+                          >
+                <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+                  {{ iglesia }}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="form.value.optionplace == 'OTRO LUGAR'">
+            <mat-form-field appearance="outline" class="box-input">
+              <mat-label>especificación</mat-label>
+              <input formControlName="place"
+              type="text"
+              matInput
+              placeholder="especificación"
+              class="input-text"
+              >
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+
+        </ng-container>
+
+        <ng-container *ngIf="form.value.modalidad == 'VIRTUAL'">
+          <mat-form-field appearance="outline" class="box-select">
+            <mat-label> Plataforma </mat-label>
+            <mat-select
+                        class="input-select"
+                        formControlName="optionplace"
+                        (selectionChange)='checkForm()'
+                        >
+              <mat-option *ngFor="let plat of PLATAFORMAS" [value]=plat >
+                {{ plat }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+
+          <ng-container *ngIf="form.value.optionplace == 'OTRO'">
+            <mat-form-field appearance="outline" class="box-input">
+              <mat-label>especificación</mat-label>
+              <input formControlName="place"
+              type="text"
+              matInput
+              placeholder="especificación"
+              class="input-text"
+              >
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+
+        </ng-container>
+    </div>
+
+
+    <div class="field">
+      <label class="label"> FECHA(s) </label>
+      <mat-radio-group class="radio-group" formControlName="tipofecha" >
+        <mat-radio-button class="radio-button" *ngFor="let tipo of TIPOSFECHA" [value]="tipo" (change)="typeDateChange(tipo)">
+          {{tipo}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <ng-container *ngIf="form.value.tipofecha == 'UN DÍA'">
+        <mat-form-field class="box_input_date" appearance="outline" >
+          <mat-label>Seleccionar fecha</mat-label>
+          <input matInput [matDatepicker]="picker"
+                          formControlName="fechasingle"
+                          (dateChange)="checkForm()"
+                          >
+          <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle >
+          <mat-datepicker #picker
+                          ></mat-datepicker>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="form.value.tipofecha == 'VARIOS DÍAS'">
+        varios dias
+        <mat-form-field class="box_input_date" appearance="outline">
+          <mat-label>Selecciona rango de fechas</mat-label>
+          <mat-date-range-input [rangePicker]="picker"  >
+            <input matStartDate placeholder="Start date" (dateChange)="checkForm()" formControlName="fechaini">
+            <input matEndDate placeholder="End date" (dateChange)="checkForm()" formControlName="fechafin">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </ng-container>
+
+    </div>
+
+    <div class="field">
+      <label class="label">HORA INICIO </label>
+      <mat-form-field class="marca" appearance="outline">
+        <input formControlName="horaini"
+                type="text"
+                matInput
+                placeholder="10:00"
+                matTimepicker
+                (timeChange)="checkForm()"
+                >
+      </mat-form-field>
+
+      <label class="label">HORA FIN </label>
+      <mat-form-field class="marca" appearance="outline">
+          <input formControlName="horafin"
+                 type="text"
+                 matInput
+                 placeholder="13:00"
+                 matTimepicker
+                 (timeChange)="checkForm()"
+                 >
+      </mat-form-field>
+    </div>
+
+    <div class="field">
+      <label class="label">DESCRIPCIÓN</label>
+        <mat-form-field class="box_input" appearance="outline">
+          <textarea
+                    class="text_area"
+                    matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="10"
+                    cdkAutosizeMaxRows="8"
+                    formControlName="descripcion"
+                    placeholder="descripción"></textarea>
+
+        </mat-form-field>
+    </div>
+
+    <div class="field">
+      <label class="label">ENCARGADO(s)</label>
+      <mat-form-field class="box_input" appearance="outline">
+        <input formControlName="encargado"
+              type="text"
+              matInput
+
+              placeholder="encargado"
+              class="input"
+              [(ngModel)]="nuevo_encargado"
+              (keyup.Enter)="adEncargado()"
+              >
+              <mat-icon matSuffix mat-fab color="primary" matTooltip="enter to add">add_circle</mat-icon>
+      </mat-form-field>
+
+      <mat-list-item *ngFor="let encargado of encargados; let i = index">
+        <div class="item">
+          <label matLine >{{ encargado }}</label>
+          <button mat-icon-button >
+            <mat-icon (click)="borrarItemEncargado(i)">cancel</mat-icon>
+          </button>
+        </div>
+     </mat-list-item>
+    </div>
+
+
+    <button mat-raised-button color="primary"
+    class="boton"
+    (click)="alertCheckForm()"
+    >
+    CREAR</button>
+    </form>
+
+
+  </div>
+
+

@@ -34,7 +34,9 @@ delete(id: number): Observable<any> {
 return this.http.delete(`${this.baseUrl}/event/delete/${id}`);
 }
 
-
+findByMinisterio(ministerio: any):Observable<any> {
+  return this.http.post(`${this.baseUrl}/event/findByMinisterio`, ministerio);
+}
 
 
 }

@@ -13,6 +13,8 @@ export class DialogService {
 
   setPersona(state: boolean) {
     this.closeDialog = state;
+    console.log(this.closeDialog);
+
     this.cambiosEstado();
   }
 

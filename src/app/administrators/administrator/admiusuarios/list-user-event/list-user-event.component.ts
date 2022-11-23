@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { User } from "../../../../models/user";
 import { UserService } from '../../services/user.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
@@ -38,13 +39,31 @@ export class ListUserEventComponent implements OnInit {
   }
 
   deleteUser(id: number){
-    this._serviceUser.delete(id)
-    .subscribe(res => {
-      console.log(res);
-      this.dataSource.data = this.dataSource.data.filter((item: User) => item.id!=id);
-      this.toastr.success('Satisfactoriamente!', 'Usuario eliminado');
+    Swal.fire({
+      title: 'Esta seguro?',
+      text: "Esto eliminará el usuario!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Eliminado!',
+          'El usuario ha sido eliminado.',
+          'success'
+        )
+        this._serviceUser.delete(id)
+        .subscribe(res => {
+          console.log(res);
+          this.dataSource.data = this.dataSource.data.filter((item: User) => item.id!=id);
+          this.toastr.success('Satisfactoriamente!', 'Usuario eliminado');
+        })
+      }
     })
   }
+
 
 }
 

@@ -106,7 +106,7 @@
             <mat-select
                         class="input-select"
                         formControlName="optionplace"
-                        (selectionChange)='checkForm()'
+                        (selectionChange)='choseVirtualMode()'
                         >
               <mat-option *ngFor="let plat of PLATAFORMAS" [value]=plat >
                 {{ plat }}

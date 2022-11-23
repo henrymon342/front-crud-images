@@ -27,6 +27,7 @@ export class CreateRecordPastorComponent implements OnInit {
   constructor(
                private service_asignatura: AsignaturaService,
                private route: ActivatedRoute,
+               private router: Router
                ) { }
 
   ngOnInit(): void {
@@ -136,6 +137,8 @@ export class CreateRecordPastorComponent implements OnInit {
         console.log( await res);
       })
     });
+
+    this.router.navigate(['auth/admipastores/pastor-update', this.pastor.id]);
   }
 
   // ngOnDestroy(){

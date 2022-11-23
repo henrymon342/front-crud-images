@@ -131,9 +131,10 @@ export class CreatePastorComponent implements OnInit {
       this.form.controls['titulos'].setValue('');
     }
     console.log(this.form.value);
-    if(this.checkForm()){
-      this.popUpValidForm();
+    console.log(this.file);
 
+    if(this.checkForm() && this.file!=undefined){
+      this.popUpValidForm();
     }
     else{
       this.popUpInvalidForm();
@@ -226,6 +227,7 @@ export class CreatePastorComponent implements OnInit {
     this.toastr.success('Satisfactoriamente!', 'Pastor creado');
     this.closeDialog = true;
     this._serviceDialog.setPersona(this.closeDialog)
+    window.location.reload();
   }
 
   showError(){

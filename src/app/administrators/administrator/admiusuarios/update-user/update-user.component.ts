@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { User } from '../../../../models/user';
@@ -44,7 +44,8 @@ export class UpdateUserComponent implements OnInit {
   constructor( private route: ActivatedRoute,
                private fb: FormBuilder,
                private _serviceUser:UserService,
-               private toastr: ToastrService
+               private toastr: ToastrService,
+               private router: Router
                ) {
                  this.createForm();
                }
@@ -177,6 +178,7 @@ export class UpdateUserComponent implements OnInit {
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Cambios guardados');
     //////////////
+    this.router.navigate(['auth/administrador/admi-usuarios/main-lists']);
   }
 
   showError(){

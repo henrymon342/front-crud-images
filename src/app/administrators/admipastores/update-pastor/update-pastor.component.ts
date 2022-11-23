@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Image } from '../../../models/image';
 import { Pastor } from '../../../models/pastor';
 import { ImageService } from '../../../services/image.service';
 import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
+import { AsignaturaService } from '../services/asignatura.service';
 import { PastorService } from '../services/pastor.service';
 
 @Component({
@@ -39,7 +40,6 @@ export class UpdatePastorComponent implements OnInit {
   titulosForm: FormGroup;
 
 
-  closeDialog: boolean = false;
 
   files: File[] = [];
   file: File;
@@ -49,13 +49,16 @@ export class UpdatePastorComponent implements OnInit {
   titles: any[] = [];
 
   hasMaterias: boolean = false;
+  seeRecord: boolean = false;
 
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
                private _serviceDialog: DialogService,
                private _servicePastor: PastorService,
                private _serviceImage: ImageService,
-               private route: ActivatedRoute)
+               private route: ActivatedRoute,
+               private service_asignatura: AsignaturaService,
+               private router: Router)
                {
                 this.createForm();
                }
@@ -248,15 +251,13 @@ export class UpdatePastorComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Pastor creado');
-    this.closeDialog = true;
-    this._serviceDialog.setPersona(this.closeDialog)
+    this.router.navigate(['auth/admipastores/main-lists']);
   }
 
   showError(){
     this.toastr.error('No valido!', 'Formulario', {
       positionClass: 'toast-bottom-left'
    });
-   this.closeDialog = false;
   }
 
 
@@ -268,9 +269,6 @@ export class UpdatePastorComponent implements OnInit {
       console.log(data);
       this.pastor = data;
 
-      // titulos: [''],
-      // option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
-      // option_places_serv:
       this.form.controls['name'].setValue(data.name);
       this.form.controls['category'].setValue(data.category);
       this.form.controls['year'].setValue(Number(data.year));
@@ -292,6 +290,14 @@ export class UpdatePastorComponent implements OnInit {
     })
 
     this.getImagePastor(this.pastor.id!);
+    this.getMaterias(this.pastor.id!);
+  }
+
+  getMaterias(id: number ) {
+    this.service_asignatura.getByIdPastor(id).subscribe(async (res:any)  =>{
+      this.hasMaterias = res.length==0?false:true;
+      console.log( await res);
+    })
   }
 
   getImagePastor(id: number ) {

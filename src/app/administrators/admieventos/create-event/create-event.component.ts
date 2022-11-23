@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EventService } from '../services/event.service';
+import Swal from 'sweetalert2';
+import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-event',
@@ -34,10 +38,14 @@ export class CreateEventComponent implements OnInit {
 
     nuevo_encargado: string;
     encargados: string[] = [];
+    closeDialog: boolean = false;
 
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
-               private _service_event: EventService) { }
+               private _service_event: EventService,
+               private _serviceDialog: DialogService,
+               public _router: Router,
+               public _location: Location) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -51,7 +59,7 @@ export class CreateEventComponent implements OnInit {
       optionplace: ['', [Validators.required]],
       place: ['', [Validators.required]],
       tipofecha: ['UN DÍA', [Validators.required]],
-      fechasingle: ['', [Validators.required]],
+      fechasingle: [''],
       fechaini: [''],
       fechafin: [''],
       horaini: ['', [Validators.required]],
@@ -74,6 +82,7 @@ export class CreateEventComponent implements OnInit {
 
 
   alertCheckForm(): void {
+    console.log(this.closeDialog);
     if( this.encargados.length ){
       this.form.controls['encargado'].setValue(this.encargados.toString());
     }
@@ -86,9 +95,42 @@ export class CreateEventComponent implements OnInit {
   }
 
   createEvent(): void {
-    this._service_event.createEvent(this.form.value).subscribe( res =>{
-      console.log(res);
+    let timerInterval: any;
+    Swal.fire({
+      title: 'Creando Evento!',
+      html: `Cerrando en <b></b> milisegundos.`,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+
+        Swal.showLoading()
+        let b = Swal.getHtmlContainer()!.querySelector('b')
+        timerInterval = setInterval(() => {
+          b!.textContent = String(Swal.getTimerLeft())
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
     })
+    this._service_event.createEvent(this.form.value).subscribe( async (res) =>{
+      console.log(res);
+      await this.showSuccess();
+    })
+
+
+  }
+
+  async showSuccess() {
+    this.toastr.success('Satisfactoriamente!', 'Usuario creado');
+    //////////////
+    this.closeDialog = true;
+    this._serviceDialog.setPersona(true);
+    window.location.reload();
 
   }
 
@@ -104,15 +146,25 @@ export class CreateEventComponent implements OnInit {
   borrarItemEncargado( index: number){
     var arr_nuevo:any = [];
     for (let i = 0; i < this.encargados.length; i++) {
-
       if( i != index ){
         arr_nuevo.push(this.encargados[i])
       }
     }
     this.encargados = arr_nuevo;
     this.form.value.encargado = this.encargados;
-
   }
+
+  choseVirtualMode(){
+    const virtual = this.form.value.optionplace
+    console.log( this.form.value.optionplace);
+    if( virtual == 'ZOOM' || virtual == 'MEET' || virtual == 'DISCORD' || virtual == 'MICROSOFT TEAMS' ){
+      this.form.controls['place'].setValue( virtual );
+    }else{
+      this.form.controls['place'].setValue('');
+    }
+    this.checkForm();
+  }
+
 
   typeDateChange(event: any): void{
     console.log(event);
@@ -129,5 +181,6 @@ export class CreateEventComponent implements OnInit {
     this.toastr.error('No valido!', 'Formulario', {
       positionClass: 'toast-bottom-left'
    });
+   this.closeDialog = false;
   }
 }

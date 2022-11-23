@@ -1,13 +1,31 @@
+<div class="section">
+  <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+        Crear nuevo
+  </button>
+</div>
+
 
 <div class="container">
   <section class="list">
 
     <div class="actions">
       <mat-form-field appearance="standard" class="input-search">
-        <mat-label>Buscar Pastor</mat-label>
+        <mat-label>Buscar Iglesia</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
       <div class="bottons">
+        <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+          TODOS
+        </button>
+        <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+          ZONAS
+        </button>
       </div>
     </div>
 
@@ -68,7 +86,7 @@
                   edit
                 </mat-icon>
               </button>
-              <button (click)="popUpDeletePastor(element.id)" mat-icon-button>
+              <button (click)="popUpDeleteIglesia(element.id)" mat-icon-button>
                 <mat-icon class="red-icon">
                   delete_outline
                 </mat-icon>
@@ -86,6 +104,3 @@
       </table>
   </section>
 </div>
-
-
-

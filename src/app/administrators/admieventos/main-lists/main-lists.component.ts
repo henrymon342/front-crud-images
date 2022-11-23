@@ -16,6 +16,13 @@ export class MainListsComponent implements OnInit {
     private _serviceDialog: DialogService) { }
 
   ngOnInit(): void {
+    this._serviceDialog.closeDialogEmitter.subscribe(
+      data => {
+        this.stateDialog = data;
+        console.log(this.stateDialog);
+        this.dialogRef.close();
+      }
+    );
   }
 
   openDialog() {
@@ -25,9 +32,9 @@ export class MainListsComponent implements OnInit {
                           panelClass: "dialog"
                           });
 
-    this.dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(`Dialog result: ${result}`);
-    });
+  this.dialogRef.afterClosed().subscribe((result:any) => {
+    console.log(`Dialog result: ${result}`);
+  });
   }
 
 }

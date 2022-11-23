@@ -1,0 +1,124 @@
+
+
+
+  <div class="container">
+    <form class="form" [formGroup]="form" (change)="checkForm()" enctype="multipart/form-data">
+      <div class="title-form">
+        <small>
+          Crear Iglesia
+        </small>
+      </div>
+
+      <div class="field">
+        <label class="label">NOMBRE DE LA IGLESIA</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="nombre de iglesia" formControlName="nombre" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let church of IGLESIAS" value="{{church}}">
+              {{ church }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <label class="label">ZONA</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="zona" formControlName="zona" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let zone of ZONAS" value="{{ zone }}">
+              {{ zone }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <label class="label">NOMBRE DEL PASTOR</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="pastor" formControlName="pastor" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let pas of PASTORES" value="{{ pas }}">
+              {{ pas }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="field">
+        <label class="label">SUPERINTENDENTE DE DNI</label>
+        <mat-form-field class="box-input" appearance="outline">
+          <input formControlName="superdni"
+                type="text"
+                matInput
+                placeholder="superintendente dni"
+                class="input-text"
+                >
+            <mat-error>
+              El <strong>nombre</strong> es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <label class="label">PRESIDENTE DE MNI</label>
+        <mat-form-field class="box-input" appearance="outline">
+          <input formControlName="presimni"
+                type="text"
+                matInput
+                placeholder="presidente mni"
+                class="input-text"
+                >
+            <mat-error>
+              El <strong>nombre</strong> es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <label class="label">PRESIDENTE DE JNI</label>
+        <mat-form-field class="box-input" appearance="outline">
+          <input formControlName="presijni"
+                type="text"
+                matInput
+                placeholder="presidente jni"
+                class="input-text"
+                >
+            <mat-error>
+              El <strong>nombre</strong> es requerido
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="subtitle">
+        <span class="text">CULTO CENTRAL </span>
+      </div>
+
+      <div class="field">
+        <label class="label">DÍA</label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="diacentral" formControlName="diacentral" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let day of DAYS" value="{{ day }}">
+              {{ day }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>este campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+
+
+
+      </div>
+
+
+
+    <button mat-raised-button color="primary"
+    class="boton"
+    (click)="alertCheckForm()"
+    >
+    CREAR</button>
+    </form>
+
+
+  </div>
+
+

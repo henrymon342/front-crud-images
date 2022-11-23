@@ -38,7 +38,7 @@ const routes: Routes = [
         component: UpdateEventComponent
       },
       {
-        path: 'pastor-create',
+        path: 'event-create',
         component: CreateEventComponent
       },
       { path: '', redirectTo: 'main-lists', pathMatch: 'full' }

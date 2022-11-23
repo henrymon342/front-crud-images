@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Asignatura } from '../../../../models/asignatura';
 import { Pastor } from '../../../../models/pastor';
@@ -26,6 +26,7 @@ export class UpdateRecordPastorComponent implements OnInit {
   constructor( private fb: FormBuilder,
                private _serviceAsignatura: AsignaturaService,
                private route: ActivatedRoute,
+               private router: Router
                ) { }
 
   ngOnInit(): void {
@@ -146,6 +147,7 @@ export class UpdateRecordPastorComponent implements OnInit {
         console.log( await res);
       })
     });
+    this.router.navigate(['auth/admipastores/pastor-update',this.pastor.id]);
   }
 
 

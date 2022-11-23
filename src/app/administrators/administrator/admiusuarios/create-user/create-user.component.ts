@@ -94,14 +94,11 @@ export class CreateUserComponent implements OnInit {
 
   alertCheckForm(){
     console.log(this.closeDialog);
-
     if(this.checkForm()){
       this.popUpValidForm();
-
     }
     else{
       this.popUpInvalidForm();
-
     }
   }
 
@@ -164,6 +161,7 @@ export class CreateUserComponent implements OnInit {
     //////////////
     this.closeDialog = true;
     this._serviceDialog.setPersona(this.closeDialog)
+    window.location.reload();
   }
 
   showError(){

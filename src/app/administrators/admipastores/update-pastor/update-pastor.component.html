@@ -198,10 +198,13 @@
         </ngx-dropzone>
     </div>
 
+    <ng-container *ngIf="!hasMaterias && (pastor.category == 'DISTRITAL' || pastor.category == 'LOCAL')">
+      <button class="boton" mat-raised-button color="primary" [routerLink]="['/auth/admipastores/create-record-pastor/', pastor.id]">AÑADIR RECORD </button>
+    </ng-container>
 
-    <ng-container *ngIf="!hasMaterias && pastor.category == 'DISTRITAL'">
+    <ng-container *ngIf="hasMaterias && (pastor.category == 'DISTRITAL' || pastor.category == 'LOCAL')">
       <button mat-button class="titulorecord titulo" [routerLink]="['/auth/admipastores/update-record-pastor/', pastor.id]">EDITAR RECORD ACADÉMICO</button>
-      </ng-container>
+    </ng-container>
 
 
     <button mat-raised-button color="primary"

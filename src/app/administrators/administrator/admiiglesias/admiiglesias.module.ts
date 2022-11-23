@@ -2,29 +2,32 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdmiiglesiasRoutingModule } from './admiiglesias-routing.module';
-import { AdmiIglesiaListComponent } from './admi-iglesia-list/admi-iglesia-list.component';
-import { AdmiIglesiaUpdateComponent } from './admi-iglesia-update/admi-iglesia-update.component';
-import { AdmiIglesiaDetailComponent } from './admi-iglesia-detail/admi-iglesia-detail.component';
 import { AdmiiglesiasComponent } from './admiiglesias.component';
 import { MaterialModule } from '../../../../Material/material.module';
-import { AdmiIglesiaCreateComponent } from './admi-iglesia-create/admi-iglesia-create.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { CreateIglesiaComponent } from './create-iglesia/create-iglesia.component';
+import { DetailIglesiaComponent } from './detail-iglesia/detail-iglesia.component';
+import { ListIglesiaComponent } from './list-iglesia/list-iglesia.component';
+import { MainListIglesiaComponent } from './main-list-iglesia/main-list-iglesia.component';
+import { UpdateIglesiaComponent } from './update-iglesia/update-iglesia.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-
-    AdmiIglesiaListComponent,
-    AdmiIglesiaUpdateComponent,
-    AdmiIglesiaDetailComponent,
     AdmiiglesiasComponent,
-    AdmiIglesiaCreateComponent,
+    CreateIglesiaComponent,
+    DetailIglesiaComponent,
+    ListIglesiaComponent,
+    MainListIglesiaComponent,
+    UpdateIglesiaComponent
   ],
   imports: [
     CommonModule,
     AdmiiglesiasRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class AdmiiglesiasModule { }

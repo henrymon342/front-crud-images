@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmiiglesiasComponent } from './admiiglesias.component';
-import { AdmiIglesiaListComponent } from './admi-iglesia-list/admi-iglesia-list.component';
-import { AdmiIglesiaDetailComponent } from './admi-iglesia-detail/admi-iglesia-detail.component';
-import { AdmiIglesiaUpdateComponent } from './admi-iglesia-update/admi-iglesia-update.component';
-import { AdmiIglesiaCreateComponent } from './admi-iglesia-create/admi-iglesia-create.component';
+import { MainListIglesiaComponent } from './main-list-iglesia/main-list-iglesia.component';
+import { ListIglesiaComponent } from './list-iglesia/list-iglesia.component';
+import { CreateIglesiaComponent } from './create-iglesia/create-iglesia.component';
+import { DetailIglesiaComponent } from './detail-iglesia/detail-iglesia.component';
+import { UpdateIglesiaComponent } from './update-iglesia/update-iglesia.component';
 
 const routes: Routes = [
   {
@@ -12,22 +13,26 @@ const routes: Routes = [
     component: AdmiiglesiasComponent,
     children: [
       {
-        path: 'admi-iglesia-list',
-        component: AdmiIglesiaListComponent
+        path: 'main-list',
+        component: MainListIglesiaComponent
       },
       {
-        path: 'admi-iglesia-detail',
-        component: AdmiIglesiaDetailComponent
+        path: 'list-iglesia',
+        component: ListIglesiaComponent
       },
       {
-        path: 'admi-iglesia-update',
-        component: AdmiIglesiaUpdateComponent
+        path: 'create-iglesia',
+        component: CreateIglesiaComponent
       },
       {
-        path: 'admi-iglesia-create',
-        component: AdmiIglesiaCreateComponent
+        path: 'detail-iglesia',
+        component: DetailIglesiaComponent
       },
-      { path: '', redirectTo: 'admi-iglesia-list', pathMatch: 'full' },
+      {
+        path: 'update-iglesia',
+        component: UpdateIglesiaComponent
+      },
+      { path: '', redirectTo: 'main-list', pathMatch: 'full' },
     ]
   }
 ];

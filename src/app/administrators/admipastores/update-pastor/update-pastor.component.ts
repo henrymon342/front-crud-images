@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,8 @@ import { ImageService } from '../../../services/image.service';
 import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
 import { AsignaturaService } from '../services/asignatura.service';
 import { PastorService } from '../services/pastor.service';
+import * as html2pdf from 'html2pdf.js';
+
 
 @Component({
   selector: 'app-update-pastor',
@@ -16,6 +18,8 @@ import { PastorService } from '../services/pastor.service';
   styleUrls: ['./update-pastor.component.scss']
 })
 export class UpdatePastorComponent implements OnInit {
+
+@ViewChild("content1", {static: false}) contenido!: ElementRef;
 
   CATEGORIES: string[] = ['LOCAL', 'DISTRITAL', 'PRESBITERO']
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
@@ -329,5 +333,19 @@ export class UpdatePastorComponent implements OnInit {
     console.log(this.titles);
   }
 
+
+  generaPDF(){
+    var element = document.getElementById('content1');
+    var opt = {
+      margin:       .5,
+      filename:     'boleta'+this.pastor.name+'.pdf',
+      image:        { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // New Promise-based usage:
+    html2pdf().from(element).set(opt).save();
+  }
 
 }

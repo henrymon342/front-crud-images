@@ -184,7 +184,7 @@
       <!-- <label class="label"> IMAGEN de PASTOR</label> -->
         <ngx-dropzone (change)="onSelect($event)">
           <ngx-dropzone-label>Arrartrar imagen aquí</ngx-dropzone-label>
-          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" *ngFor="let f of files" [file]="f">
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" *ngFor="let f of files" [file]="f" accept="image/jpeg,image/jpg,image/png">
             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
           </ngx-dropzone-image-preview>
         </ngx-dropzone>

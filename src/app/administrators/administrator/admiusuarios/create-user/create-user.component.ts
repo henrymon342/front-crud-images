@@ -38,6 +38,10 @@ export class CreateUserComponent implements OnInit {
 
   closeDialog: boolean = false;
   conter: number = 0;
+
+  hide = true;
+  ShowError: boolean = false;
+
   constructor( private fb: FormBuilder,
                private _service_user:UserService,
                private toastr: ToastrService,
@@ -67,7 +71,7 @@ export class CreateUserComponent implements OnInit {
     console.log('form: ', this.form.value);
     if( this.form.valid ){
       console.log('ES VALIDO');
-      return true;
+      return this.isSame()?true:false;
     }else{
       console.log('NO!, ES VALIDO');
       return false;
@@ -170,5 +174,15 @@ export class CreateUserComponent implements OnInit {
    });
    this.closeDialog = false;
   //  this._serviceDialog.setPersona(this.closeDialog)
+  }
+
+  isSame(){
+    if( this.form.value.password != this.form.value.password_confirm ){
+      this.ShowError = false;
+      return false;
+    }else{
+      this.ShowError = false;
+      return true;
+    }
   }
 }

@@ -207,6 +207,10 @@
     </ng-container>
 
 
+    <ng-container *ngIf="hasMaterias && (pastor.category == 'DISTRITAL' || pastor.category == 'LOCAL')">
+      <button class="boton" mat-raised-button color="info" (click)="generaPDF()"> generar boleta </button>
+    </ng-container>
+
     <button mat-raised-button color="primary"
     class="boton"
     (click)="alertCheckForm()"
@@ -218,3 +222,47 @@
   </div>
 
 
+  <div style="display: none" >
+
+
+    <div id="content1" #content1 >
+
+      <div class="title-record">
+        <small>
+          BOLETA DE PASTOR
+        </small>
+      </div>
+
+      <div class="content-record">
+
+        <div class="detail-record">
+          <div class="fila">
+            <label>Nombre:</label>
+            <span>{{ pastor.name }} </span>
+          </div>
+
+          <div class="fila">
+            <label>Categoria:</label>
+            <span>{{ pastor.category }}</span>
+          </div>
+
+          <div class="fila">
+            <label>Area:</label>
+            <span>{{ pastor.area }}</span>
+          </div>
+
+          <div class="fila">
+            <label>Año de ordenación:</label>
+            <span>{{ pastor.year }}</span>
+          </div>
+        </div>
+
+
+        <ng-container *ngIf="hasMaterias">
+        <app-record-pastor [idPas]="pastor.id"></app-record-pastor>
+        </ng-container>
+
+      </div>
+
+      </div>
+    </div>

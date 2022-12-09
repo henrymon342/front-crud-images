@@ -11,7 +11,9 @@ import { ListIglesiaComponent } from './list-iglesia/list-iglesia.component';
 import { MainListIglesiaComponent } from './main-list-iglesia/main-list-iglesia.component';
 import { UpdateIglesiaComponent } from './update-iglesia/update-iglesia.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatTimepickerModule } from 'mat-timepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdmiiglesiasRoutingModule,
     MaterialModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatTimepickerModule,
+    NgxDropzoneModule
   ]
 })
 export class AdmiiglesiasModule { }

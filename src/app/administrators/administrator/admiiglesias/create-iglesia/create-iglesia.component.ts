@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Pastor } from '../../../../models/pastor';
+import {formatDate} from '@angular/common';
+
 @Component({
   selector: 'app-create-iglesia',
   templateUrl: './create-iglesia.component.html',
@@ -27,6 +29,11 @@ export class CreateIglesiaComponent implements OnInit {
   ZONAS: string[] = ['CIUDAD NORTE', 'CIUDAD CENTRAL', 'CIUDAD SUR', 'MINERA', 'VIACHA', 'ZONA PACAJES', 'COMANCHE', 'TAMBO QUEMADO', 'CAQUIAVIRI', 'SUCRE']
   DAYS: string[] = ['SABADO', 'DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
   PASTORES: Pastor[] = [];
+
+  startDate = new Date(1990, 0, 1);
+  files: File[] = [];
+  file: File;
+
 
   constructor( private fb: FormBuilder ) {
     this.createForm();
@@ -69,4 +76,23 @@ export class CreateIglesiaComponent implements OnInit {
   alertCheckForm(){
     console.log(this.form.value);
   }
+
+  getAgeFundation(): void{
+    console.log(this.form.value.fundacion);
+  }
+
+  onSelect(event: any) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    if(this.files.length > 1){ // checking if files array has more than one content
+      this.replaceFileImage(); // replace file
+      }
+      this.file = this.files[0]
+      console.log(this.file);
+  }
+
+  replaceFileImage(){
+    this.files.splice(0,1); // index =0 , remove_count = 1
+  }
+
 }

@@ -167,27 +167,27 @@ export class CreatePastorComponent implements OnInit {
 
   crearPastor(){
     let timerInterval: any;
-    Swal.fire({
-      title: 'Creando pastor!',
-      html: `Cerrando en <b></b> milisegundos.`,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: () => {
+    // Swal.fire({
+    //   title: 'Creando pastor!',
+    //   html: `Cerrando en <b></b> milisegundos.`,
+    //   timer: 2000,
+    //   timerProgressBar: true,
+    //   didOpen: () => {
 
-        Swal.showLoading()
-        let b = Swal.getHtmlContainer()!.querySelector('b')
-        timerInterval = setInterval(() => {
-          b!.textContent = String(Swal.getTimerLeft())
-        }, 100)
-      },
-      willClose: () => {
-        clearInterval(timerInterval)
-      }
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
-      }
-    })
+    //     Swal.showLoading()
+    //     let b = Swal.getHtmlContainer()!.querySelector('b')
+    //     timerInterval = setInterval(() => {
+    //       b!.textContent = String(Swal.getTimerLeft())
+    //     }, 100)
+    //   },
+    //   willClose: () => {
+    //     clearInterval(timerInterval)
+    //   }
+    // }).then((result) => {
+    //   if (result.dismiss === Swal.DismissReason.timer) {
+    //     console.log('I was closed by the timer')
+    //   }
+    // })
 
     this._servicePastor.createPastor(this.form.value).subscribe( async res => {
       console.log(res);
@@ -233,7 +233,7 @@ export class CreatePastorComponent implements OnInit {
   showError(){
     this.toastr.error('No valido!', 'Formulario', {
       positionClass: 'toast-bottom-left'
-   });
+    });
    this.closeDialog = false;
   }
 

@@ -10,6 +10,7 @@ import { DialogService } from '../../administrator/admiusuarios/services/dialog.
 import { AsignaturaService } from '../services/asignatura.service';
 import { PastorService } from '../services/pastor.service';
 import * as html2pdf from 'html2pdf.js';
+import { Global } from '../../../services/global';
 
 
 @Component({
@@ -23,21 +24,7 @@ export class UpdatePastorComponent implements OnInit {
 
   CATEGORIES: string[] = ['LOCAL', 'DISTRITAL', 'PRESBITERO']
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
-  IGLESIAS: string[] = [
-    'CALLIRPA', 'CHAPICHAPINI', 'ROSAPATAYARIBAY', 'TOMATA', 'TOPOHOCO', 'TUMARAPI',// ZONA ANDINA PACAJES
-    'CAQUIAVIRI', 'COLQUE ALTA', 'CHIPANAMAYA', 'LLIMPHI', 'LACALACA', 'LAURA AFETUNI', // ZONA CAQUIAVIRI
-    'BAJO PANPAHASI', 'BUENOS AIRES', 'CENTRAL LA PAZ', 'EL BUEN PASTOR', 'KOINONIA', 'LA PORTADA',
-    'MEMORIAL WINCHESTER', 'MIRAFLORES', 'MUNAYPATA', 'PASANKERI', 'VILLA FÁTIMA', 'ESCOBAR URIA',
-    'PLAYA VERDE', 'SOPOCACHI BAJO', 'CHINCHAYA', 'CIUDADELA FERROVIARIA', // ZONA NORTE
-    'ARANJUEZ', 'AVIRCATO', 'BELLA VISTA', 'CODAVISA', 'COTA COTA', '23 DE MARZO', 'MARQUIRIVI', // ZONA SUR
-    'ANTARANI', 'BOTIJLACA', 'CANTUYO', 'COMANCHE', 'KELLAKELLA BAJA', 'JEKERI', 'ROSAPATA DE TULI', 'KELLAKELLA ALTA', // ZONA COMANCHE
-    'CHULLUNKHAYANI', 'CONIRI', 'HILATA SAN JORGE', 'IRPUMA', 'VIACHA', 'COLQUENCHA', ' NUEVA TILATA 3',
-    'TONCOPUJIO', 'MARISCAL SANTA CRUZ', // ZONA VIACHA
-    'COHONI', 'TACACHÍA', 'QUILIHUAYA', // ZONA ILLIMANI
-    'CALARI', 'COROCORO', 'GENERAL PANDO', 'PUTUNI', 'TUPALTUPA', 'TOTORANI', 'SICUIPATA', // ZONA MINERA
-    'CALASAYA', 'CRUCERO', 'PATACAMAYA', 'CALTECA', 'CALACACHI', 'TOLOMA', // ZONA PATACAMAYA TAMBO QUEMADO
-    'FE EN CRISTO', 'FILADELFIA', 'NUEVA VIDA', 'SHADDAI', 'LEUQUE', 'ALTO MUNAYPATA', 'IROCOTA'
-    ];
+  IGLESIAS: string[] = Global.IGLESIAS;
   YEARS = this.rangeYears();
   AREAS = this.arrayAreas();
   form: FormGroup;

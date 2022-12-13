@@ -34,7 +34,8 @@ export class ListPastorDistritalComponent implements OnInit {
     this._servicePastor.getPastorByCategory(category)
     .subscribe(res => {
       console.log(res);
-      this.dataSource.data = res as Pastor[];
+      this.dataSource.data = res.sort() as Pastor[];
+      this.dataSource.data = this.sortData(this.dataSource.data);
     })
   }
 
@@ -88,6 +89,19 @@ export class ListPastorDistritalComponent implements OnInit {
         // Swal.fire('Changes are not saved', '', 'info')
       }
     })
+  }
+
+  sortData(data:any[]){
+    console.log(data);
+    return data.sort((a:Pastor, b:Pastor)=>{
+      if ( a.name.toLowerCase() < b.name.toLowerCase()){
+        return -1;
+      }
+      if ( a.name.toLowerCase() > b.name.toLowerCase()){
+        return 1;
+      }
+      return 0;
+    });
   }
 }
 

@@ -28,7 +28,21 @@ export class ListPastorPresbiteroComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.dataSource.data = res as Pastor[];
+      this.dataSource.data = this.sortData(this.dataSource.data);
     })
+  }
+
+  sortData(data:any[]){
+    console.log(data);
+    return data.sort((a:Pastor, b:Pastor)=>{
+      if ( a.name.toLowerCase() < b.name.toLowerCase()){
+        return -1;
+      }
+      if ( a.name.toLowerCase() > b.name.toLowerCase()){
+        return 1;
+      }
+      return 0;
+    });
   }
 
 

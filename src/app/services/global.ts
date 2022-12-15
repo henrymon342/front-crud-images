@@ -23,4 +23,38 @@ export class Global {
     ].sort();
 
     // numeros.sort(function(a, b){return a - b});
+
+    public static AREAS: any[] = [
+      { area: 'Ministro de Educación Cristiana', sigla: 'CED' },
+      { area: 'Capellán', sigla: 'CHP' },
+      { area: 'Asignación Distrital', sigla: 'DA-A' },
+      { area: 'Asignación Distrital Interino', sigla: 'DIA-A' },
+      { area: 'Superintendente de Distrito', sigla: 'DS-S' },
+      { area: 'Educación', sigla: 'EDU' },
+      { area: 'Servicio de Evangelismo, juvilado', sigla: 'ESR' },
+      { area: 'Evangelista, Comisionado', sigla: 'EVC' },
+      { area: 'Evangelista, Registrado', sigla: 'EVR' },
+      { area: 'Evangelista, Permanente', sigla: 'EVT' },
+      { area: 'Asignación a la Iglesia General', sigla: 'GA-A' },
+      { area: 'Sin Asignación', sigla: 'U' },
+      { area: 'Superintendente General', sigla: 'GS' },
+      { area: 'Pastor', sigla: 'PAS' },
+      { area: 'Servicio Pastoral, Tiempo Parcial', sigla: 'PSV-PT' },
+      { area: 'Servicio Pastoral, Tiempo Completo', sigla: 'PSV-FT' },
+      { area: 'Jubilado, Con Asignación', sigla: 'RA' },
+      { area: 'Jubilado, Sin Asignación', sigla: 'RU' },
+      { area: 'Evangelista de Música, Comisionado', sigla: 'SEC' },
+      { area: 'Evangelista de Música, Registrado', sigla: 'SER' },
+      { area: 'Servicio Especial /Interdenominacional', sigla: 'SPC' },
+      { area: 'Estudiante', sigla: 'STU' },
+      { area: 'En Proceso de Transferencia', sigla: 'TRF' },
+    ].sort((a:any, b:any)=>{
+      if ( a.area.toLowerCase() < b.area.toLowerCase()){
+        return -1;
+      }
+      if ( a.area.toLowerCase() > b.area.toLowerCase()){
+        return 1;
+      }
+      return 0;
+    });
 }

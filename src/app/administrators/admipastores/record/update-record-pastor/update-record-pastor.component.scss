@@ -2,6 +2,17 @@
 
 .container{
   padding: 0 4em;
+
+
+  .container-btn{
+    position: relative;
+    .btn-float{
+      position: fixed;
+      top: 0em;
+      left: 2em;
+    }
+  }
+
   .title-component{
     font-family: 'Secular One', sans-serif;
     text-align: center;

@@ -26,9 +26,10 @@ export class UpdatePastorComponent implements OnInit {
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
   IGLESIAS: string[] = Global.IGLESIAS;
   YEARS = this.rangeYears();
-  AREAS = this.arrayAreas();
+  AREAS = Global.AREAS;
   form: FormGroup;
   titulosForm: FormGroup;
+  requisitosForm: FormGroup;
 
 
 
@@ -38,6 +39,8 @@ export class UpdatePastorComponent implements OnInit {
 
   pastor:Pastor = new Pastor();
   titles: any[] = [];
+  requisits: any[] = [];
+
 
   hasMaterias: boolean = false;
   seeRecord: boolean = false;
@@ -67,6 +70,7 @@ export class UpdatePastorComponent implements OnInit {
       membresia: ['', [Validators.required]],
       lugardeministerio: ['', [Validators.required]],
       titulos: [''],
+      requisitos: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
       option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
 
@@ -78,6 +82,14 @@ export class UpdatePastorComponent implements OnInit {
       licenciatura: [false],
       maestria: [false],
       doctorado: [false]
+    });
+
+
+    this.requisitosForm = this.fb.group({
+      docs_personales: [false],
+      carta_recomendacion: [false],
+      certificado_membresia: [false],
+      otros: [false]
     });
   }
 
@@ -116,22 +128,13 @@ export class UpdatePastorComponent implements OnInit {
     // this.form.controls['miembroen'].setValue('');
   }
 
-  arrayAreas(){
-    var areas:{ area: string, sigla: string }[] = [];
-      areas.push({area: 'Pastor', sigla: 'PAS'});
-      areas.push({area: 'Educación', sigla: 'EDU'});
-      areas.push({area: 'Especial', sigla: 'ESP'});
-      areas.push({area: 'Estudiando', sigla: 'STU'});
-      areas.push({area: 'Sin asignación', sigla: 'U'});
-      areas.push({area: 'Superintendente del distrito', sigla: 'DS'});
-      areas.push({area: 'Jubilado con asignación', sigla: 'RA'});
-      areas.push({area: 'Jubilado sin asignación', sigla: 'RU'});
-      areas.push({area: 'Evangelista registrado', sigla: 'EVR'});
-
-    return areas;
-  }
-
   alertCheckForm(){
+    if( this.form.value.category != 'PRESBITERO' ){
+      this.form.controls['requisitos'].setValue(JSON.stringify(this.requisitosForm.value));
+    }else{
+      this.form.controls['requisitos'].setValue('');
+    }
+
     if( this.form.value.category == 'PRESBITERO' ){
       this.form.controls['titulos'].setValue(JSON.stringify(this.titulosForm.value));
     }else{
@@ -172,11 +175,6 @@ export class UpdatePastorComponent implements OnInit {
   }
 
   editarPastor(){
-    if( this.form.value.category == 'PRESBITERO' ){
-      this.form.controls['titulos'].setValue(JSON.stringify(this.titulosForm.value));
-    }else{
-      this.form.controls['titulos'].setValue('');
-    }
     console.log(this.form.value);
     let timerInterval: any;
     Swal.fire({
@@ -277,7 +275,8 @@ export class UpdatePastorComponent implements OnInit {
         this.form.controls['lugardeministerio'].setValue(data.lugardeministerio);
       }
 
-      this.createArrayTitles(this.pastor.titulos)
+      this.createArrayTitles(this.pastor.titulos);
+      this.createArrayRequiremend(this.pastor.requisitos);
     })
 
     this.getImagePastor(this.pastor.id!);
@@ -320,6 +319,27 @@ export class UpdatePastorComponent implements OnInit {
     console.log(this.titles);
   }
 
+  createArrayRequiremend(requis?: string){
+    if( !requis ){
+      console.log('no existe');
+    }else{
+      console.log('existe');
+
+      console.log(requis);
+      var listaaux = JSON.parse(requis+'');
+      for (let variable in listaaux) {
+        if (listaaux[variable] === true) {
+          console.log(variable);
+          this.requisits.push({nombre: variable, valor: true});
+          this.requisitosForm.controls[variable].setValue(true);
+        }else{
+          this.requisits.push({nombre: variable, valor: false});
+          this.requisitosForm.controls[variable].setValue(false);
+        }
+      }
+    }
+    console.log(this.requisits);
+  }
 
   generaPDF(){
     var element = document.getElementById('content1');

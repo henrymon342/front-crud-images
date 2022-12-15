@@ -7,4 +7,5 @@ export class Pastor {
   membresia: string;
   lugardeministerio: string;
   titulos?: string;
+  requisitos?: string;
 }

@@ -4,6 +4,15 @@
 
   .container{
 
+    .container-btn{
+      position: relative;
+      .btn-float{
+        position: fixed;
+        top: 10em;
+        left: 1em;
+      }
+    }
+
     .title-form{
       padding: 1em;
       small{
@@ -65,9 +74,14 @@
       }
 
       .boton{
-        width: 60%;
+        width: auto;
         justify-self: center;
-        margin: 1em;
+        margin: .5em;
+      }
+
+      .btns{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .subtitle{
@@ -109,5 +123,24 @@
         padding-bottom: .8em;
       }
     }
+  }
+  .container-checks{
+    display: flex;
+    justify-content: center;
+    .group_checks{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      mat-checkbox{
+
+        text-align: center;
+      }
+    }
+  }
+
+  .container-checks-title{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 2em 0 1em 0;
   }
 }

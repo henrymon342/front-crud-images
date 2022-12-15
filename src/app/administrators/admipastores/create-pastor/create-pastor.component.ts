@@ -19,7 +19,7 @@ export class CreatePastorComponent implements OnInit {
   IGLESIAS: string[] = Global.IGLESIAS;
 
   YEARS = this.rangeYears();
-  AREAS = this.arrayAreas();
+  AREAS = Global.AREAS;
   form: FormGroup;
 
   titulosForm = this.fb.group({
@@ -28,6 +28,13 @@ export class CreatePastorComponent implements OnInit {
     licenciatura: false,
     maestria: false,
     doctorado: false
+  });
+
+  requisitosForm = this.fb.group({
+    docs_personales: false,
+    carta_recomendacion: false,
+    certificado_membresia: false,
+    otros: false
   });
 
   closeDialog: boolean = false;
@@ -41,8 +48,6 @@ export class CreatePastorComponent implements OnInit {
                private _serviceImage: ImageService) { }
 
   ngOnInit(): void {
-
-    // this.IGLESIAS = this.IGLESIAS.sort();
     console.log(this.IGLESIAS);
     this.createForm();
   }
@@ -59,6 +64,7 @@ export class CreatePastorComponent implements OnInit {
       membresia: ['', [Validators.required]],
       lugardeministerio: ['', [Validators.required]],
       titulos: [''],
+      requisitos: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
       option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
 
@@ -100,22 +106,13 @@ export class CreatePastorComponent implements OnInit {
     // this.form.controls['miembroen'].setValue('');
   }
 
-  arrayAreas(){
-    var areas:{ area: string, sigla: string }[] = [];
-      areas.push({area: 'Pastor', sigla: 'PAS'});
-      areas.push({area: 'Educación', sigla: 'EDU'});
-      areas.push({area: 'Especial', sigla: 'ESP'});
-      areas.push({area: 'Estudiando', sigla: 'STU'});
-      areas.push({area: 'Sin asignación', sigla: 'U'});
-      areas.push({area: 'Superintendente del distrito', sigla: 'DS'});
-      areas.push({area: 'Jubilado con asignación', sigla: 'RA'});
-      areas.push({area: 'Jubilado sin asignación', sigla: 'RU'});
-      areas.push({area: 'Evangelista registrado', sigla: 'EVR'});
-
-    return areas;
-  }
-
   alertCheckForm(){
+    if( this.form.value.category != 'PRESBITERO' ){
+      this.form.controls['requisitos'].setValue(JSON.stringify(this.requisitosForm.value));
+    }else{
+      this.form.controls['requisitos'].setValue('');
+    }
+
     if( this.form.value.category == 'PRESBITERO' ){
       this.form.controls['titulos'].setValue(JSON.stringify(this.titulosForm.value));
     }else{

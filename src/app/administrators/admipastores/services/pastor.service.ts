@@ -17,6 +17,10 @@ export class PastorService {
       return this.http.post(`${this.baseUrl}/pastores/new`, user);
   }
 
+  getAll() {
+    return this.http.get(`${this.baseUrl}/pastores/all`);
+  }
+
   get(id:number): Observable<any> {
     return this.http.get(`${this.baseUrl}/pastores/find/${id}`);
   }

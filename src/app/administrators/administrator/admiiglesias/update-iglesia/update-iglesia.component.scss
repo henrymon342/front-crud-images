@@ -63,10 +63,16 @@
         }
       }
 
-      mat-list-item .item{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      .datepicker{
+
+      }
+
+      .container-img{
+        text-align: center;
+        img{
+          width: 30%;
+          height: auto;
+        }
       }
     }
 

@@ -25,11 +25,11 @@ const routes: Routes = [
         component: CreateIglesiaComponent
       },
       {
-        path: 'detail-iglesia',
+        path: 'detail-iglesia/:id',
         component: DetailIglesiaComponent
       },
       {
-        path: 'update-iglesia',
+        path: 'update-iglesia/:id',
         component: UpdateIglesiaComponent
       },
       { path: '', redirectTo: 'main-list', pathMatch: 'full' },

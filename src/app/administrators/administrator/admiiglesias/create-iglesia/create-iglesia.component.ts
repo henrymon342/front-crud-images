@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Pastor } from '../../../../models/pastor';
-import {formatDate} from '@angular/common';
+import { Global } from '../../../../services/global';
+import { PastorService } from '../../../admipastores/services/pastor.service';
+import Swal from 'sweetalert2';
+import { ImageService } from '../../../../services/image.service';
+import { IglesiaService } from '../services/iglesia.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-iglesia',
@@ -11,38 +16,29 @@ import {formatDate} from '@angular/common';
 export class CreateIglesiaComponent implements OnInit {
 
   public form: FormGroup;
-  IGLESIAS: string[] = [
-    'CALLIRPA', 'CHAPICHAPINI', 'ROSAPATAYARIBAY', 'TOMATA', 'TOPOHOCO', 'TUMARAPI',// ZONA ANDINA PACAJES
-    'CAQUIAVIRI', 'COLQUE ALTA', 'CHIPANAMAYA', 'LLIMPHI', 'LACALACA', 'LAURA AFETUNI', // ZONA CAQUIAVIRI
-    'BAJO PANPAHASI', 'BUENOS AIRES', 'CENTRAL LA PAZ', 'EL BUEN PASTOR', 'KOINONIA', 'LA PORTADA',
-    'MEMORIAL WINCHESTER', 'MIRAFLORES', 'MUNAYPATA', 'PASANKERI', 'VILLA FÁTIMA', 'ESCOBAR URIA',
-    'PLAYA VERDE', 'SOPOCACHI BAJO', 'CHINCHAYA', 'CIUDADELA FERROVIARIA', // ZONA NORTE
-    'ARANJUEZ', 'AVIRCATO', 'BELLA VISTA', 'CODAVISA', 'COTA COTA', '23 DE MARZO', 'MARQUIRIVI', // ZONA SUR
-    'ANTARANI', 'BOTIJLACA', 'CANTUYO', 'COMANCHE', 'KELLAKELLA BAJA', 'JEKERI', 'ROSAPATA DE TULI', 'KELLAKELLA ALTA', // ZONA COMANCHE
-    'CHULLUNKHAYANI', 'CONIRI', 'HILATA SAN JORGE', 'IRPUMA', 'VIACHA', 'COLQUENCHA', ' NUEVA TILATA 3',
-    'TONCOPUJIO', 'MARISCAL SANTA CRUZ', // ZONA VIACHA
-    'COHONI', 'TACACHÍA', 'QUILIHUAYA', // ZONA ILLIMANI
-    'CALARI', 'COROCORO', 'GENERAL PANDO', 'PUTUNI', 'TUPALTUPA', 'TOTORANI', 'SICUIPATA', // ZONA MINERA
-    'CALASAYA', 'CRUCERO', 'PATACAMAYA', 'CALTECA', 'CALACACHI', 'TOLOMA', // ZONA PATACAMAYA TAMBO QUEMADO
-    'FE EN CRISTO', 'FILADELFIA', 'NUEVA VIDA', 'SHADDAI', 'LEUQUE', 'ALTO MUNAYPATA', 'IROCOTA'
-    ];
-  ZONAS: string[] = ['CIUDAD NORTE', 'CIUDAD CENTRAL', 'CIUDAD SUR', 'MINERA', 'VIACHA', 'ZONA PACAJES', 'COMANCHE', 'TAMBO QUEMADO', 'CAQUIAVIRI', 'SUCRE']
-  DAYS: string[] = ['SABADO', 'DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
-  PASTORES: Pastor[] = [];
+  public IGLESIAS: string[] = Global.IGLESIAS;
+  public ZONAS: string[] = Global.ZONAS;
+  public DAYS: string[] = Global.DIAS;
+  public PASTORES: Pastor[] = [];
 
   startDate = new Date(1990, 0, 1);
   files: File[] = [];
   file: File;
 
 
-  constructor( private fb: FormBuilder ) {
+  constructor( private fb: FormBuilder,
+               private _iglesiaService: IglesiaService,
+               private _pastorService: PastorService,
+               private _serviceImage: ImageService,
+               private toastr: ToastrService ) {
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.getPastores();
   }
 
-  createForm(){
+  createForm(): void{
     this.form = this.fb.group({
       nombre: ['', [Validators.required]],
       idPastor: ['', [Validators.required]],
@@ -58,7 +54,6 @@ export class CreateIglesiaComponent implements OnInit {
       horajniini: ['', [Validators.required]],
       horajnifin: ['', [Validators.required]],
       zona: ['', [Validators.required]],
-
     })
   }
 
@@ -75,6 +70,19 @@ export class CreateIglesiaComponent implements OnInit {
 
   alertCheckForm(){
     console.log(this.form.value);
+    if(this.checkForm() && this.file!=undefined){
+      this.popUpValidForm();
+    }
+    else{
+      this.popUpInvalidForm();
+    }
+  }
+
+  popUpInvalidForm(){
+    console.log(' form invalid! image is missing');
+    this.toastr.error('No valido!', 'Formulario', {
+      positionClass: 'toast-bottom-left'
+    });
   }
 
   getAgeFundation(): void{
@@ -82,17 +90,105 @@ export class CreateIglesiaComponent implements OnInit {
   }
 
   onSelect(event: any) {
-    console.log(event);
     this.files.push(...event.addedFiles);
     if(this.files.length > 1){ // checking if files array has more than one content
       this.replaceFileImage(); // replace file
       }
-      this.file = this.files[0]
+      this.file = this.files[0];
+
+      var fileSize = this.file.size,
+      mb = 1048576,
+      final = fileSize / mb;
+
+      if( Number(final) > 5  ) {
+        console.log('THIS FILE IS SO WEIGHT');
+        this.files.pop();
+        this.showErrorSizeImage(final.toFixed(2));
+      }
+
+      console.log('final', Number(final)<5);
       console.log(this.file);
   }
 
   replaceFileImage(){
     this.files.splice(0,1); // index =0 , remove_count = 1
+  }
+
+  showErrorSizeImage( size: string): void{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'warning',
+      title: size+ ' mb',
+      text: "Imagen demasiado grande",
+      footer: 'La imagen debe ser menor a 5mb',
+      showConfirmButton: false,
+      timer: 2500
+    })
+  }
+
+  onRemove(event:any): void {
+    this.files.pop();
+  }
+
+  popUpValidForm(){
+
+    Swal.fire({
+      title: 'Esta seguro de crear un nuevo Pastor?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Si, lo estoy',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.crearIglesia();
+
+      } else if (result.isDenied) {
+        // Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
+
+  crearIglesia(){
+    this._iglesiaService.create(this.form.value).subscribe( async res => {
+      console.log(res);
+      this.subirImagenDrop(await res.id);
+      this.showSuccess();
+    })
+  }
+
+  async subirImagenDrop(id: string){
+    let formData = new FormData();
+    formData.append("image", this.file, this.file['name']);
+    formData.append("idAsociado", id);
+    console.log(this.file['name']);
+    this._serviceImage.createImage( formData ).subscribe(async res =>{
+      console.log('LOG OF IMAGE UPLOAD', await res );
+    })
+  }
+
+  showSuccess() {
+    window.location.reload();
+  }
+
+  getPastores(){
+    this._pastorService.getAll().subscribe( (res: any) => {
+      console.log(res);
+      this.PASTORES = res;
+      this.PASTORES.sort(
+        function (a, b) {
+          // A va primero que B
+          if (a.name < b.name)
+              return -1;
+          // B va primero que A
+          else if (a.name > b.name)
+              return 1;
+          // A y B son iguales
+          else
+              return 0;
+      }
+      );
+    })
   }
 
 }

@@ -3,6 +3,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Iglesia } from '../../../../models/iglesia';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateIglesiaComponent } from '../create-iglesia/create-iglesia.component';
+import { IglesiaService } from '../services/iglesia.service';
+import { Pastor } from '../../../../models/pastor';
+import { PastorService } from '../../../admipastores/services/pastor.service';
+import { ImageService } from '../../../../services/image.service';
+import { AsignaturaService } from '../../../admipastores/services/asignatura.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-main-list-iglesia',
@@ -11,14 +17,38 @@ import { CreateIglesiaComponent } from '../create-iglesia/create-iglesia.compone
 })
 export class MainListIglesiaComponent implements OnInit {
 
+
   public dataSource = new MatTableDataSource<Iglesia>();
-  displayedColumns: string[] = [ 'Nro', 'name', 'category', 'area', 'year', 'membresia', 'lugardeministerio', 'mas'];
+  displayedColumns: string[] = [ 'Nro', 'nombre', 'zona', 'pastor', 'fundacion', 'mas'];
 
   dialogRef: any;
 
-  constructor( public dialog: MatDialog ) { }
+  constructor( public dialog: MatDialog,
+               private _churchService: IglesiaService,
+               private _pastorService: PastorService,
+               private _imagenService: ImageService,
+               private toastr: ToastrService
+               ) { }
 
   ngOnInit(): void {
+    this.getChurchs();
+  }
+
+  getChurchs(): void{
+    this._churchService.getAll()
+    .subscribe(res => {
+      this.dataSource.data = res as Iglesia[];
+      this.dataSource.data = this.sortData(this.dataSource.data);
+      for ( const church of this.dataSource.data ) {
+        const idPas = church.idPastor;
+        this.getPastor(idPas).then((res) =>{
+          church.pastorname = res.name;
+        }).catch((error)=>{
+          church.pastorname = 'no name';
+          console.log(error);
+        })
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -39,7 +69,49 @@ export class MainListIglesiaComponent implements OnInit {
   }
 
   popUpDeleteIglesia(id: number ): void{
-
+    this._churchService.delete(id)
+    .subscribe( async res => {
+      console.log(await res);
+      this.dataSource.data = this.dataSource.data.filter((item: Iglesia) => item.id!=id);
+    })
+    this.deleteImage(id);
+    this.toastr.success('Satisfactoriamente!', 'Iglesia eliminada');
   }
+
+  deleteImage(id: number){
+    this._imagenService.delete(id).subscribe( res => {
+      console.log(res);
+    })
+  }
+
+  sortData(data:any[]){
+    console.log(data);
+    return data.sort((a:Iglesia, b:Iglesia)=>{
+      if ( a.nombre.toLowerCase() < b.nombre.toLowerCase()){
+        return -1;
+      }
+      if ( a.nombre.toLowerCase() > b.nombre.toLowerCase()){
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  setPastors(data:any[]){
+    let aux = [];
+    for (let church of data) {
+      this.setChurch(church, 'hey!');
+    }
+    return aux;
+  }
+
+  setChurch( church:Iglesia, namePas:string ){
+    const pas =  this.getPastor(church.idPastor);
+  }
+
+  async getPastor(id: number): Promise<Pastor>{
+    const res = await this._pastorService.get(id).toPromise();
+    return res || []
+   }
 
 }

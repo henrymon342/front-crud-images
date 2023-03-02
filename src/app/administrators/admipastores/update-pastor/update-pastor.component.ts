@@ -27,7 +27,7 @@ export class UpdatePastorComponent implements OnInit {
   IGLESIAS: string[] = Global.IGLESIAS;
   YEARS = this.rangeYears();
   AREAS = Global.AREAS;
-  form: FormGroup;
+  public form: FormGroup;
   titulosForm: FormGroup;
   requisitosForm: FormGroup;
 
@@ -35,7 +35,7 @@ export class UpdatePastorComponent implements OnInit {
 
   files: File[] = [];
   file: File;
-  image: Image = new Image();
+  public image: Image = new Image();
 
   pastor:Pastor = new Pastor();
   titles: any[] = [];
@@ -235,8 +235,6 @@ export class UpdatePastorComponent implements OnInit {
       })
      }
   }
-
-
 
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Pastor creado');

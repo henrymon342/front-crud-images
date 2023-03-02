@@ -126,7 +126,6 @@ export class CreatePastorComponent implements OnInit {
     }
     else{
       this.popUpInvalidForm();
-
     }
   }
 
@@ -186,12 +185,23 @@ export class CreatePastorComponent implements OnInit {
 
 
   onSelect(event: any) {
-    console.log(event);
     this.files.push(...event.addedFiles);
     if(this.files.length > 1){ // checking if files array has more than one content
       this.replaceFileImage(); // replace file
       }
-      this.file = this.files[0]
+      this.file = this.files[0];
+
+      var fileSize = this.file.size,
+      mb = 1048576,
+      final = fileSize / mb;
+
+      if( Number(final) > 5  ) {
+        console.log('THIS FILE IS SO WEIGHT');
+        this.files.pop();
+        this.showErrorSizeImage(final.toFixed(2));
+      }
+
+      console.log('final', Number(final)<5);
       console.log(this.file);
   }
 
@@ -199,13 +209,13 @@ export class CreatePastorComponent implements OnInit {
     this.files.splice(0,1); // index =0 , remove_count = 1
   }
 
-  subirImagenDrop(id: string){
+  async subirImagenDrop(id: string){
     let formData = new FormData();
     formData.append("image", this.file, this.file['name']);
     formData.append("idAsociado", id);
     console.log(this.file['name']);
-    this._serviceImage.createImage( formData ).subscribe( res =>{
-      console.log( res );
+    this._serviceImage.createImage( formData ).subscribe(async res =>{
+      console.log('LOG OF IMAGE UPLOAD', await res );
     })
   }
 
@@ -214,7 +224,7 @@ export class CreatePastorComponent implements OnInit {
   showSuccess() {
     this.toastr.success('Satisfactoriamente!', 'Pastor creado');
     this.closeDialog = true;
-    this._serviceDialog.setPersona(this.closeDialog)
+    this._serviceDialog.setPersona(this.closeDialog);
     window.location.reload();
   }
 
@@ -225,6 +235,21 @@ export class CreatePastorComponent implements OnInit {
    this.closeDialog = false;
   }
 
+  showErrorSizeImage( size: string): void{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'warning',
+      title: size+ ' mb',
+      text: "Imagen demasiado grande",
+      footer: 'La imagen debe ser menor a 5mb',
+      showConfirmButton: false,
+      timer: 2500
+    })
+  }
+
+  onRemove(event:any): void {
+    this.files.pop();
+  }
 
 }
 

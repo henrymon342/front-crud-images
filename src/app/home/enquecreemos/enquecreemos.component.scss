@@ -1,0 +1,254 @@
+
+.container{
+  .container-title{
+    background-image: url('../../assets/bgs/bg_adoracion.jpg');
+
+    width: 100%;
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    background-attachment: fixed;
+    padding: 4em;
+    text-align: center;
+    color: white;
+
+    &:before {
+      content:'';
+      position: absolute;
+            top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .title{
+      margin: 0;
+      font-size: 4em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+
+    .container-sub-title{
+      position: relative;
+      .sub-title{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+      }
+      .sub-title-cite{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 200;
+        font-family: 'Secular One', sans-serif;
+        text-align: end;
+        padding: 1em;
+
+      }
+    }
+  }
+
+  .bg-objetivos{
+    width: 100%;
+    height: 100px;
+    position: relative;
+    color: #353a47;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #f9f9f9;
+
+    &:before {
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      // background-color: rgba(0,0,0,0.2);
+    }
+    .objetivos{
+
+      margin: 0;
+      font-size: 2em;
+      font-weight: 900;
+      position: relative;
+      font-family: "Josefin Sans", sans-serif;
+      align-self: center;
+      padding: 0 2em;
+      line-height: 2;
+      // background-color: #26374686;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        // background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background-size: 80% 50%;
+        z-index: 260;
+      }
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) no-repeat 0 0;
+        background-size: 80% 50%;
+      }
+    }
+  }
+
+  .areas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 6em;
+    background-color: #f9f9f9;
+
+    .area{
+      text-align: center;
+      padding: 0 4em;
+      .icon{
+        width: 50px;
+        // filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+      }
+      .title{
+        font-size: 24px;
+        font-weight: 700;
+        font-family: "Josefin Sans", sans-serif;
+        text-align: center;
+        line-height: 2em;
+      }
+      .text{
+        font-size: 16px;
+        font-weight: 500;
+        font-family: "Comfortaa", cursive;
+        text-align: center;
+        line-height: 2em;
+      }
+    }
+  }
+
+  .articles{
+    padding: 1em 20%;
+    .article{
+      margin: 2em;
+      padding: 0em;
+      mat-expansion-panel-header{
+        height: 60px;
+
+        mat-panel-description{
+
+          font-size: 18px;
+          font-weight: 700;
+          font-family: "Comfortaa", cursive;
+          text-align: center;
+          line-height: 2em;
+        }
+      }
+
+      .text{
+        font-size: 16px;
+        font-weight: 600;
+        font-family: "Comfortaa", cursive;
+        text-align: start;
+        line-height: 2em;
+      }
+
+      mat-action-row{
+        font-size: 14px;
+        font-weight: 600;
+        font-family: "Comfortaa", cursive;
+        text-align: start;
+        line-height: 2em;
+      }
+
+    }
+  }
+
+  .presentation{
+    display: flex;
+    justify-content: center;
+    padding: 4em;
+    .bg-center{
+      background-color: #353a47;
+      color: #f9f9f9;
+      padding: 4em 8em;
+      width: 90%;
+      height: auto;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "Comfortaa", cursive;
+      text-align: start;
+      line-height: 2em;
+    }
+  }
+
+  .valors{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: start;
+    padding: 4em 2em;
+    .valor{
+      background-color: #fff;
+      border-radius: 10px;
+      text-align: center;
+      padding: 2em;
+      margin: 1em;
+      // .icon{
+      //   width: 50px;
+      //   // filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+      // }
+      .text-title{
+        margin: 0;
+        font-size: 32px;
+        font-weight: 900;
+        position: relative;
+        font-family: "Josefin Sans", sans-serif;
+        align-self: center;
+        padding: 0 2em;
+        line-height: 1;
+        color: #06d6a0;
+
+      }
+
+      .icon{
+        width: 70px;
+        color: #118ab2;
+        font-size: 2em;
+      }
+
+      .title{
+        font-size: 24px;
+        font-weight: 700;
+        font-family: "Josefin Sans", sans-serif;
+        text-align: center;
+        line-height: 2em;
+      }
+      .text{
+        font-size: 16px;
+        font-weight: 500;
+        font-family: "Comfortaa", cursive;
+        text-align: justify;
+        line-height: 2em;
+      }
+    }
+  }
+
+}

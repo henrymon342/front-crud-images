@@ -4,8 +4,11 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Global } from '../../../services/global';
 import { ImageService } from '../../../services/image.service';
-import { DialogService } from '../../administrator/admiusuarios/services/dialog.service';
 import { PastorService } from '../services/pastor.service';
+import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { ChangeService } from '../../../services/change.service';
 
 @Component({
   selector: 'app-create-pastor',
@@ -18,7 +21,7 @@ export class CreatePastorComponent implements OnInit {
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
   IGLESIAS: string[] = Global.IGLESIAS;
 
-  YEARS = this.rangeYears();
+  YEARS = Global.rangeYears();
   AREAS = Global.AREAS;
   form: FormGroup;
 
@@ -37,23 +40,27 @@ export class CreatePastorComponent implements OnInit {
     otros: false
   });
 
-  closeDialog: boolean = false;
 
   files: File[] = [];
   file: File;
+
+  public isDisabled: boolean = false;
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
-               private _serviceDialog: DialogService,
                private _servicePastor: PastorService,
-               private _serviceImage: ImageService) { }
+               private _serviceImage: ImageService,
+               private router:Router,
+               public _location: Location,
+               private _changeService: ChangeService) { }
 
   ngOnInit(): void {
     console.log(this.IGLESIAS);
     this.createForm();
   }
 
-
-
+  changeState(){
+    this._changeService.toggle();
+  }
 
   createForm(): void{
     this.form = this.fb.group({
@@ -67,12 +74,10 @@ export class CreatePastorComponent implements OnInit {
       requisitos: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
       option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
-
     })
   }
 
   checkForm(): boolean{
-
     console.log('form: ', this.form.value);
     if( this.form.valid ){
       console.log('ES VALIDO');
@@ -86,14 +91,6 @@ export class CreatePastorComponent implements OnInit {
   changeValueCategory(){
    // hacer algo en caso de categorias
     this.checkForm();
-  }
-
-  rangeYears() {
-    const anios:{ anio: number }[] = [];
-    for (let i = 1950; i < 2040; i++) {
-      anios.push({anio: i});
-    }
-    return anios;
   }
 
   clearOtherInputMem(){
@@ -130,18 +127,16 @@ export class CreatePastorComponent implements OnInit {
   }
 
   popUpValidForm(){
-
     Swal.fire({
       title: 'Esta seguro de crear un nuevo Pastor?',
       showDenyButton: true,
-      // showCancelButton: true,
       confirmButtonText: 'Si, lo estoy',
       denyButtonText: `No`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        this.isDisabled = true;
         this.crearPastor();
-
       } else if (result.isDenied) {
         // Swal.fire('Changes are not saved', '', 'info')
       }
@@ -149,38 +144,60 @@ export class CreatePastorComponent implements OnInit {
   }
 
   popUpInvalidForm(){
-    this.showError();
+    this.showError('formulario no valido');
   }
 
-  crearPastor(){
+  async crearPastor(){
     let timerInterval: any;
-    // Swal.fire({
-    //   title: 'Creando pastor!',
-    //   html: `Cerrando en <b></b> milisegundos.`,
-    //   timer: 2000,
-    //   timerProgressBar: true,
-    //   didOpen: () => {
-
-    //     Swal.showLoading()
-    //     let b = Swal.getHtmlContainer()!.querySelector('b')
-    //     timerInterval = setInterval(() => {
-    //       b!.textContent = String(Swal.getTimerLeft())
-    //     }, 100)
-    //   },
-    //   willClose: () => {
-    //     clearInterval(timerInterval)
-    //   }
-    // }).then((result) => {
-    //   if (result.dismiss === Swal.DismissReason.timer) {
-    //     console.log('I was closed by the timer')
-    //   }
-    // })
-
-    this._servicePastor.createPastor(this.form.value).subscribe( async res => {
-      console.log(res);
-      this.subirImagenDrop(await res.id);
-      this.showSuccess();
+    Swal.fire({
+      title: 'Creando pastor!',
+      html: `Cerrando en <b></b> milisegundos.`,
+      timer: 10000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        let b = Swal.getHtmlContainer()!.querySelector('b')
+        timerInterval = setInterval(() => {
+          b!.textContent = String(Swal.getTimerLeft())
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        this.changeState();
+      }
     })
+
+    const pas = this.form.value;
+    try
+    {
+       if( this.file != null ){
+        await firstValueFrom(this._servicePastor.createPastor( pas ))
+        .then((value) => {
+          console.log(value);
+          this.asociarImagen(value.id);
+
+          }).catch((err)=>{
+            console.log('ERROR AL AÑADIR PASTOR');
+            console.log(err);
+            this.showError('no se pudo añadir pastor');
+          });
+       }
+       else{
+        console.log('ES NECESARIO LA IMAGEN');
+        this.showError('es necesario la imagen de pastor');
+       }
+
+      }
+      catch(Error)
+      {
+        console.log('ERROR AL AÑADIR PASTOR');
+        console.error(Error);
+        this.showError('hubo un problema al añadir pastor');
+      }
   }
 
 
@@ -200,7 +217,6 @@ export class CreatePastorComponent implements OnInit {
         this.files.pop();
         this.showErrorSizeImage(final.toFixed(2));
       }
-
       console.log('final', Number(final)<5);
       console.log(this.file);
   }
@@ -209,30 +225,62 @@ export class CreatePastorComponent implements OnInit {
     this.files.splice(0,1); // index =0 , remove_count = 1
   }
 
-  async subirImagenDrop(id: string){
-    let formData = new FormData();
-    formData.append("image", this.file, this.file['name']);
-    formData.append("idAsociado", id);
-    console.log(this.file['name']);
-    this._serviceImage.createImage( formData ).subscribe(async res =>{
-      console.log('LOG OF IMAGE UPLOAD', await res );
+  // async subirImagenDrop(id: string){
+  //   let formData = new FormData();
+  //   formData.append("image", this.file, this.file['name']);
+  //   formData.append("idAsociado", id);
+  //   console.log(this.file['name']);
+  //   this._serviceImage.createImage( formData ).subscribe(async res =>{
+  //     console.log('LOG OF IMAGE UPLOAD', await res );
+  //   })
+  // }
+
+  async asociarImagen( idadjunto: number ){
+      let formData = new FormData();
+      formData.append("image", this.file, this.file['name']);
+      formData.append("idAsociado", idadjunto.toString() );
+      console.log(this.file['name']);
+      await firstValueFrom(this._serviceImage.createImage( formData ))
+      .then((value) => {
+        console.log(value);
+        Swal.close();
+        this.refresh();
+        this.changeState();
+        this.getImage(value.newImagen.idAsosiado);
+      })
+      .catch((err)=>{
+        console.log('ERROR AL GUARDAR IMAGEN');
+        console.log(err);
+
+      });
+  }
+
+  refresh(): void {
+		this.router.navigateByUrl("/auth/admipastores/main-lists", { skipLocationChange: true }).then(() => {
+		this.router.navigate([decodeURI(this._location.path())]);
+		});
+	}
+
+  async getImage(id:number){
+    await firstValueFrom(this._serviceImage.get( id ))
+    .then((value) => {
+      console.log(value);
     })
+    .catch((err)=>{
+      console.log('ERROR AL OBTENER IMAGEN');
+      console.log(err);
+    });
   }
 
+  // showSuccess() {
+  //   this.toastr.success('Satisfactoriamente!', 'Pastor creado');
+  //   window.location.reload();
+  // }
 
-
-  showSuccess() {
-    this.toastr.success('Satisfactoriamente!', 'Pastor creado');
-    this.closeDialog = true;
-    this._serviceDialog.setPersona(this.closeDialog);
-    window.location.reload();
-  }
-
-  showError(){
-    this.toastr.error('No valido!', 'Formulario', {
+  showError( message: string ){
+    this.toastr.error( message, 'Error', {
       positionClass: 'toast-bottom-left'
     });
-   this.closeDialog = false;
   }
 
   showErrorSizeImage( size: string): void{

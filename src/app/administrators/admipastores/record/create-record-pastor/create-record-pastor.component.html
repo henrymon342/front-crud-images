@@ -1,8 +1,8 @@
 <div class="container animate__animated animate__fadeInUp">
 
-  <h4 class="title-component">
-    Record
-  </h4>
+  <div class="title-component">
+    <span class="text"> RECORD DE PASTOR </span>
+  </div>
 
   <table mat-table [dataSource]="listaMaterias" class="mat-elevation-z8">
     <!-- Position Column -->
@@ -20,9 +20,9 @@
     <!-- Name Column -->
     <ng-container matColumnDef="nota">
       <th mat-header-cell *matHeaderCellDef> Nota/100pts </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-form-field appearance="legacy">
-          <input matInput type="number" (change)="changeNota(element, nota.value)" [value]="element.nota" #nota min="0" max="100" maxlength="3" >
+      <td mat-cell *matCellDef="let element"  [width]="element.width" element.width="1em">
+        <mat-form-field >
+          <input matInput type="text" (change)="changeNota(element, nota.value)" [value]="element.nota" #nota pattern="/^[0-100]$/" maxlength="3">
         </mat-form-field>
       </td>
     </ng-container>

@@ -1,1 +1,74 @@
-<p>lista-iglesias works!</p>
+<div class="container">
+  <section class="bg-title">
+    <h3 class="title"> IGLESIAS</h3>
+    <h6 class="text-versicle">
+      Y que la paz de Cristo reine en sus corazones,
+      porque con este propósito los llamó Dios a formar un solo cuerpo.
+      Y sean agradecidos.
+      <h5 class="text-quote">
+        COLOSENSES 3:15
+      </h5>
+    </h6>
+  </section>
+
+  <section class="church">
+    <div class="block1">
+      <div class="church-header">
+        <div class="church-post">
+          <div class="church-logo">
+          </div>
+          <h5 class="church-deno"> IGLESIA del NAZARENO</h5>
+          <!-- IGLESIA DEL NAZARENO -->
+        </div>
+        <h3 class="church-name">
+          {{ currentChurch.nombre }}
+          </h3>
+        <h5 class="church-zone">
+          {{ currentChurch.zona }}
+        </h5>
+      </div>
+      <div class="church-actions">
+        <div class="btn">
+        <mat-icon (click)="toDirection('left')">keyboard_arrow_left</mat-icon>
+        </div>
+      <div class="btn">
+        <mat-icon (click)="toDirection('right')">keyboard_arrow_right</mat-icon>
+      </div>
+      </div>
+      <div class="church-search">
+        <div class="search">
+          <input type="text" placeholder="buscar" (input)="searchChurch(myInput.value)" #myInput>
+          <div class="btn">
+            <mat-icon>search</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block2">
+      <card-iglesia
+                    [idchurch]="currentChurch.id"
+                    [church]="currentChurch.nombre"
+                    [zona]="currentChurch.zona"
+                    [idPastor]="currentChurch.idPastor"
+                    [diacentral]="currentChurch.diacentral"
+                    [diajni]="currentChurch.diajni"
+                    [horacentralini]="currentChurch.horacentralini"
+                    [horacentralfin]="currentChurch.horacentralfin"
+                    [horajniini]="currentChurch.horajniini"
+                    [horajnifin]="currentChurch.horajnifin"
+                    >
+
+      </card-iglesia>
+    </div>
+    <svg class="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 330" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(231, 111, 81, 1)" offset="0%"></stop><stop stop-color="rgba(244, 162, 97, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,99L40,132C80,165,160,231,240,258.5C320,286,400,275,480,242C560,209,640,154,720,159.5C800,165,880,231,960,242C1040,253,1120,209,1200,170.5C1280,132,1360,99,1440,110C1520,121,1600,176,1680,170.5C1760,165,1840,99,1920,104.5C2000,110,2080,187,2160,214.5C2240,242,2320,220,2400,209C2480,198,2560,198,2640,176C2720,154,2800,110,2880,121C2960,132,3040,198,3120,236.5C3200,275,3280,286,3360,258.5C3440,231,3520,165,3600,126.5C3680,88,3760,77,3840,82.5C3920,88,4000,110,4080,99C4160,88,4240,44,4320,71.5C4400,99,4480,198,4560,198C4640,198,4720,99,4800,49.5C4880,0,4960,0,5040,44C5120,88,5200,176,5280,214.5C5360,253,5440,242,5520,209C5600,176,5680,121,5720,93.5L5760,66L5760,330L5720,330C5680,330,5600,330,5520,330C5440,330,5360,330,5280,330C5200,330,5120,330,5040,330C4960,330,4880,330,4800,330C4720,330,4640,330,4560,330C4480,330,4400,330,4320,330C4240,330,4160,330,4080,330C4000,330,3920,330,3840,330C3760,330,3680,330,3600,330C3520,330,3440,330,3360,330C3280,330,3200,330,3120,330C3040,330,2960,330,2880,330C2800,330,2720,330,2640,330C2560,330,2480,330,2400,330C2320,330,2240,330,2160,330C2080,330,2000,330,1920,330C1840,330,1760,330,1680,330C1600,330,1520,330,1440,330C1360,330,1280,330,1200,330C1120,330,1040,330,960,330C880,330,800,330,720,330C640,330,560,330,480,330C400,330,320,330,240,330C160,330,80,330,40,330L0,330Z"></path></svg>
+    <!-- <svg class="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 390" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(42, 157, 143, 1)" offset="0%"></stop><stop stop-color="rgba(138, 177, 125, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,273L34.3,286C68.6,299,137,325,206,318.5C274.3,312,343,273,411,227.5C480,182,549,130,617,117C685.7,104,754,130,823,169C891.4,208,960,260,1029,266.5C1097.1,273,1166,234,1234,188.5C1302.9,143,1371,91,1440,110.5C1508.6,130,1577,221,1646,273C1714.3,325,1783,338,1851,312C1920,286,1989,221,2057,175.5C2125.7,130,2194,104,2263,117C2331.4,130,2400,182,2469,182C2537.1,182,2606,130,2674,143C2742.9,156,2811,234,2880,247C2948.6,260,3017,208,3086,162.5C3154.3,117,3223,78,3291,104C3360,130,3429,221,3497,221C3565.7,221,3634,130,3703,91C3771.4,52,3840,65,3909,84.5C3977.1,104,4046,130,4114,123.5C4182.9,117,4251,78,4320,78C4388.6,78,4457,117,4526,130C4594.3,143,4663,130,4731,110.5C4800,91,4869,65,4903,52L4937.1,39L4937.1,390L4902.9,390C4868.6,390,4800,390,4731,390C4662.9,390,4594,390,4526,390C4457.1,390,4389,390,4320,390C4251.4,390,4183,390,4114,390C4045.7,390,3977,390,3909,390C3840,390,3771,390,3703,390C3634.3,390,3566,390,3497,390C3428.6,390,3360,390,3291,390C3222.9,390,3154,390,3086,390C3017.1,390,2949,390,2880,390C2811.4,390,2743,390,2674,390C2605.7,390,2537,390,2469,390C2400,390,2331,390,2263,390C2194.3,390,2126,390,2057,390C1988.6,390,1920,390,1851,390C1782.9,390,1714,390,1646,390C1577.1,390,1509,390,1440,390C1371.4,390,1303,390,1234,390C1165.7,390,1097,390,1029,390C960,390,891,390,823,390C754.3,390,686,390,617,390C548.6,390,480,390,411,390C342.9,390,274,390,206,390C137.1,390,69,390,34,390L0,390Z"></path></svg> -->
+    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="wave" viewBox="0 0 1440 320"><path fill="#e76a4b" fill-opacity="0.9" d="M0,160L40,154.7C80,149,160,139,240,154.7C320,171,400,213,480,197.3C560,181,640,107,720,74.7C800,43,880,53,960,85.3C1040,117,1120,171,1200,170.7C1280,171,1360,117,1400,90.7L1440,64L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg> -->
+  </section>
+
+
+</div>
+
+
+
+
+

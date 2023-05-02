@@ -14,11 +14,12 @@
     }
 
     .title-form{
-      padding: 1em;
+      padding: 1em 0 0 0;
+      color: #3f51b5;
       small{
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.8em;
-        font-weight: 400;
+        font-family: "Secular One", sans-serif;
+        font-weight: 600;
+        font-size: 2em;
         justify-self: flex-start;
       }
     }
@@ -35,11 +36,11 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         // font-weight: 600;
         display: grid;
-        margin: .5em 1em;
         width: 70%;
-        padding: 2em;
+        padding: 1em 2em;
+        border-radius: 10px;
         .label{
-          padding-bottom: 1em;
+          // padding-bottom: 1em;
         }
 
         .box-select{
@@ -68,7 +69,7 @@
         }
 
         img{
-          width: 256px;
+          width: 128px;
           justify-self: center;
         }
       }
@@ -86,12 +87,15 @@
 
       .subtitle{
         font-family: 'Plus Jakarta Sans', sans-serif;
-        // font-weight: 600;
+        font-weight: 500;
         // font-size: 1.1em;
-        padding: 1em;
+        display: grid;
+        width: 70%;
+        padding: 1em 0em;
       }
     }
   }
+
 
 
   .group_checks{
@@ -105,34 +109,84 @@
 
 #content1{
 
-  .title-record{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.8em;
+  .title{
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+    align-items: flex-end;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 12px;
     font-weight: 400;
+    padding: 1em;
+    .title-img{
+      margin: 0em .3em;
+      width: 40px;
+      content: url("https://res.cloudinary.com/duu9333ux/image/upload/v1680726674/nazarene-logo.png");
+    }
+  }
+
+  .title-record{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
     justify-self: center;
     padding: 1em;
     text-align: center;
   }
 
+  .subtitle{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    padding: 1em 0em;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+  }
+
+  .date{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 2em;
+  }
+
   .content-record{
 
+    display: flex;
+    justify-content: center;
+    padding: 1em;
     .detail-record{
+      padding: 1em 2em;
+      width: 32em;
       .fila{
+        font-family: "Josefin Sans", sans-serif;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         padding-bottom: .8em;
+      }
+    }
+
+    .img-record{
+      img{
+        width: 128px;
       }
     }
   }
   .container-checks{
+    padding: 1em;
     display: flex;
     justify-content: center;
     .group_checks{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      width: auto;
+      display: flex;
+      flex-direction: column;
       mat-checkbox{
-
-        text-align: center;
+        font-family: "Josefin Sans", sans-serif;
       }
     }
   }

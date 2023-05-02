@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  URL: 'https://back-crud-images.vercel.app/api'
+  URL: 'https://back-crud-images.vercel.app/api',
   // URL: 'http://localhost:3000/api'
+
+  recaptcha: {
+    siteKey: '6LdcptYlAAAAAFz4UKzWsKYr18B0ftXnhxyCf-sp',
+  },
+
 };
 
 /*

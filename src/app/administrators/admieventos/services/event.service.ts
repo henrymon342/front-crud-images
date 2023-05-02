@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { EventModel } from '../../../models/event';
-
-
 
 
 @Injectable({
@@ -38,5 +36,13 @@ findByMinisterio(ministerio: any):Observable<any> {
   return this.http.post(`${this.baseUrl}/event/findByMinisterio`, ministerio);
 }
 
+findByMonth(data:any): Observable<any> {
+  console.log(data);
+  return this.http.post(`${this.baseUrl}/event/findByMonth`, data);
+}
+
+findByRangeDates(data:any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/event/findByRangeDates`, data);
+}
 
 }

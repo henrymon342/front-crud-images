@@ -1,9 +1,9 @@
 <div class="section">
-  <button mat-raised-button color="primary"
+  <!-- <button mat-raised-button color="primary"
               class="button-create"
               (click)="openDialog()">
         Crear nuevo
-  </button>
+  </button> -->
 </div>
 
 
@@ -15,6 +15,11 @@
         <mat-label>Buscar Iglesia</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
+      <button mat-raised-button color="primary"
+              class="button-create"
+              (click)="openDialog()">
+        Crear nuevo
+      </button>
       <!-- <div class="bottons">
         <button mat-raised-button color="primary"
               class="button-create"

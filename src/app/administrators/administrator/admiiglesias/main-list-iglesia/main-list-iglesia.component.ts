@@ -7,8 +7,8 @@ import { IglesiaService } from '../services/iglesia.service';
 import { Pastor } from '../../../../models/pastor';
 import { PastorService } from '../../../admipastores/services/pastor.service';
 import { ImageService } from '../../../../services/image.service';
-import { AsignaturaService } from '../../../admipastores/services/asignatura.service';
 import { ToastrService } from 'ngx-toastr';
+import { ChangeService } from '../../../../services/change.service';
 
 @Component({
   selector: 'app-main-list-iglesia',
@@ -21,16 +21,22 @@ export class MainListIglesiaComponent implements OnInit {
   public dataSource = new MatTableDataSource<Iglesia>();
   displayedColumns: string[] = [ 'Nro', 'nombre', 'zona', 'pastor', 'fundacion', 'mas'];
 
-  dialogRef: any;
+  public isChange = false;
+  public dialogRef: any;
 
   constructor( public dialog: MatDialog,
                private _churchService: IglesiaService,
                private _pastorService: PastorService,
                private _imagenService: ImageService,
-               private toastr: ToastrService
+               private toastr: ToastrService,
+               private _changeService: ChangeService
                ) { }
 
   ngOnInit(): void {
+    this._changeService.change.subscribe(isChange => {
+      this.dialogRef.close();
+      this.isChange = isChange;
+    });
     this.getChurchs();
   }
 

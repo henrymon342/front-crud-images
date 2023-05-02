@@ -1,0 +1,83 @@
+
+.container{
+  .bg-title{
+    background-image: url('../../assets/bgs/bg_recursos.jpg');
+    width: 100%;
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-attachment: fixed;
+    padding: 4em;
+    text-align: center;
+    color: white;
+
+    &:before {
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .title{
+      margin: 0;
+      font-size: 4em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+
+    .text-versicle{
+      position: relative;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: 'Comfortaa', cursive;
+      // padding: 2em;
+      .text-quote{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 200;
+        font-family: 'Secular One', sans-serif;
+        text-align: end;
+        padding: 1em;
+      }
+    }
+  }
+
+  .resources{
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    height: auto;
+    .card{
+      text-align: center;
+      .container-img{
+        width: 200px;
+        height: 250px;
+        #gyd{
+          content: url('../../assets/recursos/img_GyD.jpg');
+          object-fit: cover;
+          width:100%;
+          height:100%;
+        }
+        #manual{
+          content: url('../../assets/recursos/img_manual.jpg');
+          object-fit: cover;
+          width:100%;
+          height:100%;
+        }
+      }
+      .title{
+        font-size: 16px;
+        font-weight: 400;
+        font-family: 'Secular One', sans-serif;
+        padding: .5em;
+      }
+    }
+  }
+}

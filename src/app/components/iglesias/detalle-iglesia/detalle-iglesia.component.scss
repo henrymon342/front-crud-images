@@ -1,0 +1,208 @@
+
+
+.container{
+  .one{
+
+    display: grid;
+    grid-template-columns: 40% 60%;
+    justify-content: center;
+    .church-header{
+      text-align: center;
+
+      .church-post{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+        padding-bottom: 0;
+       .church-logo{
+        background-image: url('https://res.cloudinary.com/duu9333ux/image/upload/v1681745252/nazarene-logo_3.ico');
+        color: #263746;
+        opacity: .8;
+        width: 150px;
+        height: 100px;
+        background-position: center center;
+        background-size: cover;
+        // background-attachment: fixed;
+       }
+       .church-deno{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+        // padding: 2em;
+       }
+      }
+      .church-name{
+        margin: 0;
+        font-size: 3em;
+        font-weight: 900;
+        position: relative;
+        font-family: 'Secular One', sans-serif;
+        color: #263746;
+        padding: 0 1em;
+      }
+      .church-zone{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+        text-align: center;
+      }
+      .actions{
+        padding: 2em 0 0 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .ubication{
+          text-align: center;
+          color: #e15554;
+          .text{
+            color: #263746;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'Comfortaa', cursive;
+          }
+        }
+        .fundation{
+          text-align: center;
+          color: #3e84ca;
+          .text{
+            color: #263746;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'Comfortaa', cursive;
+          }
+        }
+      }
+    }
+    .img-church{
+      height: 350px;
+      width: 100%;
+      border-radius: 10px;
+
+      img{
+        object-fit: cover;
+        width:100%;
+        height:100%;
+      }
+    }
+  }
+
+  .church-people{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1em 2em;
+
+    .pastor{
+      // width: 50%;
+      padding: 1em 2em;
+      justify-self: ceter;
+      text-align: center;
+
+      .title{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+        padding-bottom: 1em;
+      }
+      .img-pastor{
+        width: 150px;
+        height: 150px;
+        background-image: url('../../../assets/bgs/header_bg.jpg');
+        object-fit: cover;
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        border-radius: 50%;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+
+      }
+      .name-pastor{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+        padding-top: 1em;
+      }
+    }
+    .directiva{
+      text-align: center;
+      padding: 2em 4em;
+      // box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+      // border-radius: 10px;
+      .title{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+        // padding-bottom: 1em;
+      }
+      .person{
+        padding: 1em;
+        .name{
+          font-size: 16px;
+          font-weight: 500;
+          font-family: 'Comfortaa', cursive;
+        }
+        .subtitle{
+          font-size: 12px;
+          font-weight: 400;
+          font-family: 'Comfortaa', cursive;
+          padding-bottom: 1em;
+        }
+      }
+    }
+  }
+
+  .schedule{
+    .title{
+      background-color: #e9edf1;
+      text-align: center;
+      padding: 1em;
+      color: #263746;
+      font-size: 16px;
+      font-weight: 400;
+      font-family: 'Comfortaa', cursive;
+    }
+
+    .cards{
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      padding: 2em;
+
+
+
+      .card{
+        background-color: #e9edf1;
+        text-align: center;
+        color: #263746;
+        font-size: 16px;
+        font-family: 'Comfortaa', cursive;
+        padding: 2em 4em;
+        border-radius: 10px;
+
+        .culto{
+          font-family: "Secular One", sans-serif;
+          font-weight: 600;
+          padding-bottom: .5em;
+
+        }
+        .dia{
+          font-weight: 400;
+          padding-bottom: .5em;
+        }
+        .horario{
+          font-weight: 300;
+
+        }
+      }
+    }
+  }
+}

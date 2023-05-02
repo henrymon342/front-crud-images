@@ -31,7 +31,7 @@ export class UpdatePastorComponent implements OnInit {
   titulosForm: FormGroup;
   requisitosForm: FormGroup;
 
-
+  public dateReport = new Date();
 
   files: File[] = [];
   file: File;
@@ -237,7 +237,7 @@ export class UpdatePastorComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Satisfactoriamente!', 'Pastor creado');
+    this.toastr.success('Satisfactoriamente!', 'Los datos se editaron');
     this.router.navigate(['auth/admipastores/main-lists']);
   }
 
@@ -344,8 +344,8 @@ export class UpdatePastorComponent implements OnInit {
     var opt = {
       margin:       .5,
       filename:     'boleta'+this.pastor.name+'.pdf',
-      image:        { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 2 },
+      image:        { type: 'jpg', quality: 0.95 },
+      html2canvas:  { useCORS: true, scale: 2, dpi: 300, letterRendering: true },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 

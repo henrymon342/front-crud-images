@@ -1,0 +1,284 @@
+
+
+.container{
+  .title-bg{
+    background-image: url('../../../assets/bgs/bg_congregacion.jpg');
+    width: 100%;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    background-attachment: fixed;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ministerio{
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 24px;
+      color: white;
+    }
+
+    .title-text{
+      margin: 0;
+      font-size: 3em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+  }
+
+  .bg-timer{
+
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 5% 10%;
+    .timer{
+      width: 80%;
+
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      .timer-item{
+        background-color: #073b4c;
+        border-radius: 10px;
+        padding: 1em 2em;
+        text-align: center;
+        color: #fff;
+        margin: 0 .1em;
+        h4{
+          margin: 0;
+          font-family: 'Saira';
+          font-size: 3em;
+          font-weight: 800;
+
+        }
+        h5{
+          margin: 0;
+          font-family: 'Saira', sans-serif;
+          font-size: 1em;
+          font-weight: 400;
+        }
+      }
+      .dots{
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        font-size: 4em;
+        font-weight: 800;
+        color: #073b4c;
+      }
+    }
+  }
+
+  .info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #118ab2;
+    color: white;
+    .schedule{
+      padding: 2em 2em;
+      margin: 0;
+      font-size: 1.5em;
+      font-weight: 400;
+      font-family: 'Secular One', sans-serif;
+      // color: #1b998b;
+    color: white;
+
+    }
+
+    .content-date{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .icon_date{
+    color: white;
+
+        // color: #073b4c;
+        font-size: 2em;
+        width: auto;
+        margin: 0 1em;
+      }
+      .date-type{
+        font-size: 1em;
+        font-weight: 500;
+        font-family: 'Saira', sans-serif;
+        padding: 0 2em;
+        .date{
+        }
+        .time{
+
+        }
+      }
+    }
+  }
+
+  .data-place{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 2em 2em;
+    margin: 0;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: 'Secular One', sans-serif;
+    color: #118ab2;
+    .data{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 1em 2em;
+      .title{
+        font-size: .8em;
+        font-family: 'Saira', sans-serif;
+        color: #1b998b;
+        font-weight: 600;
+      }
+      .text{
+
+      }
+    }
+  }
+
+  .presentation{
+    display: flex;
+    justify-content: center;
+    padding: 1em 4em;
+    .bg-center{
+      background-color: #353a47;
+      color: #f9f9f9;
+      padding: 2em 4em;
+      width: 90%;
+      height: auto;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "Comfortaa", cursive;
+      text-align: start;
+      line-height: 2em;
+    }
+  }
+
+  .bg-objetivos{
+    width: 100%;
+    height: 100px;
+    position: relative;
+    color: #353a47;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #fff;
+
+    &:before {
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      // background-color: rgba(0,0,0,0.2);
+    }
+    .objetivos{
+
+      margin: 0;
+      font-size: 2em;
+      font-weight: 900;
+      position: relative;
+      font-family: "Josefin Sans", sans-serif;
+      align-self: center;
+      padding: 0 2em;
+      line-height: 2;
+      // background-color: #26374686;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        // background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background-size: 80% 50%;
+        z-index: 260;
+      }
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) no-repeat 0 0;
+        background-size: 80% 50%;
+      }
+    }
+  }
+
+
+  .finished{
+    .cont-finished{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4em;
+      background-color: #ef476f;
+
+      .text{
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Comfortaa", cursive;
+        text-align: start;
+        color: white;
+
+        border: 2px solid white ;
+        padding: 2em 4em;
+      }
+
+      .item{
+        padding: 1em 2em;
+        color: white;
+        border-radius: 10px;
+
+        font-size: 24px;
+        font-weight: 600;
+        font-family: "Comfortaa", cursive;
+        text-align: start;
+        line-height: 2em;
+        margin: .1em;
+      }
+    }
+  }
+
+  .encargados{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 4em 1em 4em;
+    .encargado{
+      padding: 1em;
+      background-color: #118ab2;
+      color: white;
+      border-radius: 10px;
+      font-family: "Comfortaa", cursive;
+    }
+  }
+}
+
+.mat-dialog-container {
+  padding-top: 0 !important;
+}
+

@@ -1,0 +1,95 @@
+<section class="btn-peticion">
+  <button mat-raised-button
+color="primary" [routerLink]="['/home/peticiones/list-peticion']">
+  ver peticiones de oración
+</button>
+</section>
+
+
+<div class="container">
+  <div class="bg-objetivos">
+    <div class="objetivos">
+      Pedidos de oración
+    </div>
+  </div>
+
+  <form class="form" [formGroup]="form" (change)="checkForm()">
+
+
+
+  <div class="field">
+    <label class="label">Nombre</label>
+    <mat-form-field class="box-input" appearance="outline">
+      <input formControlName="nombre"
+            type="text"
+            matInput
+            placeholder="nombre"
+            class="input-text">
+        <mat-error>
+          El <strong>nombre</strong> es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <label class="label">Apellido</label>
+    <mat-form-field class="box-input" appearance="outline">
+      <input formControlName="apellido"
+            type="text"
+            matInput
+            placeholder="apellido"
+            class="input-text">
+        <mat-error>
+          El <strong>apellido</strong> es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <label class="label">Correo electrónico</label>
+    <mat-form-field class="box-input" appearance="outline">
+      <input formControlName="correo"
+            type="text"
+            matInput
+            placeholder="correo"
+            class="input-text">
+        <mat-error>
+          El <strong>correo</strong> es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <label class="label">Ciudad</label>
+    <mat-form-field class="box-input" appearance="outline">
+      <input formControlName="ciudad"
+            type="text"
+            matInput
+            placeholder="ciudad"
+            class="input-text">
+        <mat-error>
+          El <strong>ciudad</strong> es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <label class="label">Su pedido de oración</label>
+    <mat-form-field class="box-input" appearance="outline">
+      <textarea formControlName="pedido"
+            type="text"
+            matInput
+            placeholder="pedido"
+            class="input-text">
+      </textarea>
+        <mat-error>
+          El <strong>pedido</strong> es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="tokenVisible"> reCAPTCHA Token <br />
+      <p style="color: red">{{reCAPTCHAToken}}</p>
+    </div>
+  </div>
+
+
+
+
+  </form>
+
+
+</div>
+
+

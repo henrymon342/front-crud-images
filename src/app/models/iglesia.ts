@@ -1,5 +1,5 @@
 export class Iglesia {
-  id?: number;
+  id: number;
   nombre: string;
   idPastor: number;
   ubicacion: string;
@@ -16,4 +16,5 @@ export class Iglesia {
   zona: string;
   imagePath?: string;
   pastorname?: string;
+  imagePathPas?: string;
 }

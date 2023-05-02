@@ -1,0 +1,129 @@
+
+
+.container{
+
+  .bg-objetivos{
+    width: 100%;
+    height: 100px;
+    position: relative;
+    color: #353a47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #fff;
+
+    &:before {
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      // background-color: rgba(0,0,0,0.2);
+    }
+    .objetivos{
+
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+      position: relative;
+      font-family: "Josefin Sans", sans-serif;
+      align-self: center;
+      padding: 0 2em;
+      line-height: 2;
+      // background-color: #26374686;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        // background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) repeat-x 0 0;
+        background-size: 80% 50%;
+        z-index: 260;
+      }
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 100%;
+        top: 8px;
+        height: 75px;
+        width: 1500px;
+        background: url(https://www.samnaz.org/wp-content/uploads/2021/01/dotted-grid-black.png) no-repeat 0 0;
+        background-size: 80% 50%;
+      }
+    }
+  }
+
+
+  form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f5f5f5;
+
+    .field{
+      background-color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      // font-weight: 600;
+      display: grid;
+      margin: .5em 1em;
+      width: 70%;
+      padding: 2em;
+      .label{
+        padding-bottom: 1em;
+      }
+
+      .box-select{
+        width: 50%;
+        justify-self: center;
+          .input-select{
+          }
+      }
+
+      .box-input{
+        width: 60%;
+        justify-self: center;
+
+      }
+
+      .radio-group{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1em;
+        .radio-button{
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          // font-weight: 600;
+
+        }
+      }
+
+      mat-list-item .item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .boton{
+      width: 60%;
+      justify-self: center;
+      margin: 2em;
+    }
+
+    .subtitle{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      // font-weight: 600;
+      // font-size: 1.1em;
+      padding: 1em;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrator',
@@ -8,7 +9,7 @@ import { Location } from '@angular/common';
 })
 export class AdministratorComponent implements OnInit {
 
-  constructor( private location: Location ) { }
+  constructor( private location: Location, private router: Router ) { }
 
   ngOnInit(): void {
   }
@@ -16,5 +17,9 @@ export class AdministratorComponent implements OnInit {
 
   back() {
     this.location.back(); // <-- go back to previous location on cancel
+  }
+
+  gotohome() {
+    this.router.navigate(['auth/login']);
   }
 }

@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('../administrators/admieventos/admieventos.module').then(m => m.AdmieventosModule)
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path:'',
     redirectTo: 'administrador',
     pathMatch: 'full'

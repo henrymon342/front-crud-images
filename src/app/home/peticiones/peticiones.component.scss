@@ -1,0 +1,135 @@
+
+.container{
+  .container-title{
+    background-image: url('../../assets/bgs/bg_peticion_oracion.jpg');
+
+    width: 100%;
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    background-attachment: fixed;
+    padding: 4em;
+    text-align: center;
+    color: white;
+
+    &:before {
+      content:'';
+      position: absolute;
+            top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      // background-color: rgba(0,0,0,0.1);
+    }
+
+    .title{
+      margin: 0;
+      font-size: 4em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+
+    .container-sub-title{
+      position: relative;
+      .sub-title{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+      }
+      .sub-title-cite{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 200;
+        font-family: 'Secular One', sans-serif;
+        text-align: end;
+        padding: 1em;
+
+      }
+    }
+  }
+
+  .versiculo{
+    padding: 6em 8em;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Comfortaa", cursive;
+    text-align: center;
+    line-height: 2em;
+    align-self: center;
+
+    background-image: url('../../assets/bgs/bg_jni.jpg');
+    background-size: cover;
+    background-position: center center;
+
+    width: 100%;
+    height: 300px;
+
+    color: #fff;
+    position: relative;
+
+
+    &:before {
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.3);
+    }
+    .texto{
+      position: relative;
+      z-index: 20;
+    }
+    .cita{
+      position: relative;
+      z-index: 20;
+    }
+  }
+
+  .presentation{
+    display: flex;
+    // justify-content: center;
+    padding: 1em;
+    .bg-center{
+      color: #f9f9f9;
+      // padding: 2em 4em;
+      width: 100%;
+      height: auto;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "Comfortaa", cursive;
+      text-align: center;
+      line-height: 2em;
+      text-align: center;
+      .text{
+        color: #118ab2;
+        border: 2px solid 118ab2;
+        padding: 4em 8em 0 8em;
+      }
+      .cita{
+        display: flex;
+        justify-content: center;
+        .cita-text{
+          width: 10em;
+          border: 2px solid #118ab2;
+          color: #118ab2;
+          padding: 0em 1em 0 1em;
+        }
+      }
+    }
+  }
+
+  .btn-peticion{
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 2em 0 2em 8em;
+  }
+
+}

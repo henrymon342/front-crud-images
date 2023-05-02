@@ -1,8 +1,5 @@
 
 
-
-
-
   <div class="container">
 
     <div class="container-btn">
@@ -16,10 +13,14 @@
         <small>
           Editar Pastor
         </small>
+        <hr>
+      </div>
+
+      <div class="subtitle">
+        <span class="text"> CATEGORIA </span>
       </div>
 
      <div class="field">
-      <label class="label"> Categoria</label>
       <mat-radio-group
         class="radio-group"
         formControlName="category"
@@ -49,9 +50,9 @@
           </mat-error>
       </mat-form-field>
 
-      <label class="label" *ngIf="form.value.category == 'LOCAL'"> AÑO DE 1RA LICENCIA LOCAL </label>
-      <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> AÑO DE ORDENACIÓN </label>
-      <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> AÑO DE 1RA LICENCIA RECIBIDA </label>
+      <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia local </label>
+      <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación </label>
+      <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida </label>
       <mat-form-field appearance="outline" class="box-select">
         <mat-select  class="input-select" placeholder="año" formControlName="year" (selectionChange)='checkForm()'>
           <mat-option *ngFor="let gest of YEARS" [value]=gest.anio>
@@ -64,95 +65,89 @@
       </mat-form-field>
 
 
-      <div class="field">
-        <label class="label">LUGAR DE MEMBRESÍA</label>
-          <mat-radio-group class="radio-group" formControlName="option_places_memb" (change)="clearOtherInputMem()">
-            <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
-              {{place}}
-            </mat-radio-button>
-          </mat-radio-group>
+      <label class="label"> Lugar de Membresía </label>
+      <mat-radio-group class="radio-group" formControlName="option_places_memb" (change)="clearOtherInputMem()">
+        <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
+          {{place}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <ng-container *ngIf="form.value.option_places_memb == 'IGLESIA'">
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-label>iglesia</mat-label>
+          <mat-select
+                      class="input-select"
+                      formControlName="membresia"
+                      (selectionChange)='checkForm()'
+                      >
+            <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+              {{ iglesia }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="form.value.option_places_memb == 'OTRO'">
+        <mat-form-field appearance="outline" class="box-input">
+          <mat-label>especificación</mat-label>
+          <input formControlName="membresia"
+          type="text"
+          matInput
+          placeholder="especificacion"
+          class="input-text"
+          >
+          <mat-error>
+            El <strong>campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
 
-          <ng-container *ngIf="form.value.option_places_memb == 'IGLESIA'">
-            <mat-form-field appearance="outline" class="box-select">
-              <mat-label>iglesia</mat-label>
-              <mat-select
-                          class="input-select"
-                          formControlName="membresia"
-                          (selectionChange)='checkForm()'
-                          >
-                <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
-                  {{ iglesia }}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                El <strong>campo</strong> es requerido
-              </mat-error>
-            </mat-form-field>
-          </ng-container>
+      <label class="label">Lugar de servicio ministerial</label>
+      <mat-radio-group class="radio-group" formControlName="option_places_serv" (change)="clearOtherInputServ()">
+        <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
+          {{place}}
+        </mat-radio-button>
+      </mat-radio-group>
 
-          <ng-container *ngIf="form.value.option_places_memb == 'OTRO'">
-            <mat-form-field appearance="outline" class="box-input">
-              <mat-label>especificación</mat-label>
-              <input formControlName="membresia"
-              type="text"
-              matInput
-              placeholder="especificacion"
-              class="input-text"
-              >
-              <mat-error>
-                El <strong>campo</strong> es requerido
-              </mat-error>
-            </mat-form-field>
-          </ng-container>
-      </div>
+      <ng-container *ngIf="form.value.option_places_serv == 'IGLESIA'">
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-label>iglesia</mat-label>
+          <mat-select
+                      class="input-select"
+                      formControlName="lugardeministerio"
+                      (selectionChange)='checkForm()'
+                      >
+            <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+              {{ iglesia }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
-
-      <div class="field">
-        <label class="label">LUGAR DE SERVICIO MINISTERIAL</label>
-          <mat-radio-group class="radio-group" formControlName="option_places_serv" (change)="clearOtherInputServ()">
-            <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
-              {{place}}
-            </mat-radio-button>
-          </mat-radio-group>
+      <ng-container *ngIf="form.value.option_places_serv == 'OTRO'">
+        <mat-form-field appearance="outline" class="box-input">
+          <mat-label>especificación</mat-label>
+          <input formControlName="lugardeministerio"
+          type="text"
+          matInput
+          placeholder="especificacion"
+          class="input-text"
+          >
+          <mat-error>
+            El <strong>campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
 
-          <ng-container *ngIf="form.value.option_places_serv == 'IGLESIA'">
-            <mat-form-field appearance="outline" class="box-select">
-              <mat-label>iglesia</mat-label>
-              <mat-select
-                          class="input-select"
-                          formControlName="lugardeministerio"
-                          (selectionChange)='checkForm()'
-                          >
-                <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
-                  {{ iglesia }}
-                </mat-option>
-              </mat-select>
-              <mat-error>
-                El <strong>campo</strong> es requerido
-              </mat-error>
-            </mat-form-field>
-          </ng-container>
-
-          <ng-container *ngIf="form.value.option_places_serv == 'OTRO'">
-            <mat-form-field appearance="outline" class="box-input">
-              <mat-label>especificación</mat-label>
-              <input formControlName="lugardeministerio"
-              type="text"
-              matInput
-              placeholder="especificacion"
-              class="input-text"
-              >
-              <mat-error>
-                El <strong>campo</strong> es requerido
-              </mat-error>
-            </mat-form-field>
-          </ng-container>
-      </div>
-
-
-      <label class="label"> ÁREA </label>
+      <label class="label"> Área </label>
       <mat-form-field appearance="outline" class="box-select">
         <mat-select  class="input-select" placeholder="area" formControlName="area" (selectionChange)='checkForm()'>
           <mat-option *ngFor="let area of AREAS" value="{{area.area}}">
@@ -164,36 +159,37 @@
         </mat-error>
       </mat-form-field>
 
+    </div>
 
       <ng-container *ngIf="form.value.category == 'PRESBITERO'">
-        <label class="label"> GRADO ACADÉMICO </label>
-        <section class="group_checks" [formGroup]="titulosForm">
-          <mat-checkbox formControlName="diploma_ministerial">DIPLOMA MINISTERIAL</mat-checkbox>
-          <mat-checkbox formControlName="bachiller_en_teologia">BACHILLER EN TEOLOGÍA</mat-checkbox>
-          <mat-checkbox formControlName="licenciatura">LICENCIATURA</mat-checkbox>
-          <mat-checkbox formControlName="maestria">MAESTRÍA</mat-checkbox>
-          <mat-checkbox formControlName="doctorado">DOCTORADO</mat-checkbox>
-        </section>
+        <div class="subtitle">
+          <span class="text">GRADO ACADÉMICO </span>
+        </div>
+        <div class="field">
+          <!-- <label class="label"> GRADO ACADÉMICO </label> -->
+          <section class="group_checks" [formGroup]="titulosForm">
+            <mat-checkbox formControlName="diploma_ministerial">DIPLOMA MINISTERIAL</mat-checkbox>
+            <mat-checkbox formControlName="bachiller_en_teologia">BACHILLER EN TEOLOGÍA</mat-checkbox>
+            <mat-checkbox formControlName="licenciatura">LICENCIATURA</mat-checkbox>
+            <mat-checkbox formControlName="maestria">MAESTRÍA</mat-checkbox>
+            <mat-checkbox formControlName="doctorado">DOCTORADO</mat-checkbox>
+          </section>
+        </div>
       </ng-container>
 
       <ng-container *ngIf="form.value.category != 'PRESBITERO'">
-        <label class="label"> REQUISITOS PARA JUNTA DE CREDENCIALES </label>
-        <section class="group_checks" [formGroup]="requisitosForm">
-          <mat-checkbox formControlName="docs_personales">DOCUMENTOS PERSONALES</mat-checkbox>
-          <mat-checkbox formControlName="carta_recomendacion">CARTA DE RECOMENDACIÓN</mat-checkbox>
-          <mat-checkbox formControlName="certificado_membresia">CERTIFICADO MEMBRESIA</mat-checkbox>
-          <mat-checkbox formControlName="otros">OTROS</mat-checkbox>
-        </section>
+        <div class="subtitle">
+          <span class="text"> REQUISITOS PARA JUNTA DE CREDENCIALES </span>
+        </div>
+        <div class="field">
+          <section class="group_checks" [formGroup]="requisitosForm">
+            <mat-checkbox formControlName="docs_personales">DOCUMENTOS PERSONALES</mat-checkbox>
+            <mat-checkbox formControlName="carta_recomendacion">CARTA DE RECOMENDACIÓN</mat-checkbox>
+            <mat-checkbox formControlName="certificado_membresia">CERTIFICADO MEMBRESIA</mat-checkbox>
+            <mat-checkbox formControlName="otros">OTROS</mat-checkbox>
+          </section>
+        </div>
       </ng-container>
-
-
-
-    </div>
-
-
-
-
-
 
 
     <div class="subtitle">
@@ -245,44 +241,76 @@
   </div>
 
 
-  <div style="display: none" >
+  <!-- <div style="display: none" > -->
+    <div>
 
 
     <div id="content1" #content1 >
-
+      <div class="title">
+        <span>IGLESIA del NAZARENO</span>
+        <img class="title-img">
+        <span>DISTRITO LA PAZ</span>
+      </div>
       <div class="title-record">
-        <small>
+        <span>
           BOLETA DE PASTOR
-        </small>
+        </span>
       </div>
 
+      <div class="date">
+        <span class="text"> Fecha de emisión: {{ dateReport | date: 'M/d/yy, h:mm a' }} </span>
+      </div>
+
+      <hr>
+
+      <div class="subtitle">
+        <span class="text">DATOS PERSONALES </span>
+      </div>
       <div class="content-record">
 
         <div class="detail-record">
           <div class="fila">
             <label>Nombre:</label>
-            <span>{{ pastor.name }} </span>
+            <span>{{ pastor.name | uppercase }} </span>
           </div>
 
           <div class="fila">
             <label>Categoria:</label>
-            <span>{{ pastor.category }}</span>
+            <span>{{ pastor.category | uppercase }}</span>
           </div>
 
           <div class="fila">
             <label>Area:</label>
-            <span>{{ pastor.area }}</span>
+            <span>{{ pastor.area | uppercase }}</span>
           </div>
 
           <div class="fila">
-            <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia Local </label>
-            <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación </label>
-            <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida </label>
-            <span>{{ pastor.year }}</span>
+            <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia Local: </label>
+            <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación: </label>
+            <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida: </label>
+            <span>{{ pastor.year | uppercase  }}</span>
+          </div>
+
+          <div class="fila">
+            <label class="label"> Lugar de membresía: </label>
+            <span>{{ pastor.membresia | uppercase  }}</span>
+          </div>
+
+          <div class="fila">
+            <label class="label"> Lugar de servicio ministerial: </label>
+            <span>{{ pastor.lugardeministerio | uppercase  }}</span>
           </div>
         </div>
 
+        <div class="img-record">
+          <img [src]="image.imagePath" alt="">
+        </div>
+      </div>
+
         <ng-container *ngIf="pastor.category == 'PRESBITERO'">
+          <div class="subtitle">
+            <span class="text"> EDUCACIÓN </span>
+          </div>
           <div class="container-checks">
             <section class="group_checks" [formGroup]="titulosForm" >
               <mat-checkbox formControlName="diploma_ministerial" >DIPLOMA MINISTERIAL</mat-checkbox>
@@ -295,25 +323,23 @@
         </ng-container>
 
         <ng-container *ngIf="form.value.category != 'PRESBITERO'">
-          <div class="container-checks-title">
-            <label class="label"> REQUISITOS PARA JUNTA DE CREDENCIALES </label>
+          <div class="subtitle">
+            <span class="text"> REQUISITOS PARA JUNTA DE CREDENCIALES </span>
           </div>
+
           <div class="container-checks">
             <section class="group_checks" [formGroup]="requisitosForm">
-              <span>DOCUMENTOS PERSONALES</span><mat-checkbox formControlName="docs_personales"></mat-checkbox>
-              <span>CARTA DE RECOMENDACIÓN</span><mat-checkbox formControlName="carta_recomendacion"></mat-checkbox>
-              <span>CERTIFICADO MEMBRESIA</span><mat-checkbox formControlName="certificado_membresia"></mat-checkbox>
-              <span>OTROS</span><mat-checkbox formControlName="otros"></mat-checkbox>
+              <mat-checkbox formControlName="docs_personales"><span>DOCUMENTOS PERSONALES</span></mat-checkbox>
+              <mat-checkbox formControlName="carta_recomendacion"><span>CARTA DE RECOMENDACIÓN</span></mat-checkbox>
+              <mat-checkbox formControlName="certificado_membresia"><span>CERTIFICADO MEMBRESIA</span></mat-checkbox>
+              <mat-checkbox formControlName="otros"><span>OTROS</span></mat-checkbox>
             </section>
           </div>
-          </ng-container>
-
+        </ng-container>
 
         <ng-container *ngIf="hasMaterias">
         <app-record-pastor [idPas]="pastor.id"></app-record-pastor>
         </ng-container>
-
-      </div>
 
       </div>
     </div>

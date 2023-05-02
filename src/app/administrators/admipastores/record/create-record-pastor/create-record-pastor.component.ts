@@ -80,12 +80,14 @@ export class CreateRecordPastorComponent implements OnInit {
   changeNota(element: Asignatura, nuevanota: string ){
     this.listaMaterias.forEach(item => {
       if(item.numero == element.numero){
+        console.log(nuevanota);
         item.nota = nuevanota;
         if( Number(item.nota) > 60 ){
           item.estado = true;
         }else{
           item.estado = false;
         }
+
       }
     });
     console.log(this.listaMaterias);

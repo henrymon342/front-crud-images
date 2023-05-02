@@ -1,0 +1,147 @@
+
+.container{
+  .container-title{
+    background-image: url('../../../assets/bgs/bg_adoracion.jpg');
+
+    width: 100%;
+    height: 300px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    background-attachment: fixed;
+    padding: 4em;
+    text-align: center;
+    color: white;
+
+    &:before {
+      content:'';
+      position: absolute;
+            top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .title{
+      margin: 0;
+      font-size: 4em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+
+    .container-sub-title{
+      position: relative;
+      .sub-title{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Comfortaa', cursive;
+      }
+      .sub-title-cite{
+        margin: 0;
+        font-size: 18px;
+        font-weight: 200;
+        font-family: 'Secular One', sans-serif;
+        text-align: end;
+        padding: 1em;
+
+      }
+    }
+  }
+
+  .cont_events{
+    padding: 0em 8em;
+    min-height: 80vh;
+  }
+
+  .bg_calendar{
+    background-image: url('../../../assets/bgs/bg_adoracion.jpg');
+    background: linear-gradient(45deg, #4f779b, #00a2af);
+    width: 100%;
+    height: auto;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    background-attachment: fixed;
+    padding: 1em;
+    text-align: center;
+    color: white;
+
+    .title-img{
+      margin: 0em .3em;
+      width: 60px;
+      content: url("../../../assets/logos/logoww.png");
+    }
+
+    .title{
+      margin: 0;
+      font-size: 2em;
+      font-weight: 900;
+      position: relative;
+      font-family: 'Secular One', sans-serif;
+    }
+
+    .btn-show-calendar{
+      text-align: center;
+      mat-icon{
+        font-size: 2.5em;
+        color: #eee;
+        transition: font-size .5s ease;
+        &:hover{
+          font-size: 3em;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .container-select-date{
+    padding: 1em;
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    .select-mount{
+      width: 40em;
+      background: linear-gradient(180deg, #263746, #263746);
+      color: white;
+      border-radius: .5em;
+      border: none;
+      &:hover{
+        background: #ddd;
+        color: #263746;
+        cursor: pointer;
+      }
+      h3{
+        padding: 0 2em;
+        font-family: 'Comfortaa', cursive;
+        font-weight: 200;
+      }
+    }
+
+    .arrow-btns{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      height: 3em;
+      .select-arrow{
+        width: 4em;
+        background: linear-gradient(180deg, #263746, #263746);
+        color: white;
+        border-radius: .5em;
+        border: none;
+        &:hover{
+          background: #ddd;
+          color: #263746;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

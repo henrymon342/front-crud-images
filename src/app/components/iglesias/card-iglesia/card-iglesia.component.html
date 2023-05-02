@@ -1,0 +1,54 @@
+
+<div class="container">
+  <div class="img">
+    <img [src]="imgChurch.imagePath" alt="">
+    <!-- <img alt=""> -->
+  </div>
+  <div class="data-church">
+    <div class="data">
+      <div class="data-pastor">
+        <div class="title">
+          PASTOR
+        </div>
+        <div class="text">
+          {{ pastor.name | uppercase }}
+          <!-- {{ church }} -->
+          <!-- Isai Murga Cornejo -->
+        </div>
+      </div>
+     <hr>
+    <div class="services">
+      <div class="title">SERVICIOS</div>
+      <div class="general">
+        <div class="subtitle">
+          CULTO GENERAL
+        </div>
+        <div class="text">
+          <!--  | {{ church.horacentralini }} - {{ church.horacentralfin }} -->
+          {{ diacentral }} | {{ horacentralini | date: 'h:mm a' }} - {{ horacentralfin | date: 'h:mm a' }}
+        </div>
+      </div>
+      <div class="general">
+        <div class="subtitle">
+          REUNION DE JÓVENES
+        </div>
+        <div class="text">
+          <!-- {{ church. }} | {{ church.horajniini }} - {{ church.horajnifin }} -->
+          {{ diajni }} | {{ horajniini | date: 'h:mm a' }} - {{ horajnifin | date: 'h:mm a' }}
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="more">
+      <div class="img-pastor">
+        <img id="img-pas" [src]="imgPastor.imagePath" alt="">
+        <!-- <img id="img-pas" alt=""> -->
+      </div>
+      <button mat-raised-button
+            color="primary"
+            (click)="seeMore()">
+            VER MÁS
+          </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<!--
+<header>
+  <h1> SUBIDA DE IMAGENES CON CLOUDINARY </h1>
+</header>
+
+<section>
+  <form enctype="multipart/form-data">
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [removable]="true" *ngFor="let f of files" [file]="f">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-image-preview>
+    </ngx-dropzone>
+
+    <span  class="input-group-text upload"  (click)="subirImagenDrop()">Subir imagen desde ngx-dropzone</span>
+  </form>
+</section>
+
+
+<section>
+  <button (click)="crearPastor()">crear pastor</button>
+</section>
+
+<section>
+  <input type="text" #input>
+  <img src="" alt="">
+</section>
+ -->
+
+
+
+
+
+<div class="container">
+  <section class="bg-title">
+    <h3 class="title"> RECURSOS</h3>
+    <h6 class="text-versicle">
+      Que habite en ustedes la palabra de Cristo con toda su riqueza: instrúyanse y
+      aconséjense unos a otros con toda sabiduría; canten salmos, himnos y canciones
+      espirituales a Dios, con gratitud de corazón.
+      <h5 class="text-quote">
+        COLOSENSES 3:16
+      </h5>
+    </h6>
+  </section>
+
+
+
+  <section class="resources">
+    <div class="card" href="https://play.google.com/store/apps/details?id=com.llamadosasantidad.graciaydevocion" target="_blank">
+      <div class="container-img">
+        <img id="gyd" alt="">
+      </div>
+        <div class="title">
+          Himnario Gracia y Devoción
+        </div>
+        <a mat-stroked-button color="primary" href="https://play.google.com/store/apps/details?id=com.llamadosasantidad.graciaydevocion" target="_blank">descargar </a>
+    </div>
+
+    <div class="card">
+      <div class="container-img">
+          <img id="manual" alt="">
+          <div class="title">
+            Manual de la Iglesia del Nazareno
+          </div>
+          <a mat-stroked-button color="primary" href="/assets/pdfs/ES_manual_2017-2021.pdf" target="_blank">ver manual </a>
+      </div>
+    </div>
+  </section>
+
+</div>

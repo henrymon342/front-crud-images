@@ -1,33 +1,33 @@
 .container{
 
   .title-form{
-    padding: 1em;
-    small{
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.8em;
-      font-weight: 400;
+    padding: 1em 0 0 0;
+    color: white;
+    h3{
+      margin: 0;
+      font-family: "Secular One", sans-serif;
+      font-weight: 600;
+      font-size: 2em;
       justify-self: flex-start;
     }
+    hr{
+      width: 100%;
+    }
   }
-  padding: 0;
   form{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #f5f5f5;
+    background: rgba(15,76,129,1);
 
     .field{
-      background-color: #fff;
+      background-color: #f5f5f5;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      // font-weight: 600;
       display: grid;
-      margin: .5em 1em;
       width: 70%;
-      padding: 2em;
-      .label{
-        padding-bottom: 1em;
-      }
+      padding: 1em 2em;
+      border-radius: 10px;
 
       .box-select{
         width: 50%;
@@ -39,7 +39,6 @@
       .box-input{
         width: 60%;
         justify-self: center;
-
       }
 
       .radio-group{
@@ -49,27 +48,26 @@
         padding: 1em;
         .radio-button{
           font-family: 'Plus Jakarta Sans', sans-serif;
-          // font-weight: 600;
-
         }
       }
 
-      .datepicker{
 
-      }
     }
 
     .boton{
       width: 60%;
       justify-self: center;
       margin: 2em;
+      background-color: #4062bb;
     }
 
     .subtitle{
       font-family: 'Plus Jakarta Sans', sans-serif;
-      // font-weight: 600;
-      // font-size: 1.1em;
-      padding: 1em;
+      font-weight: 500;
+      color: white;
+      display: grid;
+      width: 70%;
+      padding: 1em 0em;
     }
   }
 }

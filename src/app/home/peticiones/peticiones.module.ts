@@ -8,9 +8,12 @@ import { PeticionesComponent } from './peticiones.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { environment } from '../../../environments/environment';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, RecaptchaFormsModule, RecaptchaSettings, RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
+import {MatButtonModule} from '@angular/material/button';
 
+const RECAPTCHA_V3_STACKBLITZ_KEY = '6LdcptYlAAAAAFz4UKzWsKYr18B0ftXnhxyCf-sp';
+const RECAPTCHA_V2_DUMMY_KEY = '6LeJyXcgAAAAAH9cef1bCWTzk10ePkwqAKOVfbcT';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,23 @@ import { environment } from '../../../environments/environment';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    RecaptchaV3Module
+    MatButtonModule,
+    RecaptchaModule,
+    RecaptchaV3Module,
+    // RecaptchaV3Module
+    RecaptchaFormsModule,
   ],
-  providers: [{
-    provide: RECAPTCHA_V3_SITE_KEY,
-    useValue: environment.recaptcha.siteKey,
-  }],
+  providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: RECAPTCHA_V3_STACKBLITZ_KEY
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: RECAPTCHA_V2_DUMMY_KEY
+      } as RecaptchaSettings
+    }
+  ]
 })
 export class PeticionesModule { }

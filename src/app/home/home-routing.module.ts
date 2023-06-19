@@ -37,6 +37,7 @@ const routes: Routes = [
         path: 'peticiones',
         loadChildren: () => import('../home/peticiones/peticiones.module').then(m => m.PeticionesModule)
       },
+      { path: '', redirectTo: 'enquecreemos', pathMatch: 'full' }
       // {
       //   path: 'peticiones', component: PeticionesComponent
       // },

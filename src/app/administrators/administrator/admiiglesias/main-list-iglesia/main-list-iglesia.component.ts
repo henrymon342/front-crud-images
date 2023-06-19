@@ -9,6 +9,7 @@ import { PastorService } from '../../../admipastores/services/pastor.service';
 import { ImageService } from '../../../../services/image.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChangeService } from '../../../../services/change.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main-list-iglesia',
@@ -75,19 +76,36 @@ export class MainListIglesiaComponent implements OnInit {
   }
 
   popUpDeleteIglesia(id: number ): void{
-    this._churchService.delete(id)
-    .subscribe( async res => {
-      console.log(await res);
-      this.dataSource.data = this.dataSource.data.filter((item: Iglesia) => item.id!=id);
-    })
-    this.deleteImage(id);
-    this.toastr.success('Satisfactoriamente!', 'Iglesia eliminada');
+    Swal.fire({
+      title: 'Esta seguro de eliminar la iglesia?',
+      showDenyButton: true,
+      confirmButtonText: 'Si, lo estoy',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deleteChurch(id);
+      } else if (result.isDenied) {
+        Swal.fire('Algo paso al eliminar iglesia', '', 'info')
+      }
+    });
   }
 
-  deleteImage(id: number){
-    this._imagenService.delete(id).subscribe( res => {
-      console.log(res);
-    })
+  async deleteChurch(idChurch: number){
+    console.log(idChurch);
+    this._churchService.delete(idChurch)
+    .subscribe( async res => {
+      console.log(await res);
+      this.dataSource.data = this.dataSource.data.filter((item: Iglesia) => item.id!=idChurch);
+      this.deleteImage(idChurch);
+      this.toastr.success('Satisfactoriamente!', 'Iglesia eliminada');
+    });
+  }
+
+  async deleteImage(id: number){
+    this._imagenService.delete(id).subscribe( async res => {
+      console.log(await res);
+    });
   }
 
   sortData(data:any[]){

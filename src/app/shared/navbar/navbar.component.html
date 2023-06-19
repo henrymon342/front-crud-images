@@ -4,13 +4,17 @@
   <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="title">
+  <div class="title" routerLink="/home">
       <span>IGLESIA del NAZARENO</span>
       <img class="title-img">
       <span>DISTRITO LA PAZ</span>
   </div>
   <button (click)="onSuccess()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+    <!-- <mat-icon> contacts</mat-icon> -->
+    <span class="material-symbols-outlined">
+      login
+    </span>
+    <!-- <mat-icon>favorite</mat-icon> -->
   </button>
 </mat-toolbar>
 

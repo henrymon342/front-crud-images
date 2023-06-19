@@ -26,21 +26,84 @@ export class CalendarComponent implements OnInit {
 
   public locale: string = 'es';
   constructor( private _eventService: EventService ) {
-    this.getEvents();
   }
 
   ngOnInit(): void {
+    const date = new Date();
+    this.getEventbyMonth(date);
+    // this.getEvents();
+
   }
 
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
+  getEventbyMonth( fecha: Date):void {
+    console.log(fecha.getFullYear());
+    console.log(fecha.getMonth());
+    const nromes = fecha.getMonth();
+    const gestion = fecha.getFullYear();
+    this._eventService.findByMonth({ nromes, gestion }).subscribe( (res: EventModel[]) =>{
+      console.log(res);
+      this.allEvents = res as EventModel[];
+      this.allEvents.forEach( evento => {
+        let colorEvent = this.getMinisteryColor(evento);
+        let objetofechas = this.getDatesEvents(evento);
+        console.log('COLOR', colorEvent);
+        console.log('OBJETO FECHAS', objetofechas);
+        const obj = objetofechas['end'] || {};
+        this.eventos = [
+
+          {
+            id: evento.id,
+            start: startOfDay(new Date(objetofechas['start'])),
+            end: endOfDay(new Date(obj)),
+            title: evento.titulo,
+            color: colorEvent,
+            allDay: true,
+            meta: evento.id,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            }
+          }
+        ];
+      });
+    })
+  }
+
+  getDatesEvents( evento: EventModel ):{}{
+    if( evento.tipofecha == 'VARIOS DÍAS' ){
+      return { start: startOfDay(new Date(evento.fechaini!)), end: endOfDay(new Date(evento.fechafin!)) };
+    }else{
+      return { start: startOfDay(new Date(evento.fechaini!)) };
+    }
+  }
+
+  getMinisteryColor(evento: EventModel): any {
+    switch ( evento.ministerio ) {
+      case 'JNI':
+        return this.COLORS.orange;
+      case 'MNI':
+        return this.COLORS.green;
+      case 'DNI':
+        return this.COLORS.blue;
+      default:
+        return '';
+    }
+  }
+
+  closeOpenMonthViewDay():void {
+    this.getEventbyMonth(this.viewDate);
   }
 
   getEvents() {
+    console.log('CARGANDO ACTIVIDADES...');
+
     var modelEvent:any[] = [];
     const nromes = this.viewDate.getMonth();
-    this._eventService.findByMonth({nromes}).subscribe( async (res: EventModel[]) =>{
+    const gestion = this.viewDate.getFullYear();
+    this._eventService.findByMonth({nromes, gestion}).subscribe( async (res: EventModel[]) =>{
       this.allEvents = res;
+      console.log(res);
+
       this.allEvents.forEach((element: EventModel) => {
         console.log(element);
         //COLORES
@@ -164,6 +227,7 @@ export class CalendarComponent implements OnInit {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
+
     this.eventos = this.eventos.map((iEvent) => {
       if (iEvent === event) {
         console.log(event);

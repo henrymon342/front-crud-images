@@ -50,33 +50,7 @@
         font-family: 'Comfortaa', cursive;
         text-align: center;
       }
-      .actions{
-        padding: 2em 0 0 0;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
 
-        .ubication{
-          text-align: center;
-          color: #e15554;
-          .text{
-            color: #263746;
-            font-size: 12px;
-            font-weight: 500;
-            font-family: 'Comfortaa', cursive;
-          }
-        }
-        .fundation{
-          text-align: center;
-          color: #3e84ca;
-          .text{
-            color: #263746;
-            font-size: 12px;
-            font-weight: 500;
-            font-family: 'Comfortaa', cursive;
-          }
-        }
-      }
     }
     .img-church{
       height: 350px;
@@ -87,6 +61,66 @@
         object-fit: cover;
         width:100%;
         height:100%;
+      }
+    }
+  }
+
+  .actions{
+    padding: 1em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+
+    .ubication{
+      background-color: #263746;
+      padding: 1em 2em;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      mat-icon{
+        color: #fff;
+        font-size: 2em;
+      }
+      .text{
+        color: #fff;
+        padding: .5em 1em;
+        font-family: "Secular One", sans-serif;
+        font-weight: 400;
+      }
+    }
+    .fundation{
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+      .funda{
+        background-color: #263746;
+        color: #fff;
+        padding: 1em 2em;
+        mat-icon{
+          color: #fff;
+          font-size: 2em;
+        }
+        .text{
+          color: #fff;
+          padding: .5em 1em;
+          font-family: "Secular One", sans-serif;
+          font-weight: 400;
+        }
+      }
+      .anios{
+        background-color: #fff;
+        color: #263746;
+        display: grid;
+        padding: .5em 2em;
+        height: auto;
+        font-family: "Secular One", sans-serif;
+
+        .text-anio{
+          font-size: 3em;
+
+        }
       }
     }
   }

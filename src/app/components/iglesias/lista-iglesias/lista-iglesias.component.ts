@@ -2,6 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Iglesia } from '../../../models/iglesia';
 import { IglesiaService } from '../../../administrators/administrator/admiiglesias/services/iglesia.service';
+import { PastorService } from '../../../administrators/admipastores/services/pastor.service';
+import { Pastor } from '../../../models/pastor';
+import { firstValueFrom } from 'rxjs';
+import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector: 'app-lista-iglesias',
@@ -25,10 +29,12 @@ public iglesias = [
   private copychurchs: Iglesia[] = [];
   public mymodel: string = '';
 
-
+  public pastor: Pastor = new Pastor();
 
   public currentChurch: Iglesia = new Iglesia();
-  constructor( private _churchService: IglesiaService ) { }
+  constructor( private _churchService: IglesiaService,
+               private _pastorService: PastorService,
+               private _imgService: ImageService ) { }
 
   ngOnInit(): void {
     this.getChurchs();
@@ -41,30 +47,95 @@ public iglesias = [
       this.copychurchs = await res;
       console.log(res);
       this.currentChurch = this.churchs[this.position];
-
+      this.getPastor(this.currentChurch.idPastor);
+      this.getImgPastor(this.currentChurch.idPastor);
+      this.getImgChurch(this.currentChurch.id);
     });
   }
 
   toDirection(direction: string): void{
-    console.log(direction);
-    if( direction == 'right' ){
+    if( direction == 'right' ){   // move to rigth
       this.position++;
       if( this.position == this.churchs.length ){
         this.position = 0;
       }
     }
-    else{
+    else{                         // move to left
       this.position--;
       if( this.position < 0 ){
         this.position = this.churchs.length-1;
       }
     }
     this.currentChurch = this.churchs[this.position];
+    this.getPastor(this.currentChurch.idPastor);
+    this.getImgPastor(this.currentChurch.idPastor);
+    this.getImgChurch(this.currentChurch.id);
   }
 
+  async getPastor(idpas: number){
+    console.log(idpas);
+    let pa:Pastor = new Pastor();
+    try
+    {
+      pa = await firstValueFrom(this._pastorService.get( idpas ))
+      .then( (value: Pastor) => {
+        console.log(value);
+
+        this.currentChurch.pastorname = value["name"];
+        return value;
+        }).catch((err)=>{
+          console.log(err);
+          return err;
+        });
+      console.log(pa);
+
+    }
+    catch(Error)
+    {
+      console.error(Error);
+    }
+  }
+
+  async getImgPastor(idpas: number){
+    let pa:any;
+    try
+    {
+      pa = await firstValueFrom(this._imgService.get( idpas ))
+      .then((value: any) => {
+        return value;
+        }).catch((err)=>{
+          console.log(err);
+          return err;
+        });
+    }
+    catch(Error)
+    {
+      console.error(Error);
+    }
+    this.currentChurch.imagePathPas = pa.imagePath;
+  }
+
+  async getImgChurch(idchurch: number){
+    let pa:any;
+    try
+    {
+      pa = await firstValueFrom(this._imgService.get( idchurch ))
+      .then((value: any) => {
+        return value;
+        }).catch((err)=>{
+          console.log(err);
+          return err;
+        });
+    }
+    catch(Error)
+    {
+      console.error(Error);
+    }
+    this.currentChurch.imagePath = pa.imagePath;
+  }
+
+
   searchChurch(newValue: any): void {
-    console.log(newValue);
-    console.log(newValue.length == 0);
     if( newValue != null ){
       this.churchs = this.copychurchs.filter( element => {
         return element.nombre.toLowerCase().includes(newValue);

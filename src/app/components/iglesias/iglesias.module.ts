@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { CardIglesiaComponent } from './card-iglesia/card-iglesia.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatFormFieldModule,
     IglesiasRoutingModule,
+    MatProgressSpinnerModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

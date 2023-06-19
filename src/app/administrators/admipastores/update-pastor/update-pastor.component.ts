@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
@@ -12,6 +12,12 @@ import { PastorService } from '../services/pastor.service';
 import * as html2pdf from 'html2pdf.js';
 import { Global } from '../../../services/global';
 
+export interface Parent {
+  name: string;
+  age: number;
+  health: number;
+  obs: string;
+}
 
 @Component({
   selector: 'app-update-pastor',
@@ -24,12 +30,15 @@ export class UpdatePastorComponent implements OnInit {
 
   CATEGORIES: string[] = ['LOCAL', 'DISTRITAL', 'PRESBITERO']
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
+  ESTADO_CIVIL: string[] = ['SOLTERO', 'CASADO', 'VIUDO', 'DIVORCIADO'];
   IGLESIAS: string[] = Global.IGLESIAS;
   YEARS = this.rangeYears();
   AREAS = Global.AREAS;
   public form: FormGroup;
   titulosForm: FormGroup;
   requisitosForm: FormGroup;
+  familyForm: FormGroup;
+  estudyForm: FormGroup;
 
   public dateReport = new Date();
 
@@ -40,14 +49,19 @@ export class UpdatePastorComponent implements OnInit {
   pastor:Pastor = new Pastor();
   titles: any[] = [];
   requisits: any[] = [];
+  family: any[] = [];
 
 
   hasMaterias: boolean = false;
   seeRecord: boolean = false;
 
+  ELEMENT_DATA: Parent[] = [];
+  displayedColumns: string[] = ['nro', 'name', 'age', 'health', 'obs'];
+  dataSource = this.ELEMENT_DATA;
+  displayedColumns2: string[] = ['nro', 'nivel', 'nombreinst', 'gestiongraduacion', 'grado'];
+
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
-               private _serviceDialog: DialogService,
                private _servicePastor: PastorService,
                private _serviceImage: ImageService,
                private route: ActivatedRoute,
@@ -59,20 +73,40 @@ export class UpdatePastorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPastor();
+
+    this.familyForm = this.fb.group({
+      Rows: this.fb.array([this.initRows()])
+    });
+    this.estudyForm = this.fb.group({
+      Rows: this.fb.array([this.initRowsE()])
+    });
   }
 
   createForm(): void{
     this.form = this.fb.group({
       name: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      celular: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
+      fecha_nac: ['', [Validators.required]],
+      lugar_nac: ['', [Validators.required]],
+      estado_civil: ['', [Validators.required]],
+      nombre_esposa: ['', [Validators.required]],
+      fecha_nac_esposa: ['', [Validators.required]],
+      lugar_nac_esposa: ['', [Validators.required]],
+      // hijos: ['', [Validators.required]],
       category: ['LOCAL', [Validators.required]],
       year: ['', [Validators.required]],
+      dado_en: ['', [Validators.required]],
       area: ['', [Validators.required]],
       membresia: ['', [Validators.required]],
       lugardeministerio: ['', [Validators.required]],
       titulos: [''],
       requisitos: [''],
+      data_family: ['', [Validators.required]],
+      educacion: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
-      option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
+      option_places_serv: ['IGLESIA', [Validators.required]],
 
     })
 
@@ -91,6 +125,75 @@ export class UpdatePastorComponent implements OnInit {
       certificado_membresia: [false],
       otros: [false]
     });
+  }
+
+  get formArr() {
+    return this.familyForm.get("Rows") as FormArray;
+  }
+
+  initRows() {
+    return this.fb.group({
+      name: [""],
+      age: [""],
+      health: true,
+      obs: [""]
+    });
+  }
+
+  initDataRows(obj: any) {
+    this.formArr.removeAt(0);
+    this.formArr.push(
+    this.fb.group({
+      name: [obj.name],
+      age: [obj.age],
+      health: obj.health,
+      obs: [obj.obs]
+    }));
+  }
+
+  addNewRow() {
+    this.formArr.push(this.initRows());
+    console.log(this.familyForm.value);
+
+  }
+
+  deleteRow(index: number) {
+    this.formArr.removeAt(index);
+  }
+
+  ////////////////
+  get formArrE() {
+    return this.estudyForm.get("Rows") as FormArray;
+  }
+
+  initRowsE() {
+    return this.fb.group({
+      nivel: [""],
+      nombreinst: [""],
+      gestiongraduacion: [""],
+      grado: [""]
+    });
+  }
+
+  initDataRowsE(obj: any) {
+    this.formArrE.removeAt(0);
+    this.formArrE.push(
+    this.fb.group({
+      nivel: [obj.nivel],
+      nombreinst: [obj.nombreinst],
+      gestiongraduacion: obj.gestiongraduacion,
+      grado: [obj.grado]
+    }));
+  }
+
+  addNewRowE() {
+    this.formArrE.push(this.initRows());
+    console.log(this.estudyForm.value);
+
+  }
+
+  deleteRowE(index: number) {
+    this.formArrE.removeAt(index);
   }
 
   checkForm(): boolean{
@@ -251,14 +354,29 @@ export class UpdatePastorComponent implements OnInit {
   getPastor() {
     const param = this.route.snapshot.params;
     this.pastor.id = param['id'];
-    console.log(param['id']);
     this._servicePastor.get(this.pastor.id!).subscribe((data: Pastor) => {
       console.log(data);
       this.pastor = data;
 
+
+
+      // data_family: ['', [Validators.required]],
+      // educacion: [''],
+
+
       this.form.controls['name'].setValue(data.name);
+      this.form.controls['direccion'].setValue(data.direccion);
+      this.form.controls['celular'].setValue(data.celular);
+      this.form.controls['correo'].setValue(data.correo);
+      this.form.controls['fecha_nac'].setValue(data.fecha_nac);
+      this.form.controls['lugar_nac'].setValue(data.lugar_nac);
+      this.form.controls['estado_civil'].setValue(data.estado_civil);
+      this.form.controls['nombre_esposa'].setValue(data.nombre_esposa);
+      this.form.controls['fecha_nac_esposa'].setValue(data.fecha_nac_esposa);
+      this.form.controls['lugar_nac_esposa'].setValue(data.lugar_nac_esposa);
       this.form.controls['category'].setValue(data.category);
       this.form.controls['year'].setValue(Number(data.year));
+      this.form.controls['dado_en'].setValue(data.dado_en);
       this.form.controls['area'].setValue(data.area);
       if( this.IGLESIAS.includes(data.membresia) ){
         this.form.controls['membresia'].setValue(data.membresia);
@@ -275,6 +393,8 @@ export class UpdatePastorComponent implements OnInit {
 
       this.createArrayTitles(this.pastor.titulos);
       this.createArrayRequiremend(this.pastor.requisitos);
+      this.createArrayFamily(this.pastor.data_family);
+      this.createArrayStudy(this.pastor.educacion);
     })
 
     this.getImagePastor(this.pastor.id!);
@@ -339,7 +459,41 @@ export class UpdatePastorComponent implements OnInit {
     console.log(this.requisits);
   }
 
+  createArrayFamily(person?: string){
+    if( !person ){
+      console.log('no existe');
+    }else{
+      console.log('existe');
+
+      console.log(person);
+      var listaaux = JSON.parse(person+'');
+      for (let variable in listaaux) {
+        console.log(listaaux[variable]);
+        this.initDataRows(listaaux[variable]);
+      }
+    }
+    console.log(this.titles);
+  }
+
+  createArrayStudy(studing?: string){
+    if( !studing ){
+      console.log('no existe');
+    }else{
+      console.log('existe');
+
+      console.log(studing);
+      var listaaux = JSON.parse(studing+'');
+      for (let variable in listaaux) {
+        console.log(listaaux[variable]);
+        this.initDataRowsE(listaaux[variable]);
+      }
+    }
+    console.log(this.titles);
+  }
+
   generaPDF(){
+    console.log(this.familyForm.value);
+
     var element = document.getElementById('content1');
     var opt = {
       margin:       .5,

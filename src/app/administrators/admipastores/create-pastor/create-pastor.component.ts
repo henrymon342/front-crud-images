@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Global } from '../../../services/global';
@@ -10,6 +10,15 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ChangeService } from '../../../services/change.service';
 
+
+export interface Son {
+  name: string;
+  age: number;
+  // state: number;
+}
+
+const ELEMENT_DATA: Son[] = [];
+
 @Component({
   selector: 'app-create-pastor',
   templateUrl: './create-pastor.component.html',
@@ -18,6 +27,7 @@ import { ChangeService } from '../../../services/change.service';
 export class CreatePastorComponent implements OnInit {
 
   CATEGORIES: string[] = ['LOCAL', 'DISTRITAL', 'PRESBITERO']
+  ESTADO_CIVIL: string[] = ['SOLTERO', 'CASADO', 'VIUDO', 'DIVORCIADO'];
   PLACES_MEMB: string[] = ['IGLESIA', 'OTRO'];
   IGLESIAS: string[] = Global.IGLESIAS;
 
@@ -45,17 +55,84 @@ export class CreatePastorComponent implements OnInit {
   file: File;
 
   public isDisabled: boolean = false;
+
+  nuevo_hijo: string;
+  hijos: string[] = [];
+
+//////////////////////////
+
+  public formHijos: FormGroup;
+
+  public formEducacion: FormGroup;
+
   constructor( private fb: FormBuilder,
                private toastr: ToastrService,
                private _servicePastor: PastorService,
                private _serviceImage: ImageService,
                private router:Router,
                public _location: Location,
-               private _changeService: ChangeService) { }
+               private _changeService: ChangeService) {
+              }
 
   ngOnInit(): void {
     console.log(this.IGLESIAS);
     this.createForm();
+
+    this.formHijos = this.fb.group({
+      Rows: this.fb.array([this.initRows()])
+    });
+
+    this.formEducacion = this.fb.group({
+      Rows: this.fb.array([this.initRowsE()])
+    });
+  }
+
+  ////////////////
+  get formArr() {
+    return this.formHijos.get("Rows") as FormArray;
+  }
+
+  initRows() {
+    return this.fb.group({
+      name: [""],
+      age: [""],
+      health: true,
+      obs: [""]
+    });
+  }
+
+  addNewRow() {
+    this.formArr.push(this.initRows());
+    console.log(this.formHijos.value);
+
+  }
+
+  deleteRow(index: number) {
+    this.formArr.removeAt(index);
+  }
+
+  /////////////////////
+  get formArrE() {
+    return this.formEducacion.get("Rows") as FormArray;
+  }
+
+  initRowsE() {
+    return this.fb.group({
+      nivel: [""],
+      nombreinst: [""],
+      gestiongraduacion: [""],
+      grado: [""]
+    });
+  }
+
+  addNewRowE() {
+    this.formArrE.push(this.initRowsE());
+    console.log(this.formEducacion.value);
+
+  }
+
+  deleteRowE(index: number) {
+    this.formArrE.removeAt(index);
   }
 
   changeState(){
@@ -65,13 +142,26 @@ export class CreatePastorComponent implements OnInit {
   createForm(): void{
     this.form = this.fb.group({
       name: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      celular: ['', [Validators.required]],
+      correo: ['', [Validators.required]],
+      fecha_nac: ['', [Validators.required]],
+      lugar_nac: ['', [Validators.required]],
+      estado_civil: ['', [Validators.required]],
+      nombre_esposa: ['', [Validators.required]],
+      fecha_nac_esposa: ['', [Validators.required]],
+      lugar_nac_esposa: ['', [Validators.required]],
+      // hijos: ['', [Validators.required]],
       category: ['LOCAL', [Validators.required]],
       year: ['', [Validators.required]],
+      dado_en: ['', [Validators.required]],
       area: ['', [Validators.required]],
       membresia: ['', [Validators.required]],
       lugardeministerio: ['', [Validators.required]],
       titulos: [''],
       requisitos: [''],
+      data_family: ['', [Validators.required]],
+      educacion: [''],
       option_places_memb: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
       option_places_serv: ['IGLESIA', [Validators.required]], // esta variable es auxiliar
     })
@@ -115,6 +205,10 @@ export class CreatePastorComponent implements OnInit {
     }else{
       this.form.controls['titulos'].setValue('');
     }
+
+    this.form.controls['data_family'].setValue(JSON.stringify(this.formHijos.value.Rows));
+    this.form.controls['educacion'].setValue(JSON.stringify(this.formEducacion.value.Rows));
+
     console.log(this.form.value);
     console.log(this.file);
 
@@ -259,6 +353,7 @@ export class CreatePastorComponent implements OnInit {
 		this.router.navigateByUrl("/auth/admipastores/main-lists", { skipLocationChange: true }).then(() => {
 		this.router.navigate([decodeURI(this._location.path())]);
 		});
+    window.location.reload();
 	}
 
   async getImage(id:number){
@@ -299,6 +394,25 @@ export class CreatePastorComponent implements OnInit {
     this.files.pop();
   }
 
+  addHijo(){
+    if( this.nuevo_hijo == '' ){
+      return;
+    }
+    this.hijos.push(this.nuevo_hijo);
+    this.nuevo_hijo = '';
+    this.form.value.encargado = this.hijos;
+  }
+
+  borrarItemHijo( index: number){
+    var arr_nuevo:any = [];
+    for (let i = 0; i < this.hijos.length; i++) {
+      if( i != index ){
+        arr_nuevo.push(this.hijos[i])
+      }
+    }
+    this.hijos = arr_nuevo;
+    this.form.value.encargado = this.hijos;
+  }
 }
 
 

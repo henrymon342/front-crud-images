@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,13 @@ import { MaterialModule } from '../Material/material.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from "@angular/common";
+registerLocaleData(localeEs, 'es');
+
+import { CookieService } from "ngx-cookie-service";
+
 
 @NgModule({
   declarations: [
@@ -31,7 +38,10 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AppRoutingModule,
     SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

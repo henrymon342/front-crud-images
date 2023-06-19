@@ -204,7 +204,7 @@ export class UpdateIglesiaComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Satisfactoriamente!', 'Iglesia creada');
+    this.toastr.success('Satisfactoriamente!', 'Iglesia modificada');
     this.router.navigate(['auth/administrador/admi-iglesias/main-list']);
   }
 

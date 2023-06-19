@@ -17,6 +17,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { RecordPastorComponent } from './record/record-pastor/record-pastor.component';
 import { UpdateRecordPastorComponent } from './record/update-record-pastor/update-record-pastor.component';
 import { CreateRecordPastorComponent } from './record/create-record-pastor/create-record-pastor.component';
+import { MatTimepickerModule } from 'mat-timepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,11 @@ import { CreateRecordPastorComponent } from './record/create-record-pastor/creat
     SharedModule,
     ReactiveFormsModule,
     NgxDropzoneModule,
+    MatNativeDateModule,
+    MatTimepickerModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule
   ],
 })
 export class AdmipastoresModule { }

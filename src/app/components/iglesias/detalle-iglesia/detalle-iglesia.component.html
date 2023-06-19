@@ -14,24 +14,48 @@
         {{ iglesia.zona }}
       </h5>
 
-      <div class="actions">
+      <!-- <div class="actions">
         <div class="ubication">
-          <!-- <div class="title"> UBICACIÓN </div> -->
           <a href={{iglesia.ubicacion}}><mat-icon> location_on</mat-icon></a>
           <div class="text">
             UBICACIÓN
           </div>
         </div>
         <div class="fundation">
-          <!-- <div class="title"> FUNDACIÓN </div> -->
           <mat-icon>today</mat-icon>
           <div class="text">
             {{ iglesia.fundacion }}
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <img class="img-church" [src]="imagePath">
+  </section>
+
+  <section class="actions">
+    <div class="ubication">
+      <!-- <div class="title"> UBICACIÓN </div> -->
+      <a href={{iglesia.ubicacion}}><mat-icon> location_on</mat-icon></a>
+      <div class="text">
+        UBICACIÓN
+      </div>
+    </div>
+    <div class="fundation">
+      <div class="funda">
+        <mat-icon>today</mat-icon>
+        <div class="text">
+          {{ iglesia.fundacion }}
+        </div>
+      </div>
+      <div class="anios">
+        <div class="text-anio">
+          {{calcAnios(iglesia.fundacion)}}
+        </div>
+        <div class="">
+          AÑOS
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="church-people">

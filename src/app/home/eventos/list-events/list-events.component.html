@@ -74,6 +74,16 @@
 
   <div class="cont_events">
     <app-event [evento]="item" *ngFor="let item of monthEvents"></app-event>
+    <ng-container *ngIf="monthEvents.length === 0">
+      <div class="cont">
+        <div class="caja">
+          <span class="material-symbols-outlined calendario">
+            calendar_month
+          </span>
+          <p class="texto">no existen eventos este mes!</p>
+        </div>
+      </div>
+    </ng-container>
   </div>
 
 <div class="bg_calendar">

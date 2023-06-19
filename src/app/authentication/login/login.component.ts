@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../../services/login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor( private fb: FormBuilder,
               private _login_service: LoginService,
               private toastr: ToastrService,
-              private router: Router ) {
+              private router: Router,
+              private _cookieService: CookieService ) {
     this.createForm();
   }
 
@@ -36,14 +38,21 @@ export class LoginComponent implements OnInit {
 
       if( res.token ){
         console.log('res', res);
-
+        this._cookieService.set('token', res.token);
+        this._cookieService.set('user', res.username);
         if( res.type == 'ACTIVIDADES' ){
           this.toastr.success('', 'Bienvenido a la Iglesia del Nazareno');
           this.router.navigate(['auth/admieventos']);
         }
         if( res.type == 'PASTORES' ){
           this.toastr.success('', 'Bienvenido a la Iglesia del Nazareno');
-          this.router.navigate(['auth/admipastores']);
+          const username = this._cookieService.get('user')
+          console.log(username);
+          if( username === 'henrymc' ){
+            this.router.navigate(['/auth/administrador']);
+          }else{
+            this.router.navigate(['auth/admipastores']);
+          }
         }
       }else{
         this.toastr.warning( '', res.message, {

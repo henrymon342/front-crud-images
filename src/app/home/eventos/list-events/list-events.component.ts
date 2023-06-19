@@ -36,10 +36,11 @@ export class ListEventsComponent implements OnInit {
     var modelEvent:any[] = [];
 
     const nromes = this.viewDate.getMonth();
+    const gestion = this.viewDate.getFullYear();
     console.log('FECHA_ACTUAL', this.viewDate);
     console.log('NUMERO DE MES', nromes);
 
-    this._eventService.findByMonth({nromes}).subscribe( async (res: EventModel[]) =>{
+    this._eventService.findByMonth({nromes, gestion}).subscribe( async (res: EventModel[]) =>{
       console.log(res);
       this.allEvents = res;
       this.allEvents.forEach((element: EventModel) => {
@@ -205,7 +206,10 @@ export class ListEventsComponent implements OnInit {
 
   mesInteractivo(viewDate: Date){
     let nromes = viewDate.getMonth();
-    this._eventService.findByMonth({nromes}).subscribe( async res =>{
+    let gestion = viewDate.getFullYear();
+    console.log('fecha --> ', viewDate);
+
+    this._eventService.findByMonth({nromes, gestion}).subscribe( async res =>{
       this.monthEvents = await res;
       console.log(res);
     });

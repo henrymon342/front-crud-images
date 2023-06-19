@@ -1,8 +1,41 @@
 
-<div class="container">
+<!-- <div class="">
+  {{ idchurch }}
+  <br>
+  {{ church }}
+  <br>
+  {{ zona }}
+  <br>
+  {{ idPastor }}
+  <br>
+  {{ diacentral }}
+  <br>
+  {{ horacentralini }}
+  <br>
+  {{ horacentralfin }}
+  <br>
+  {{ diajni }}
+  <br>
+  {{ horajniini }}
+  <br>
+  {{ horajnifin }}
+  <br>
+  {{ nombrepastor }}
+</div> -->
+
+<div class="container" >
   <div class="img">
-    <img [src]="imgChurch.imagePath" alt="">
-    <!-- <img alt=""> -->
+    <ng-container  class="" *ngIf="imgpathpas">
+      <img [src]="imgpathchurch" alt="imagen de iglesia">
+    </ng-container>
+    <ng-container  class="" *ngIf="!imgpathpas">
+      <!-- <mat-spinner></mat-spinner> -->
+      <article class="caja">
+        <div class="card">
+
+        </div>
+      </article>
+    </ng-container>
   </div>
   <div class="data-church">
     <div class="data">
@@ -11,9 +44,7 @@
           PASTOR
         </div>
         <div class="text">
-          {{ pastor.name | uppercase }}
-          <!-- {{ church }} -->
-          <!-- Isai Murga Cornejo -->
+          {{ nombrepastor | uppercase }}
         </div>
       </div>
      <hr>
@@ -24,7 +55,6 @@
           CULTO GENERAL
         </div>
         <div class="text">
-          <!--  | {{ church.horacentralini }} - {{ church.horacentralfin }} -->
           {{ diacentral }} | {{ horacentralini | date: 'h:mm a' }} - {{ horacentralfin | date: 'h:mm a' }}
         </div>
       </div>
@@ -33,7 +63,6 @@
           REUNION DE JÓVENES
         </div>
         <div class="text">
-          <!-- {{ church. }} | {{ church.horajniini }} - {{ church.horajnifin }} -->
           {{ diajni }} | {{ horajniini | date: 'h:mm a' }} - {{ horajnifin | date: 'h:mm a' }}
         </div>
       </div>
@@ -41,8 +70,13 @@
   </div>
     <div class="more">
       <div class="img-pastor">
-        <img id="img-pas" [src]="imgPastor.imagePath" alt="">
-        <!-- <img id="img-pas" alt=""> -->
+        <ng-container  class="" *ngIf="imgpathpas">
+          <img id="imgpas" [src]="imgpathpas" alt="imagen de pastor">
+        </ng-container>
+        <ng-container  class="" *ngIf="!imgpathpas">
+          <div class="charging-round"></div>
+          <!-- <mat-spinner></mat-spinner> -->
+        </ng-container>
       </div>
       <button mat-raised-button
             color="primary"

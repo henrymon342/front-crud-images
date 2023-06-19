@@ -35,16 +35,15 @@ export class DetailEventComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.evento = data;
-    console.log(data);
-    const timeBegin = data.tipofecha == 'VARIOS DÍAS'?data.horaini:data.fechasingle;
+    const timeBegin = data.horaini;
     let res = new Date(timeBegin);
+
     res.setDate(res.getDate() + 1);
-    if( res.getDate() < new Date().getDate() ) {
-      console.log('ES MENOR');
+    var fechaEvento = new Date(res.getFullYear(), res.getMonth(), res.getDate(), res.getHours(), res.getMinutes());
+    if( fechaEvento > new Date() ) {
       this.timerStarting(res);
       this.hasFinished = false;
     }else{
-      console.log('ES mayor');
       this.hasFinished = true;
     }
 

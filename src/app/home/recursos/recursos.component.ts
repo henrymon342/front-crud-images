@@ -82,20 +82,20 @@ export class RecursosComponent implements OnInit {
 
     try
     {
-       if( this.file != null ){
-        await firstValueFrom(this._servicePastor.createPastor( pas ))
-        .then((value) => {
-          console.log(value);
-          this.asociarImagen(value.id);
-          }).catch((err)=>{
-            console.log('ERROR AL CREAR PASTOR');
-            console.log(err);
-          });
-       }
-       else{
-        console.log('ES NECESARIO LA IMAGEN');
+      //  if( this.file != null ){
+      //   await firstValueFrom(this._servicePastor.createPastor( pas ))
+      //   .then((value) => {
+      //     console.log(value);
+      //     this.asociarImagen(value.id);
+      //     }).catch((err)=>{
+      //       console.log('ERROR AL CREAR PASTOR');
+      //       console.log(err);
+      //     });
+      //  }
+      //  else{
+      //   console.log('ES NECESARIO LA IMAGEN');
 
-       }
+      //  }
     }
     catch(Error)
     {

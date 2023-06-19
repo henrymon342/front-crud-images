@@ -8,64 +8,192 @@
       </button>
     </div>
 
+    <div class="title-form">
+      <h3>
+        Editar Pastor
+      </h3>
+      <!-- <hr> -->
+    </div>
+
     <form class="form" [formGroup]="form" (change)="checkForm()" enctype="multipart/form-data">
-      <div class="title-form">
-        <small>
-          Editar Pastor
-        </small>
-        <hr>
-      </div>
 
       <div class="subtitle">
         <span class="text"> CATEGORIA </span>
       </div>
 
-     <div class="field">
-      <mat-radio-group
-        class="radio-group"
-        formControlName="category"
-        (change)="changeValueCategory()"
-        >
-        <mat-radio-button class="radio-button" *ngFor="let cate of CATEGORIES" [value]=cate>
-          {{ cate }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
+      <div class="field">
+        <mat-radio-group
+          class="radio-group"
+          formControlName="category"
+          (change)="changeValueCategory()"
+          >
+          <mat-radio-button class="radio-button" *ngFor="let cate of CATEGORIES" [value]=cate>
+            {{ cate }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
 
     <div class="subtitle">
       <span class="text">DATOS PERSONALES </span>
     </div>
 
     <div class="field">
-      <label class="label">Nombre de pastor</label>
-      <mat-form-field class="box-input" appearance="outline">
-        <input formControlName="name"
-              type="text"
-              matInput
-              placeholder="nombre"
-              class="input-text"
-              >
+      <div class="item">
+        <label class="label">Nombre de pastor</label>
+        <mat-form-field class="box-input" appearance="outline">
+          <input formControlName="name"
+          type="text"
+          matInput
+          placeholder="nombre"
+          class="input-text"
+          >
           <mat-error>
             El <strong>nombre</strong> es requerido
           </mat-error>
-      </mat-form-field>
+        </mat-form-field>
+      </div>
 
-      <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia local </label>
-      <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación </label>
-      <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida </label>
-      <mat-form-field appearance="outline" class="box-select">
-        <mat-select  class="input-select" placeholder="año" formControlName="year" (selectionChange)='checkForm()'>
-          <mat-option *ngFor="let gest of YEARS" [value]=gest.anio>
-            {{ gest.anio }}
-          </mat-option>
-        </mat-select>
-        <mat-error>
-          El <strong>este campo</strong> es requerido
-        </mat-error>
-      </mat-form-field>
+      <div class="item">
+        <label class="label"> Dirección de vivienda </label>
+        <mat-form-field class="box-input" appearance="outline">
+          <input formControlName="direccion"
+          type="text"
+          matInput
+          placeholder="dirección"
+          class="input-text"
+          >
+          <mat-error>
+            El <strong>dirección</strong> es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
 
+      <div class="item-col">
+        <div class="item">
+          <label class="label"> Teléfono o celular </label>
+          <mat-form-field class="box-input2" appearance="outline">
+          <input formControlName="celular"
+          type="text"
+          matInput
+          placeholder="celular"
+          class="input-text"
+          >
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-error>
+            El <strong>celular</strong> es requerido
+          </mat-error>
+          </mat-form-field>
+        </div>
 
-      <label class="label"> Lugar de Membresía </label>
+        <div class="item">
+          <label class="label"> Correo electrónico </label>
+          <mat-form-field class="box-input2" appearance="outline">
+          <input formControlName="correo"
+          type="text"
+          matInput
+          placeholder="correo"
+          class="input-text"
+          >
+          <mat-icon matSuffix>alternate_email</mat-icon>
+          <mat-error>
+            El <strong>correo</strong> es requerido
+          </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="item-col">
+        <div class="item">
+          <label class="label"> Fecha de nacimiento </label>
+          <mat-form-field class="box-input2" appearance="outline" >
+            <mat-label>Seleccionar fecha</mat-label>
+            <input matInput [matDatepicker]="picker"
+                            formControlName="fecha_nac"
+                            (dateChange)="checkForm()"
+                            >
+            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle >
+            <mat-datepicker #picker
+                            ></mat-datepicker>
+            <mat-error>
+              Este <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="item">
+          <label class="label"> Lugar de nacimiento </label>
+          <mat-form-field class="box-input2" appearance="outline">
+            <input formControlName="lugar_nac"
+            type="text"
+            matInput
+            placeholder="lugar de nacimiento"
+            class="input-text"
+            >
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="item">
+        <label class="label"> Estado civil </label>
+        <mat-form-field appearance="outline" class="box-select">
+          <mat-select  class="input-select" placeholder="estado civil" formControlName="estado_civil" (selectionChange)='checkForm()'>
+            <mat-option *ngFor="let estado of ESTADO_CIVIL" value="{{ estado }}">
+              {{ estado }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            El <strong>campo</strong> es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="subtitle">
+      <span class="text"> DATOS MINISTERIALES </span>
+    </div>
+
+    <div class="field">
+      <div class="item-col">
+        <div class="item">
+          <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia local </label>
+          <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación </label>
+          <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida </label>
+          <mat-form-field appearance="outline" class="box-select">
+            <mat-select  class="input-select" placeholder="año" formControlName="year" (selectionChange)='checkForm()'>
+              <mat-option *ngFor="let gest of YEARS" [value]=gest.anio>
+                {{ gest.anio }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              El <strong>este campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="item">
+          <label class="label"> Otorgado en:</label>
+          <mat-form-field appearance="outline" class="box-input2">
+            <mat-label>iglesia</mat-label>
+            <mat-select
+                        class="input-select"
+                        formControlName="dado_en"
+                        (selectionChange)='checkForm()'
+                        >
+              <mat-option *ngFor="let iglesia of IGLESIAS" [value]=iglesia >
+                {{ iglesia }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              El <strong>campo</strong> es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <label class="label"> Lugar de membresía</label>
       <mat-radio-group class="radio-group" formControlName="option_places_memb" (change)="clearOtherInputMem()">
         <mat-radio-button class="radio-button" *ngFor="let place of PLACES_MEMB" [value]="place">
           {{place}}
@@ -104,7 +232,6 @@
           </mat-error>
         </mat-form-field>
       </ng-container>
-
 
       <label class="label">Lugar de servicio ministerial</label>
       <mat-radio-group class="radio-group" formControlName="option_places_serv" (change)="clearOtherInputServ()">
@@ -147,6 +274,7 @@
       </ng-container>
 
 
+
       <label class="label"> Área </label>
       <mat-form-field appearance="outline" class="box-select">
         <mat-select  class="input-select" placeholder="area" formControlName="area" (selectionChange)='checkForm()'>
@@ -158,8 +286,190 @@
           El <strong>este campo</strong> es requerido
         </mat-error>
       </mat-form-field>
-
     </div>
+
+    <div class="subtitle">
+      <span class="text">DATOS DE CONYUGUE </span>
+    </div>
+
+    <div class="field">
+      <div class="item-col">
+        <div class="item">
+      <label class="label">Nombre  y apellido de esposa/o</label>
+          <mat-form-field class="box-input" appearance="outline">
+            <input formControlName="nombre_esposa"
+                  type="text"
+                  matInput
+                  placeholder="nombre de esposa/o"
+                  class="input-text"
+                  >
+              <mat-error>
+                El <strong>campo</strong> es requerido
+              </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="item-col">
+        <div class="item">
+
+          <label class="label"> Fecha de nacimiento de esposa/o </label>
+          <mat-form-field class="box-input2" appearance="outline" >
+            <mat-label>Seleccionar fecha</mat-label>
+            <input matInput [matDatepicker]="picker1"
+            formControlName="fecha_nac_esposa"
+            (dateChange)="checkForm()"
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle >
+              <mat-datepicker #picker1
+              ></mat-datepicker>
+              <mat-error>
+                Este <strong>campo</strong> es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+      <div class="item">
+
+        <label class="label"> Lugar de nacimiento de esposa/o</label>
+        <mat-form-field class="box-input2" appearance="outline">
+        <input formControlName="lugar_nac_esposa"
+        type="text"
+        matInput
+        placeholder="lugar de nacimiento"
+        class="input-text"
+        >
+        <mat-error>
+          El <strong>campo</strong> es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    </div>
+    </div>
+
+    <div class="subtitle">
+      <span class="text">DATOS DE FAMILIA </span>
+    </div>
+
+    <div class="field">
+      <form class="form-son" [formGroup]="familyForm" >
+        <table border=0>
+          <thead>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Salud</th>
+            <th>Observación</th>
+            <th>Acción</th>
+          </thead>
+          <tbody formArrayName="Rows">
+            <tr *ngFor="let itemrow of familyForm.controls['Rows']['controls']; let i=index;let l=last"
+              [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td>
+                  <input formControlName="name"
+                  type="text"
+                  matInput
+                  placeholder="nombre">
+              </td>
+              <td>
+                  <input formControlName="age"
+                  type="text"
+                  matInput
+                  placeholder="edad">
+              </td>
+              <td style="display: grid;">
+                <!-- {{this.formHijos.value.Rows[i]['health']|json}} -->
+                <mat-slide-toggle formControlName="health" color="primary">
+                </mat-slide-toggle>
+                <span style="color: green" *ngIf="this.familyForm.value.Rows[i]['health']">
+                  <!-- heart_plus -->
+                  buena
+                </span>
+                <span style="color: red" *ngIf="!this.familyForm.value.Rows[i]['health']">
+                  <!-- heart_minus -->
+                  mala
+                </span>
+              </td>
+              <td>
+                <input formControlName="obs"
+                type="text"
+                matInput
+                placeholder="observación">
+              </td>
+              <td>
+                <button mat-icon-button color="accent" *ngIf="familyForm.controls['Rows']['controls'].length > 0" (click)="deleteRow(i)">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+                <!-- <button *ngIf="formHijos.controls['Rows']['controls'].length > 1" (click)="deleteRow(i)" class="btn btn-danger">Delete</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <button mat-stroked-button color="primary" (click)="addNewRow()">Añadir nueva fila</button>
+      <!-- <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button> -->
+      <!-- <pre>{{familyForm.value | json}}</pre> -->
+    </div>
+
+    <div class="subtitle">
+      <span class="text"> EDUCACIÓN SECULAR Y TEOLÓGICA </span>
+    </div>
+
+    <div class="field">
+      <form class="form-son" [formGroup]="estudyForm" >
+        <table border=0>
+          <thead>
+            <th>Id</th>
+            <th>Nivel</th>
+            <th>Nombre de la institución</th>
+            <th>Año de graduación</th>
+            <th>grado</th>
+            <th>Acción</th>
+          </thead>
+          <tbody formArrayName="Rows">
+            <tr *ngFor="let itemrow of estudyForm.controls['Rows']['controls']; let i=index;let l=last"
+              [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td>
+                  <input formControlName="nivel"
+                  type="text"
+                  matInput
+                  placeholder="nivel">
+              </td>
+              <td>
+                  <input formControlName="nombreinst"
+                  type="text"
+                  matInput
+                  placeholder="institución">
+              </td>
+              <td>
+                <input formControlName="gestiongraduacion"
+                type="text"
+                matInput
+                placeholder="gestión">
+              </td>
+              <td>
+                <input formControlName="grado"
+                type="text"
+                matInput
+                placeholder="grado">
+              </td>
+              <td>
+                <button mat-icon-button color="accent" *ngIf="estudyForm.controls['Rows']['controls'].length > 0" (click)="deleteRowE(i)">
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <button mat-stroked-button color="primary" (click)="addNewRowE()">Añadir nueva fila</button>
+      <!-- <pre>{{estudyForm.value | json}}</pre> -->
+    </div>
+
 
       <ng-container *ngIf="form.value.category == 'PRESBITERO'">
         <div class="subtitle">
@@ -246,66 +556,296 @@
 
 
     <div id="content1" #content1 >
-      <div class="title">
-        <span>IGLESIA del NAZARENO</span>
-        <img class="title-img">
-        <span>DISTRITO LA PAZ</span>
-      </div>
-      <div class="title-record">
-        <span>
-          BOLETA DE PASTOR
-        </span>
+      <div class="header">
+        <div class="title-text">
+          REPORTE
+          DE
+          PASTOR
+        </div>
+
+
+
+        <div class="title-logo">
+          <div class="img">
+            <img class="title-img" src="https://res.cloudinary.com/duu9333ux/image/upload/v1680726674/nazarene-logo.png">
+          </div>
+          <div class="text">
+            <div>IGLESIA del NAZARENO</div>
+            <div>DISTRITO LA PAZ</div>
+          </div>
+        </div>
       </div>
 
       <div class="date">
         <span class="text"> Fecha de emisión: {{ dateReport | date: 'M/d/yy, h:mm a' }} </span>
       </div>
-
       <hr>
 
-      <div class="subtitle">
-        <span class="text">DATOS PERSONALES </span>
+      <div class="block-one">
+        <div class="data">
+            <div class="subtitle">
+              DATOS PERSONALES
+            </div>
+            <div class="campo">
+              <div class="col">
+
+                <div class="label">
+                  Nombre
+                </div>
+                <div class="data-label">
+                  {{ pastor.name | uppercase }}
+                </div>
+              </div>
+              <div class="col-1">
+                <div class="img-record">
+                  <img [src]="image.imagePath" alt="">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="request">
+          <div class="label">
+            SOLICITUD
+          </div>
+          <div class="data-label">
+            <div class="text">
+              {{ pastor.category | uppercase }}
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="content-record">
 
-        <div class="detail-record">
-          <div class="fila">
-            <label>Nombre:</label>
-            <span>{{ pastor.name | uppercase }} </span>
+      <div class="block-two">
+        <div class="data-person">
+          <div class="item">
+            <div class="label">
+              Dirección
+            </div>
+            <div class="data">
+              {{ pastor.direccion }}
+            </div>
           </div>
-
-          <div class="fila">
-            <label>Categoria:</label>
-            <span>{{ pastor.category | uppercase }}</span>
+          <div class="item">
+            <div class="label">
+              Celular:
+            </div>
+            <div class="data">
+              {{ pastor.celular }}
+            </div>
           </div>
-
-          <div class="fila">
-            <label>Area:</label>
-            <span>{{ pastor.area | uppercase }}</span>
+          <div class="item">
+            <div class="label">
+              Correo:
+            </div>
+            <div class="data">
+              {{ pastor.correo }}
+            </div>
           </div>
-
-          <div class="fila">
-            <label class="label" *ngIf="form.value.category == 'LOCAL'"> Año de 1ra Licencia Local: </label>
-            <label class="label" *ngIf="form.value.category == 'PRESBITERO'"> Año de ordenación: </label>
-            <label class="label" *ngIf="form.value.category == 'DISTRITAL'"> Año de 1ra Licencia recibida: </label>
-            <span>{{ pastor.year | uppercase  }}</span>
-          </div>
-
-          <div class="fila">
-            <label class="label"> Lugar de membresía: </label>
-            <span>{{ pastor.membresia | uppercase  }}</span>
-          </div>
-
-          <div class="fila">
-            <label class="label"> Lugar de servicio ministerial: </label>
-            <span>{{ pastor.lugardeministerio | uppercase  }}</span>
+          <div class="item">
+            <div class="label">
+              Estado civil:
+            </div>
+            <div class="data">
+              {{ pastor.estado_civil }}
+            </div>
           </div>
         </div>
 
-        <div class="img-record">
-          <img [src]="image.imagePath" alt="">
+        <div class="data-nac">
+          <div class="item">
+            <div class="label">
+              {{ pastor.fecha_nac | date: 'EEEE, MMMM d, y' }}
+            </div>
+            <div class="data">
+              Fecha de Nacimiento
+            </div>
+          </div>
+          <div class="item">
+            <div class="label">
+              {{ pastor.lugar_nac }}
+            </div>
+            <div class="data">
+              Lugar de Nacimiento
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="block-three">
+        <div class="data-min">
+          <div class="subtitle">
+            DATOS MINISTERIALES
+          </div>
+
+          <div class="data-area">
+            <div class="label">
+              Área
+            </div>
+            <div class="data-label">
+              <div class="text">
+                {{ pastor.area | uppercase }}
+              </div>
+            </div>
+          </div>
+
+          <div class="data-person">
+            <div class="item">
+              <div class="label">
+                Año de 1ra licencia local:
+              </div>
+              <div class="data">
+                {{ pastor.year }}
+              </div>
+            </div>
+            <div class="item">
+              <div class="label">
+                Otorgado en la Iglesia del Nazareno:
+              </div>
+              <div class="data">
+                {{ pastor.dado_en }}
+              </div>
+            </div>
+            <div class="item-2">
+              <div class="data">
+                {{ pastor.membresia }}
+              </div>
+              <div class="label">
+                Membresia
+              </div>
+            </div>
+            <div class="item-2">
+              <div class="data">
+                {{ pastor.lugardeministerio }}
+              </div>
+              <div class="label">
+                Lugar de ministerio
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="data-conyu">
+          <div class="subtitle">
+            DATOS DE CONYUGUE
+          </div>
+
+          <div class="data-person">
+            <div class="item">
+              <div class="label">
+                Nombre:
+              </div>
+              <div class="data">
+                {{ pastor.nombre_esposa }}
+              </div>
+            </div>
+            <div class="item-2">
+              <div class="data">
+                {{ pastor.fecha_nac_esposa | date: 'EEEE, MMMM d, y' }}
+              </div>
+              <div class="label">
+                Fecha de Nacimiento
+              </div>
+            </div>
+            <div class="item-2">
+              <div class="data">
+                {{ pastor.lugar_nac_esposa }}
+              </div>
+              <div class="label">
+                Lugar de Nacimiento
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-four">
+        <div class="subtitle">
+          DATOS DE FAMILIA
+        </div>
+
+        <mat-table [dataSource]="this.familyForm.value.Rows" class="mat-elevation-z8 table-family">
+          <ng-container matColumnDef="nro">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element; let i = index"> {{ i+1 }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="age">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="health">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Salud </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.health}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="obs">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Observación </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.obs}} </mat-cell>
+          </ng-container>
+          <mat-header-row primary *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+      </div>
+
+      <div class="block-four">
+        <div class="subtitle">
+          EDUCACIÓN SECULAR Y TEOLÓGICA
+        </div>
+        <mat-table [dataSource]="this.estudyForm.value.Rows" class="mat-elevation-z8 table-family">
+          <ng-container matColumnDef="nro">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element; let i = index"> {{ i+1 }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="nivel">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Nivel </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.nivel}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreinst">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Institución </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.nombreinst}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="gestiongraduacion">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Año de graduación </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.gestiongraduacion}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="grado">
+            <mat-header-cell mat-header-cell *matHeaderCellDef> Grado </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element"> {{element.grado}} </mat-cell>
+          </ng-container>
+          <mat-header-row primary *matHeaderRowDef="displayedColumns2"></mat-header-row>
+          <mat-row matRipple *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+
+        </mat-table>
+      </div>
+
+      <div class="block-five">
+          <div class="subtitle">
+            <span class="text"> REQUISITOS PARA JUNTA DE CREDENCIALES </span>
+          </div>
+
+          <div class="container-checks">
+            <section class="group_checks" [formGroup]="requisitosForm">
+              <mat-checkbox formControlName="docs_personales"><span>DOCUMENTOS PERSONALES</span></mat-checkbox>
+              <mat-checkbox formControlName="carta_recomendacion"><span>CARTA DE RECOMENDACIÓN</span></mat-checkbox>
+              <mat-checkbox formControlName="certificado_membresia"><span>CERTIFICADO MEMBRESIA</span></mat-checkbox>
+              <mat-checkbox formControlName="otros"><span>OTROS</span></mat-checkbox>
+            </section>
+          </div>
+      </div>
+
+      <!-- <div class="content-record">
 
         <ng-container *ngIf="pastor.category == 'PRESBITERO'">
           <div class="subtitle">
@@ -337,9 +877,9 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="hasMaterias">
-        <app-record-pastor [idPas]="pastor.id"></app-record-pastor>
-        </ng-container>
 
-      </div>
+      </div> -->
+      <ng-container *ngIf="hasMaterias">
+      <app-record-pastor [idPas]="pastor.id"></app-record-pastor>
+      </ng-container>
     </div>

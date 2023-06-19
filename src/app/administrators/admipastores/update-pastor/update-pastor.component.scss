@@ -1,107 +1,124 @@
 
 
-
-
-  .container{
-
-    .container-btn{
-      position: relative;
-      .btn-float{
-        position: fixed;
-        top: 10em;
-        left: 1em;
-      }
+.container{
+  background-color: #f5f5f5;
+  .container-btn{
+    position: relative;
+    .btn-float{
+      position: fixed;
+      top: 10em;
+      left: 1em;
     }
+  }
 
-    .title-form{
-      padding: 1em 0 0 0;
-      color: #3f51b5;
-      small{
-        font-family: "Secular One", sans-serif;
-        font-weight: 600;
-        font-size: 2em;
-        justify-self: flex-start;
-      }
+  .title-form{
+    padding: 1em 0 0 0;
+    color: #3f51b5;
+    display: flex;
+    justify-content: center;
+    h3{
+      margin: 0;
+      font-family: "Secular One", sans-serif;
+      font-weight: 600;
+      font-size: 2em;
     }
-    padding: 0;
-    form{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background-color: #f5f5f5;
+    hr{
+      width: 100%;
+    }
+  }
 
-      .field{
-        background-color: #fff;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        // font-weight: 600;
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .field{
+      border: 2px solid #3f51b5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: grid;
+      width: 70%;
+      padding: 1em 2em;
+      border-radius: 10px;
+      background-color: #fff;
+
+      .item{
         display: grid;
-        width: 70%;
-        padding: 1em 2em;
-        border-radius: 10px;
-        .label{
-          // padding-bottom: 1em;
-        }
-
-        .box-select{
-          width: 50%;
-          justify-self: center;
-            .input-select{
-            }
-        }
-
-        .box-input{
-          width: 60%;
-          justify-self: center;
-
-        }
-
-        .radio-group{
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          padding: 1em;
-          .radio-button{
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            // font-weight: 600;
-
-          }
-        }
-
-        img{
-          width: 128px;
-          justify-self: center;
+        button{
+          width: auto;
         }
       }
 
-      .boton{
-        width: auto;
+      .item-col{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .field-item{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .box-select{
+        width: 50%;
+        padding-left: 1em;
+      }
+
+      .box-input{
+        padding-left: 1em;
+        width: 60%;
+      }
+
+      .box-input2{
+        padding-left: 1em;
+        width: 80%;
+      }
+
+      .radio-group{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1em;
+        .radio-button{
+          font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+      }
+
+      img{
+        width: 128px;
         justify-self: center;
-        margin: .5em;
-      }
-
-      .btns{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .subtitle{
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 500;
-        // font-size: 1.1em;
-        display: grid;
-        width: 70%;
-        padding: 1em 0em;
       }
     }
+
+    .boton{
+      width: auto;
+      justify-self: center;
+      margin: .5em;
+    }
+
+    .btns{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .subtitle{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      // font-size: 1.1em;
+      display: grid;
+      width: 70%;
+      padding: 1em 0em;
+    }
   }
+}
 
 
 
-  .group_checks{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+.group_checks{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 
 
@@ -109,92 +126,320 @@
 
 #content1{
 
-  .title{
-    text-align: center;
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    .title-text{
+      font-family: 'Days One', sans-serif;
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+  .title-logo{
     display: flex;
     justify-content: flex-end;
-    text-align: center;
-    align-items: flex-end;
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 12px;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
     font-weight: 400;
-    padding: 1em;
-    .title-img{
-      margin: 0em .3em;
-      width: 40px;
-      content: url("https://res.cloudinary.com/duu9333ux/image/upload/v1680726674/nazarene-logo.png");
-    }
-  }
+    .img{
+      width: 80px;
 
-  .title-record{
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    justify-self: center;
-    padding: 1em;
-    text-align: center;
-  }
-
-  .subtitle{
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    padding: 1em 0em;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-  }
-
-  .date{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 2em;
-  }
-
-  .content-record{
-
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    .detail-record{
-      padding: 1em 2em;
-      width: 32em;
-      .fila{
-        font-family: "Josefin Sans", sans-serif;
-        display: flex;
-        justify-content: space-between;
-        padding-bottom: .8em;
+      .title-img{
+        width: 100%;
+        object-fit: cover;
+        background-size:cover;
       }
     }
 
-    .img-record{
-      img{
-        width: 128px;
-      }
+    .text{
+      display: grid;
+      text-align: left;
     }
   }
-  .container-checks{
-    padding: 1em;
-    display: flex;
-    justify-content: center;
-    .group_checks{
-      width: auto;
+}
+
+.block-one{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .data{
+    .subtitle{
+
+    }
+    .campo{
       display: flex;
-      flex-direction: column;
-      mat-checkbox{
-        font-family: "Josefin Sans", sans-serif;
+      justify-content: space-between;
+      .col{
+        display: grid;
+        width: 100%;
+        .label{
+          font-family: "Josefin Sans", sans-serif;
+        }
+        .data-label{
+          text-align: center;
+          font-family: 'Lato', sans-serif;
+
+        }
+
+
+      }
+      .col-1{
+        .img-record{
+          img{
+            border-radius: 50%;
+            width: 128px;
+            height: 128px;
+          }
+        }
       }
     }
   }
 
-  .container-checks-title{
-    text-align: center;
-    display: flex;
+  .request{
+    display: grid;
     justify-content: center;
-    padding: 2em 0 1em 0;
+    align-items: center;
+    text-align: center;
+    .label{
+      font-family: "Josefin Sans", sans-serif;
+    }
+    .data-label{
+      .text{
+        background-color: #FFBB33;
+        color: #fff;
+        padding: .5em 4em;
+        font-family: 'Lato', sans-serif;
+
+      }
+    }
   }
+}
+
+.block-two{
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin: 1em;
+  .data-person{
+    background-color: #EFEFEF;
+    margin: 0 1em;
+    .item{
+      display: flex;
+      justify-content: space-evenly;
+      border-bottom: solid #fff 2px;
+      padding: .5em;
+      .label{
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .data{
+        font-family: 'Lato', sans-serif;
+
+      }
+    }
+  }
+  .data-nac{
+    background-color: #EFEFEF;
+    margin: 0 1em;
+    height: fit-content;
+    .item{
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-bottom: solid #fff 2px;
+      padding: 1em;
+
+      .label{
+        font-family: 'Lato', sans-serif;
+      }
+      .data{
+        font-family: "Josefin Sans", sans-serif;
+
+      }
+    }
+  }
+}
+
+.block-three{
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin: 1em;
+  padding-bottom: 8em;
+  .data-min{
+    .subtitle{
+      font-family: "Josefin Sans", sans-serif;
+    }
+    .data-area{
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 1em;
+
+      .label{
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .data-label{
+        .text{
+          width: auto;
+          background-color: #0b6e4f;
+          color: #fff;
+          padding: .5em 4em;
+          font-family: 'Lato', sans-serif;
+
+        }
+      }
+    }
+    .data-person{
+      background-color: #EFEFEF;
+      margin: 0 1em;
+      .item{
+        display: flex;
+        justify-content: space-evenly;
+        border-bottom: solid #fff 2px;
+        padding: .5em;
+        .label{
+          font-family: "Josefin Sans", sans-serif;
+        }
+        .data{
+          font-family: 'Lato', sans-serif;
+
+        }
+      }
+      .item-2{
+        display: grid;
+        text-align: center;
+        border-bottom: solid #fff 2px;
+        padding: .5em;
+        .label{
+          font-family: "Josefin Sans", sans-serif;
+        }
+        .data{
+          font-family: 'Lato', sans-serif;
+
+        }
+      }
+    }
+
+  }
+
+  .data-conyu{
+    .item{
+      display: flex;
+      justify-content: space-evenly;
+      border-bottom: solid #fff 2px;
+      background-color: #EFEFEF;
+      padding: .5em;
+      .label{
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .data{
+        font-family: 'Lato', sans-serif;
+
+      }
+    }
+    .item-2{
+      background-color: #EFEFEF;
+      display: grid;
+      text-align: center;
+      border-bottom: solid #fff 2px;
+      padding: .5em;
+      .label{
+        font-family: "Josefin Sans", sans-serif;
+      }
+      .data{
+        font-family: 'Lato', sans-serif;
+
+      }
+    }
+  }
+}
+
+.block-four{
+  display: grid;
+  justify-content: center;
+  flex-direction: column;
+  // width: 100%;
+
+  margin: 1em;
+  // padding-bottom: 5em;
+  .table-family{
+    width: 60vw;
+  }
+}
+
+.block-five{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+  min-height: 40em;
+  .table-family{
+    width: 60vw;
+  }
+}
+
+.subtitle{
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: flex-start;
+  padding: 1em 0em;
+  border-radius: 10px;
+}
+
+.date{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2em;
+}
+
+.content-record{
+
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  .detail-record{
+    padding: 1em 2em;
+    width: 32em;
+    .fila{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      // font-family: "Josefin Sans", sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: .8em;
+    }
+  }
+
+  .img-record{
+    img{
+      width: 128px;
+    }
+  }
+}
+.container-checks{
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  .group_checks{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    mat-checkbox{
+      font-family: "Josefin Sans", sans-serif;
+    }
+  }
+}
+
+.container-checks-title{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 2em 0 1em 0;
+}
 }

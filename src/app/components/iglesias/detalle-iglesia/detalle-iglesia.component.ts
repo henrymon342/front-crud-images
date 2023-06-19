@@ -23,20 +23,26 @@ export class DetalleIglesiaComponent implements OnInit {
     this.imagePath = data.imagePath;
     this.imagePathPas = data.imagePathPas;
     this.iglesia = data;
-    console.log(data);
   }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.getChurch(this.data.id);
-
   }
 
   getChurch(idChurch: number): void{
     this._churchService.get(idChurch).subscribe( res =>{
       this.iglesia = res as Iglesia;
-      console.log(this.iglesia);
     });
   }
 
+  calcAnios(fundation: string){
+    console.log(fundation);
+    let now = new Date();
+    let date = new Date(fundation);
+
+    const diffInDays = Math.floor((Number(now) - Number(date)) / (1000 * 60 * 60 * 24));
+    console.log(diffInDays);
+    return Math.floor(diffInDays/365)+1;
+  }
 }
+

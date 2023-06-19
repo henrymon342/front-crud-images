@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from '../../Material/material.module';
+import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
@@ -8,7 +9,7 @@ import { MaterialModule } from '../../Material/material.module';
     HeaderComponent
   ],
   imports: [
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
     HeaderComponent

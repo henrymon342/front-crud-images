@@ -19,6 +19,61 @@
       background-repeat:no-repeat;
     }
   }
+
+  .caja{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .card{
+      width: 200px;
+      height: 200px;
+      // background-color: rgb(17, 138, 178);
+      background-color: rgba(17, 138, 178,0.3);
+      position: relative;
+      border-radius: 50%;
+      animation-duration: 1.5s;
+      animation-name: animar;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+
+      &:before {
+        content:'';
+        position: absolute;
+        top: 10%;
+        bottom: 0;
+        left: 10%;
+        right: 0;
+        background-color: rgba(17, 138, 178,0.4);
+        border-radius: 50%;
+        width: 80%;
+        height: 80%;
+
+        animation-duration: 1.5s;
+        animation-name: animar2;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+
+      &:after {
+        content:'';
+        position: absolute;
+        top: 20%;
+        bottom: 0;
+        left: 20%;
+        right: 0;
+        background-color: rgba(17, 138, 178,0.4);
+        border-radius: 50%;
+        width: 60%;
+        height: 60%;
+
+        animation-duration: 1.5s;
+        animation-name: animar;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+    }
+  }
+
   .data-church{
     display: grid;
     grid-template-columns: 70% 30%;
@@ -72,7 +127,7 @@
     .img-pastor{
       width:100px;
       height:100px;
-      #img-pas{
+      #imgpas{
         background-image: url('../../../assets/bgs/header_bg.jpg');
         object-fit: cover;
         width:100%;
@@ -82,7 +137,15 @@
         background-repeat:no-repeat;
         border-radius: 50%;
         box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      }
 
+      .charging-round{
+        padding: 5px;
+        width: 90%;
+        height: 90%;
+        border-radius: 50%;
+        background-color: #f7f7f7;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       }
     }
     button{
@@ -93,4 +156,31 @@
     }
   }
 
+}
+
+
+@keyframes animar {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(.2);
+    opacity: 0.2;
+
+  }
+}
+
+@keyframes animar2 {
+  from {
+    transform: scale(.2);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(2);
+    opacity: 0.2;
+
+  }
 }

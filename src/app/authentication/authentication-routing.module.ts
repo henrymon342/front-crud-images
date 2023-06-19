@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { UserGuard } from '../guards/user.guard';
 
 const routes: Routes = [
   {
@@ -9,15 +10,19 @@ const routes: Routes = [
   },
   {
     path: 'administrador',
-    loadChildren: () => import('../administrators/administrator/administrator.module').then(m => m.AdministratorModule)
+    loadChildren: () => import('../administrators/administrator/administrator.module').then(m => m.AdministratorModule),
+    canActivate: [ UserGuard ]
   },
   {
     path: 'admipastores',
-    loadChildren: () => import('../administrators/admipastores/admipastores.module').then(m => m.AdmipastoresModule)
+    loadChildren: () => import('../administrators/admipastores/admipastores.module').then(m => m.AdmipastoresModule),
+    canActivate: [ UserGuard ]
   },
   {
     path: 'admieventos',
-    loadChildren: () => import('../administrators/admieventos/admieventos.module').then(m => m.AdmieventosModule)
+    loadChildren: () => import('../administrators/admieventos/admieventos.module').then(m => m.AdmieventosModule),
+    canActivate: [ UserGuard ]
+
   },
   {
     path: 'login',
